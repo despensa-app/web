@@ -3,6 +3,7 @@ import Card from "../common/Card";
 import BreadcrumbItem from "../common/BreadcrumbItem";
 import Pagination from "../common/Pagination";
 import Link from "../common/Link";
+import CardProductShopping from "./CardProductShoppin";
 
 const Product = () => {
 
