@@ -6,6 +6,7 @@ const Content = () => {
     const pages = [
         {
             name: "Home",
+            href: '/',
             active: false
         },
         {
