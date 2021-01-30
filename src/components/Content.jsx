@@ -1,4 +1,4 @@
-import BreadcrumbItem from "./Breadcrumb";
+import BreadcrumbItem from "./BreadcrumbItem";
 
 const Content = ({pageHeader, breadcrumbItems, children}) => {
     return (

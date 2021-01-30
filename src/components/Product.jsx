@@ -1,6 +1,6 @@
 import Content from "./Content";
 import Card from "./Card";
-import BreadcrumbItem from "./Breadcrumb";
+import BreadcrumbItem from "./BreadcrumbItem";
 import Pagination from "./Pagination";
 
 const Link = ({href, children, preClassIcon, btnColor, size}) => (
