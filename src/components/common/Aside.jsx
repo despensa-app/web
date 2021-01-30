@@ -1,5 +1,5 @@
 import adminLTRLogo from 'admin-lte/dist/img/AdminLTELogo.png';
-import NavSidebar from "./NavSidebar";
+import NavSidebar from "./nav/NavSidebar";
 import {useState} from "react";
 
 const Aside = () => {
