@@ -1,23 +1,18 @@
-const Card = () => (
+const Card = ({children, footer, title}) => (
     <div className="card">
-        <div className="card-header">
-            <h3 className="card-title">Title</h3>
-
-            <div className="card-tools">
-                <button type="button" className="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i className="fas fa-minus"/>
-                </button>
-                <button type="button" className="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i className="fas fa-times"/>
-                </button>
+        {title && (
+            <div className="card-header">
+                <h3 className="card-title">{title}</h3>
             </div>
-        </div>
+        )}
         <div className="card-body">
-            Start creating your amazing application!
+            {children}
         </div>
-        <div className="card-footer">
-            Footer
-        </div>
+        {footer && (
+            <div className="card-footer">
+                {footer}
+            </div>
+        )}
     </div>
 );
 

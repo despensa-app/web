@@ -1,39 +1,27 @@
-import Breadcrumb from "./Breadcrumb";
-import Card from "./Card";
-import {useState} from "react";
+import BreadcrumbItem from "./Breadcrumb";
 
-const Content = () => {
-    const pages = [
-        {
-            name: "Home",
-            href: '/',
-            active: false
-        },
-        {
-            name: "Blank Page",
-            active: true
-        },
-
-    ]
-    const [pageName] = useState('Blank Page');
-    const [pagesBreadcrumb] = useState(pages);
-
+const Content = ({pageHeader, breadcrumbItems, children}) => {
     return (
         <div className="content-wrapper">
             <section className="content-header">
                 <div className="container-fluid">
                     <div className="row mb-2">
                         <div className="col-sm-6">
-                            <h1>{pageName}</h1>
+                            <h1>{pageHeader}</h1>
                         </div>
                         <div className="col-sm-6">
-                            <Breadcrumb pages={pagesBreadcrumb}/>
+                            <ol className="breadcrumb float-sm-right">
+                                <BreadcrumbItem href="/">
+                                    Home
+                                </BreadcrumbItem>
+                                {breadcrumbItems}
+                            </ol>
                         </div>
                     </div>
                 </div>
             </section>
             <section className="content">
-                <Card/>
+                {children}
             </section>
         </div>
     );
