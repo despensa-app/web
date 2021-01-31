@@ -1,15 +1,30 @@
-const PageItem = ({children, href}) => (
-    <li className="page-item">
-        <a className="page-link" href={href}>{children}</a>
-    </li>
-);
+const PageItem = ({children, href, active, onClick}) => {
+    const onHandleClick = (e) =>{
+        e.preventDefault();
+        onClick(href);
+    };
 
-const Pagination = ({pages}) => {
+    return (
+        <li className={`page-item${active ? ' active' : ''}`}>
+            <a className="page-link"
+               href={href}
+               onClick={onHandleClick}
+               dangerouslySetInnerHTML={{__html: children}}/>
+        </li>
+    );
+};
+
+const Pagination = ({links, onClick, nameKey}) => {
     return (
         <ul className="pagination m-0 justify-content-center">
             {
-                pages.map((page, i) => (
-                    <PageItem href={page.href} key={i}>{page.value}</PageItem>
+                links.map((link, i) => (
+                    <PageItem
+                        href={link.url}
+                        active={link.active}
+                        children={link.label}
+                        onClick={onClick}
+                        key={nameKey + '-page-' + i}/>
                 ))
             }
         </ul>
