@@ -1,10 +1,11 @@
+import {useState, useEffect} from "react";
+import {useParams} from "react-router-dom";
 import Content from "../common/Content";
 import Card from "../common/Card";
 import BreadcrumbItem from "../common/BreadcrumbItem";
 import Pagination from "../common/Pagination";
 import Link from "../common/Link";
 import CardProductShopping from "./CardProductShoppin";
-import {useState, useEffect} from "react";
 
 const Product = () => {
 
@@ -12,7 +13,7 @@ const Product = () => {
 
     const urlRelationship = 'http://despensa-app.api/api/products-shopping-list';
 
-    const productId = 841;
+    const {productId} = useParams();
 
     const productData = {
         "data": {
@@ -135,7 +136,7 @@ const Product = () => {
             .then(response => response.json())
             .then(data => setShoppingList(data))
             .catch(error => console.log(error));
-    }, []);
+    }, [productId]);
 
     const onPageClick = (url) => {
         url = url ? url : `${url}/${productId}/shopping-list`;
@@ -178,9 +179,14 @@ const Product = () => {
     );
 
     const BreadcrumbItems = () => (
-        <BreadcrumbItem active="true">
-            Productos
-        </BreadcrumbItem>
+        <>
+            <BreadcrumbItem href="/products">
+                Productos
+            </BreadcrumbItem>
+            <BreadcrumbItem active="true">
+                {product.data.name}
+            </BreadcrumbItem>
+        </>
     );
 
     return (
