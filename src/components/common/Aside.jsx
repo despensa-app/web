@@ -24,7 +24,7 @@ const Aside = () => {
             </a>
 
             <div className="sidebar">
-                <NavSidebar items={navItems}/>
+                <NavSidebar/>
             </div>
         </aside>
     );

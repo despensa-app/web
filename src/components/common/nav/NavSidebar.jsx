@@ -1,8 +1,10 @@
+import {Link} from "react-router-dom";
+
 const NavItem = ({href, children, preClassIcon}) => (
     <li className="nav-item">
-        <NavLink href={href} preClassIcon={preClassIcon}>
+        <Link to={href} component={NavLink} preClassIcon={preClassIcon}>
             {children}
-        </NavLink>
+        </Link>
     </li>
 );
 
@@ -31,35 +33,18 @@ const NavLink = ({href, children, preClassIcon, postClassIcon}) => (
     </a>
 );
 
-const NavSidebar = ({items}) => (
+const NavSidebar = () => (
     <nav className="mt-2">
         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            {
-                items.map(
-                    (item, i) =>
-                        <NavItem key={i} href={item.href} preClassIcon="far fa-circle">
-                            {item.name}
-                        </NavItem>
-                )
-            }
-            <NavHeader>MULTI LEVEL EXAMPLE</NavHeader>
-            <NavItem href="/" preClassIcon="fas fa-circle">Level 1</NavItem>
-            <NavItemTree name="Level 1">
-                <NavItem href="/" preClassIcon="far fa-circle">
-                    Level 2
-                </NavItem>
-                <NavItemTree name="Level 2">
-                    <NavItem href="/" preClassIcon="far fa-dot-circle">
-                        Level 3
-                    </NavItem>
-                    <NavItem href="/" preClassIcon="far fa-dot-circle">
-                        Level 3
-                    </NavItem>
-                </NavItemTree>
-                <NavItem href="/" preClassIcon="far fa-circle">
-                    Level 2
-                </NavItem>
-            </NavItemTree>
+            <NavItem href="/products" preClassIcon="far fa-circle">
+                Productos
+            </NavItem>
+            <NavItem href="/unit-types" preClassIcon="far fa-circle">
+                Tipos de unidades
+            </NavItem>
+            <NavItem href="/shopping-list" preClassIcon="far fa-circle">
+                Lista de la compra
+            </NavItem>
         </ul>
     </nav>
 );
