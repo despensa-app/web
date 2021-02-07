@@ -5,3 +5,9 @@
 .main-sidebar .brand-link > img {
     opacity: .8
 }
+
+.long-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

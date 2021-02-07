@@ -8,6 +8,7 @@ import Footer from './common/Footer';
 import Content from "./common/Content";
 import Nav from "./common/nav/Nav";
 import Product from "./products/Product";
+import Products from "./products/Products";
 
 const Index = () => {
     const version = "1.0.0";
@@ -24,7 +25,7 @@ const Index = () => {
                     <Content/>
                 </Route>
                 <Route path="/products">
-                    <Content/>
+                    <Products/>
                 </Route>
                 <Route path="/unit-types/:unitTypeId">
                     <Content/>
@@ -41,8 +42,11 @@ const Index = () => {
                 <Route path="/shopping-list">
                     <Content/>
                 </Route>
-                <Route path="/">
+                <Route exact path="/">
                     <Content/>
+                </Route>
+                <Route path="*">
+                    <p>La pagina no existe</p>
                 </Route>
             </Switch>
             <Footer version={version}/>
