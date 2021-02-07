@@ -3,7 +3,6 @@ import Card from "../common/Card";
 import Pagination from "../common/Pagination";
 import Content from "../common/Content";
 import Link from "../common/Link";
-import BreadcrumbItem from "../common/BreadcrumbItem";
 import CardProduct from "./CardProduct";
 
 const Products = () => {
@@ -65,18 +64,27 @@ const Products = () => {
         </>
     );
 
-    const BreadcrumbItems = () => (
-        <BreadcrumbItem active="true">
-            Productos
-        </BreadcrumbItem>
-    );
+    const breadcrumbItems =
+        {
+            home: {
+                preIconClassName: 'fas fa-home',
+                url: '/'
+            },
+            items:
+                [
+                    {
+                        label: 'Productos',
+                        active: true
+                    }
+                ]
+        };
 
     const onPageClick = (url) => {
         setUrl(url);
     };
 
     return (
-        <Content pageHeader={<PageHeader/>} breadcrumbItems={<BreadcrumbItems/>}>
+        <Content pageHeader={<PageHeader/>} breadcrumbItems={breadcrumbItems}>
             <Card>
                 <div className="row d-flex align-items-stretch">
                     {

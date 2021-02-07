@@ -2,7 +2,6 @@ import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 import Content from "../common/Content";
 import Card from "../common/Card";
-import BreadcrumbItem from "../common/BreadcrumbItem";
 import Pagination from "../common/Pagination";
 import Link from "../common/Link";
 import CardProductShopping from "./CardProductShoppin";
@@ -178,19 +177,27 @@ const Product = () => {
         </>
     );
 
-    const BreadcrumbItems = () => (
-        <>
-            <BreadcrumbItem href="/products">
-                Productos
-            </BreadcrumbItem>
-            <BreadcrumbItem active="true">
-                {product.data.name}
-            </BreadcrumbItem>
-        </>
-    );
+    const breadcrumbItems =
+        {
+            home: {
+                preIconClassName: 'fas fa-home',
+                url: '/'
+            },
+            items:
+                [
+                    {
+                        label: 'Productos',
+                        url: '/products'
+                    },
+                    {
+                        label: product.data.name,
+                        active: true
+                    }
+                ]
+        };
 
     return (
-        <Content pageHeader={<PageHeader/>} breadcrumbItems={<BreadcrumbItems/>}>
+        <Content pageHeader={<PageHeader/>} breadcrumbItems={breadcrumbItems}>
             <Card>
                 <dl className="row mb-0">
                     <dt className="col-sm-2">Descripción</dt>
