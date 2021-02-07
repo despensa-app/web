@@ -1,20 +1,8 @@
 import adminLTRLogo from 'admin-lte/dist/img/AdminLTELogo.png';
 import NavSidebar from "./nav/NavSidebar";
-import {useState} from "react";
 
 const Aside = () => {
     const title = "Despensa app";
-    const items = [
-        {
-            name: "Home",
-            href: "#"
-        },
-        {
-            name: "Home 2",
-            href: "#"
-        }
-    ]
-    const [navItems] = useState(items);
 
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
