@@ -4,7 +4,7 @@ import clsx from "clsx";
 const BreadcrumbItem = ({active, url, label, preIconClassName}) => {
     const labelRender = (
         <>
-            {preIconClassName && <span className={preIconClassName}> </span>  }
+            {preIconClassName && <span className={preIconClassName}> </span>}
             {label}
         </>
     );
@@ -21,7 +21,7 @@ const BreadCrumb = ({home, items}) => {
         <ol className="breadcrumb float-sm-right">
             <BreadcrumbItem {...home}/>
             {
-                items.map((item, i) => (
+                items && items.map((item, i) => (
                     <BreadcrumbItem key={`breadcrumb-item-${item.label}-${i}`} {...item}/>
                 ))
             }
