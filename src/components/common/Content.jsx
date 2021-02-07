@@ -1,4 +1,4 @@
-import BreadcrumbItem from "./BreadcrumbItem";
+import BreadCrumb from "./BreadCrumb";
 
 const Content = ({pageHeader, breadcrumbItems, children}) => {
     return (
@@ -10,12 +10,7 @@ const Content = ({pageHeader, breadcrumbItems, children}) => {
                             <h1>{pageHeader}</h1>
                         </div>
                         <div className="col-sm-6">
-                            <ol className="breadcrumb float-sm-right">
-                                <BreadcrumbItem href="/">
-                                    Home
-                                </BreadcrumbItem>
-                                {breadcrumbItems}
-                            </ol>
+                            <BreadCrumb {...breadcrumbItems}/>
                         </div>
                     </div>
                 </div>
