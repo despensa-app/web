@@ -1,7 +1,7 @@
 import Content from "../common/Content";
 import Card from "../common/Card";
 import {InputNumber} from "primereact/inputnumber";
-import {useParams, useHistory} from "react-router-dom";
+import {useParams, useHistory, Link} from "react-router-dom";
 import {useEffect, useState, useRef} from "react";
 
 const ProductForm = () => {
@@ -34,6 +34,9 @@ const ProductForm = () => {
     const PageHeader = () => (
         <>
             <span>{productId ? 'Modificar' : 'Nuevo'} producto</span>
+            {productId && <Link to={`/products/${productId}`} className="btn btn-sm btn-primary">
+                Ver producto
+            </Link>}
         </>
     );
 

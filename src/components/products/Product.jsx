@@ -1,9 +1,8 @@
 import {useState, useEffect} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Content from "../common/Content";
 import Card from "../common/Card";
 import Pagination from "../common/Pagination";
-import Link from "../common/Link";
 import CardProductShopping from "./CardProductShoppin";
 
 const Product = () => {
@@ -172,8 +171,12 @@ const Product = () => {
     const PageHeader = () => (
         <>
             <span>{product.data.name} </span>
-            <Link href="/" preClassIcon="fas fa-edit" btnColor="primary"/>
-            <Link href="/" preClassIcon="fas fa-trash" btnColor="danger"/>
+            <Link to={`/products/form/${productId}`} className="btn btn-primary">
+                <i className="fas fa-edit"/>
+            </Link>
+            <Link to="/" className="btn btn-danger">
+                <i className="fas fa-trash"/>
+            </Link>
         </>
     );
 
