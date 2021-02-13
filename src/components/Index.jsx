@@ -9,6 +9,7 @@ import Content from "./common/Content";
 import Nav from "./common/nav/Nav";
 import Product from "./products/Product";
 import Products from "./products/Products";
+import ProductForm from "./products/ProductForm";
 
 const Index = () => {
     const version = "1.0.0";
@@ -18,11 +19,14 @@ const Index = () => {
             <Nav/>
             <Aside/>
             <Switch>
-                <Route path="/products/:productId">
-                    <Product/>
+                <Route path="/products/form/:productId">
+                    <ProductForm/>
                 </Route>
                 <Route path="/products/form">
-                    <Content/>
+                    <ProductForm/>
+                </Route>
+                <Route path="/products/:productId">
+                    <Product/>
                 </Route>
                 <Route path="/products">
                     <Products/>
@@ -33,10 +37,13 @@ const Index = () => {
                 <Route path="/unit-types">
                     <Content/>
                 </Route>
-                <Route path="/shopping-list/:shoppingListId">
+                <Route path="/shopping-list/form">
                     <Content/>
                 </Route>
-                <Route path="/shopping-list/form">
+                <Route path="/shopping-list/form/:productId">
+                    <Content/>
+                </Route>
+                <Route path="/shopping-list/:shoppingListId">
                     <Content/>
                 </Route>
                 <Route path="/shopping-list">
