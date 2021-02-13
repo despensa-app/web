@@ -10,7 +10,6 @@ const ProductForm = () => {
 
     const history = useHistory();
 
-
     const url = 'http://despensa-app.api/api/products';
 
     const productData = {
@@ -21,24 +20,6 @@ const ProductForm = () => {
         "calories": 0,
         "description": ''
     }
-
-    const [product, setProduct] = useState(productData);
-
-    const productNameRef = useRef(null);
-    const [productPrice, setProductPrice] = useState(0);
-    const [productCalories, setProductCalories] = useState(0);
-    const productDescriptionRef = useRef(null);
-    const productImgUrlRef = useRef(null);
-
-
-    const PageHeader = () => (
-        <>
-            <span>{productId ? 'Modificar' : 'Nuevo'} producto</span>
-            {productId && <Link to={`/products/${productId}`} className="btn btn-sm btn-primary">
-                Ver producto
-            </Link>}
-        </>
-    );
 
     const breadcrumbItems = {
         home: {
@@ -58,9 +39,17 @@ const ProductForm = () => {
             ]
     };
 
-    const CardFooter = () => (
-        <button type="submit" className="btn btn-primary">{productId ? 'Guardar' : 'Crear'}</button>
-    );
+    const [product, setProduct] = useState(productData);
+
+    const productNameRef = useRef(null);
+
+    const [productPrice, setProductPrice] = useState(0);
+
+    const [productCalories, setProductCalories] = useState(0);
+
+    const productDescriptionRef = useRef(null);
+
+    const productImgUrlRef = useRef(null);
 
     useEffect(() => {
         if (!productId) {
@@ -80,6 +69,19 @@ const ProductForm = () => {
         productDescriptionRef.current.value = product.description;
         productImgUrlRef.current.value = product.img_url;
     }, [product]);
+
+    const PageHeader = () => (
+        <>
+            <span>{productId ? 'Modificar' : 'Nuevo'} producto</span>
+            {productId && <Link to={`/products/${productId}`} className="btn btn-sm btn-primary">
+                Ver producto
+            </Link>}
+        </>
+    );
+
+    const CardFooter = () => (
+        <button type="submit" className="btn btn-primary">{productId ? 'Guardar' : 'Crear'}</button>
+    );
 
     const onSubmit = (e) => {
         e.preventDefault();
