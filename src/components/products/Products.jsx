@@ -2,8 +2,8 @@ import {useState, useEffect} from "react";
 import Card from "../common/Card";
 import Pagination from "../common/Pagination";
 import Content from "../common/Content";
-import Link from "../common/Link";
 import CardProduct from "./CardProduct";
+import {Link} from "react-router-dom";
 
 const Products = () => {
 
@@ -60,7 +60,9 @@ const Products = () => {
     const PageHeader = () => (
         <>
             <span>Productos </span>
-            <Link href="/products/form" preClassIcon="fas fa-plus" btnColor="success"/>
+            <Link to="/products/form" className="btn btn-success">
+                <i className="fas fa-plus"/>
+            </Link>
         </>
     );
 
