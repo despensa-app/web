@@ -121,6 +121,24 @@ const Product = () => {
 
     const [product, setProduct] = useState(productData);
 
+    const breadcrumbItems = {
+        home: {
+            preIconClassName: 'fas fa-home',
+            url: '/'
+        },
+        items:
+            [
+                {
+                    label: 'Productos',
+                    url: '/products'
+                },
+                {
+                    label: product.data.name,
+                    active: true
+                }
+            ]
+    };
+
     const [shoppingList, setShoppingList] = useState(shoppingListData)
 
     const [shoppingListUrlPage, setShoppingListUrlPage] = useState('');
@@ -179,25 +197,6 @@ const Product = () => {
             </Link>
         </>
     );
-
-    const breadcrumbItems =
-        {
-            home: {
-                preIconClassName: 'fas fa-home',
-                url: '/'
-            },
-            items:
-                [
-                    {
-                        label: 'Productos',
-                        url: '/products'
-                    },
-                    {
-                        label: product.data.name,
-                        active: true
-                    }
-                ]
-        };
 
     return (
         <Content pageHeader={<PageHeader/>} breadcrumbItems={breadcrumbItems}>
