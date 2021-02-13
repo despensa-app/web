@@ -1,11 +1,13 @@
-const Card = ({children, footer, title}) => (
+import clsx from "clsx";
+
+const Card = ({children, footer, title, className}) => (
     <div className="card">
         {title && (
             <div className="card-header">
                 <h3 className="card-title">{title}</h3>
             </div>
         )}
-        <div className="card-body">
+        <div className={clsx('card-body', className)}>
             {children}
         </div>
         {footer && (
