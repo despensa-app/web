@@ -201,14 +201,21 @@ const Product = () => {
     return (
         <Content pageHeader={<PageHeader/>} breadcrumbItems={breadcrumbItems}>
             <Card>
-                <dl className="row mb-0">
-                    <dt className="col-sm-2">Descripción</dt>
-                    <dd className="col-sm-10">{product.data.description}</dd>
-                    <dt className="col-sm-2">Precio</dt>
-                    <dd className="col-sm-10">{product.data.price} €</dd>
-                    <dt className="col-sm-2">Calorías</dt>
-                    <dd className="col-sm-10">{product.data.calories} kcal</dd>
-                </dl>
+                <div className="row">
+                    <div className="col-8">
+                        <dl className="row mb-0">
+                            <dt className="col-sm-2">Descripción</dt>
+                            <dd className="col-sm-10">{product.data.description}</dd>
+                            <dt className="col-sm-2">Precio</dt>
+                            <dd className="col-sm-10">{product.data.price} €</dd>
+                            <dt className="col-sm-2">Calorías</dt>
+                            <dd className="col-sm-10">{product.data.calories} kcal</dd>
+                        </dl>
+                    </div>
+                    <div className="col-4">
+                        <img src={product.data.img_url} alt="product" className="img-rounded img-fluid w-50"/>
+                    </div>
+                </div>
             </Card>
             <Card title="Listas de la compra">
                 <div className="row d-flex align-items-stretch">
