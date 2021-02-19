@@ -3,6 +3,7 @@ import {
     Switch,
     Route
 } from "react-router-dom";
+import {useContext} from "react";
 import Aside from './common/Aside';
 import Footer from './common/Footer';
 import Content from "./common/Content";
@@ -10,12 +11,16 @@ import Nav from "./common/nav/Nav";
 import Product from "./products/Product";
 import Products from "./products/Products";
 import ProductForm from "./products/ProductForm";
+import LoadingProcessScreen from "./common/LoadingProcessScreen";
+import {LoadingProcessScreenContext} from "../App";
 
 const Index = () => {
     const version = "1.0.0";
+    const loadingProcessScreenContext = useContext(LoadingProcessScreenContext);
 
     return (
         <Router>
+            <LoadingProcessScreen {...loadingProcessScreenContext}/>
             <Nav/>
             <Aside/>
             <Switch>

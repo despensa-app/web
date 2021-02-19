@@ -1,8 +1,8 @@
 import {ProgressSpinner} from 'primereact/progressspinner';
 import clsx from "clsx";
 
-const LoadingProcess = ({display = false}) => (
-    <div id="loading-process-screen" className={clsx("full-screen", {"d-block": display}, {"d-none": !display})}>
+const LoadingProcessScreen = ({isLoading = false}) => (
+    <div id="loading-process-screen" className={clsx("full-screen", {"d-block": isLoading}, {"d-none": !isLoading})}>
         <div className="full-screen-container">
             <ProgressSpinner/>
         </div>
@@ -10,4 +10,4 @@ const LoadingProcess = ({display = false}) => (
     </div>
 );
 
-export default LoadingProcess
+export default LoadingProcessScreen
