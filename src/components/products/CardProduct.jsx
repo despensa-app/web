@@ -21,24 +21,24 @@ const CardProduct = ({id, name, price, img_url, calories, description}) => (
                     </ul>
                 </div>
                 <div className="col-5 text-center">
-                    <img src={img_url} alt="image-product" className="img-rounded img-fluid"/>
+                    <img src={img_url} alt="product" className="img-rounded img-fluid"/>
                 </div>
             </div>
         </div>
         <div className="card-footer">
             <div className="row">
                 <div className="col-3">
-                    <a href="#" className="btn btn-sm btn-danger">
+                    <button className="btn btn-sm btn-danger">
                         <i className="fas fa-trash"/>
-                    </a>
+                    </button>
                 </div>
                 <div className="col-9 text-right">
                     <Link to={`/products/${id}`} className="btn btn-sm btn-primary">
                         Ver producto
                     </Link>
-                    <a href="#" className="btn btn-sm btn-default">
+                    <button className="btn btn-sm btn-default">
                         <i className="fas fa-cart-arrow-down"/>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
