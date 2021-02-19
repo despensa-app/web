@@ -2,7 +2,7 @@ import Content from "../common/Content";
 import Card from "../common/Card";
 import {InputNumber} from "primereact/inputnumber";
 import {useParams, useHistory, Link} from "react-router-dom";
-import {useEffect, useState, useRef} from "react";
+import {useEffect, useState, useContext} from "react";
 
 const ProductForm = () => {
 
@@ -10,16 +10,19 @@ const ProductForm = () => {
 
     const history = useHistory();
 
-    const url = 'http://despensa-app.api/api/products';
+    const [productName, setProductName] = useState('');
 
-    const productData = {
-        "id": 0,
-        "name": '',
-        "price": 0,
-        "img_url": '',
-        "calories": 0,
-        "description": ''
-    }
+    const [productPrice, setProductPrice] = useState(0.0);
+
+    const [productImgUrl, setProductImgUrl] = useState('');
+
+    const [productCalories, setProductCalories] = useState(0.0);
+
+    const [productDescription, setProductDescription] = useState('');
+
+    const loadingProcessScreen = useContext(LoadingProcessScreenContext);
+
+    const url = 'http://despensa-app.api/api/products';
 
     const breadcrumbItems = {
         home: {
@@ -39,18 +42,6 @@ const ProductForm = () => {
             ]
     };
 
-    const [product, setProduct] = useState(productData);
-
-    const productNameRef = useRef(null);
-
-    const [productPrice, setProductPrice] = useState(0);
-
-    const [productCalories, setProductCalories] = useState(0);
-
-    const productDescriptionRef = useRef(null);
-
-    const productImgUrlRef = useRef(null);
-
     useEffect(() => {
         if (!productId) {
             return;
@@ -58,17 +49,15 @@ const ProductForm = () => {
 
         fetch(`${url}/${productId}`)
             .then(response => response.json())
-            .then(data => setProduct(data.data))
+            .then(data => {
+                setProductName(data.data.name);
+                setProductPrice(data.data.price);
+                setProductImgUrl(data.data.img_url);
+                setProductCalories(data.data.calories);
+                setProductDescription(data.data.description);
+            })
             .catch(error => console.log(error));
     }, [productId]);
-
-    useEffect(() => {
-        productNameRef.current.value = product.name;
-        setProductPrice(product.price);
-        setProductCalories(product.calories);
-        productDescriptionRef.current.value = product.description;
-        productImgUrlRef.current.value = product.img_url;
-    }, [product]);
 
     const PageHeader = () => (
         <>
@@ -97,15 +86,13 @@ const ProductForm = () => {
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(
-                {
-                    "name": productNameRef.current.value,
-                    "price": productPrice,
-                    "img_url": productImgUrlRef.current.value,
-                    "calories": productCalories,
-                    "description": productDescriptionRef.current.value
-                }
-            )
+            body: JSON.stringify({
+                name: productName,
+                price: productPrice,
+                img_url: productImgUrl,
+                calories: productCalories,
+                description: productDescription
+            })
         };
 
         fetch(`${url}`, requestOptions)
@@ -118,19 +105,25 @@ const ProductForm = () => {
         const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(
-                {
-                    "name": productNameRef.current.value,
-                    "price": productPrice,
-                    "img_url": productImgUrlRef.current.value,
-                    "calories": productCalories,
-                    "description": productDescriptionRef.current.value
-                }
-            )
+            body: JSON.stringify({
+                name: productName,
+                price: productPrice,
+                img_url: productImgUrl,
+                calories: productCalories,
+                description: productDescription
+            })
         };
 
         fetch(`${url}/${productId}`, requestOptions)
             .catch(error => console.log(error));
+    }
+
+    const handleInput = {
+        name: (e) => setProductName(e.target.value),
+        price: (e) => setProductPrice(e.value),
+        imgUrl: (e) => setProductImgUrl(e.target.value),
+        calories: (e) => setProductCalories(e.value),
+        description: (e) => setProductDescription(e.target.value)
     }
 
     return (
@@ -139,23 +132,23 @@ const ProductForm = () => {
                 <Card footer={<CardFooter/>} className="p-fluid">
                     <div className="form-group">
                         <label htmlFor="product_name">Nombre</label>
-                        <input type="text" ref={productNameRef} className="form-control" id="product_name" placeholder="Ingrese el nombre"/>
+                        <input type="text" value={productName} onChange={handleInput.name} className="form-control" id="product_name" placeholder="Ingrese el nombre"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="product_price">Precio</label>
-                        <InputNumber id="product_price" value={productPrice} onValueChange={(e) => setProductPrice(e.value)} mode="currency" currency="EUR" locale="es-ES" inputClassName="form-control" placeholder="Ingrese el precio"/>
+                        <InputNumber id="product_price" value={productPrice} onValueChange={handleInput.price} mode="currency" currency="EUR" locale="es-ES" inputClassName="form-control" placeholder="Ingrese el precio"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="product_calories">Calorías</label>
-                        <InputNumber id="product_calories" value={productCalories} onValueChange={(e) => setProductCalories(e.value)} mode="decimal" minFractionDigits={2} maxFractionDigits={2} inputClassName="form-control" placeholder="Ingrese la cantidad de calorías"/>
+                        <InputNumber id="product_calories" value={productCalories} onValueChange={handleInput.calories} mode="decimal" minFractionDigits={2} maxFractionDigits={2} inputClassName="form-control" placeholder="Ingrese la cantidad de calorías"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="product_description">Descripción (Opcional)</label>
-                        <textarea id="product_description" ref={productDescriptionRef} className="form-control" rows="3" placeholder="Ingrese la descripción"/>
+                        <textarea id="product_description" value={productDescription} onChange={handleInput.description} className="form-control" rows="3" placeholder="Ingrese la descripción"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="product_img_url">Imagen</label>
-                        <input type="url" ref={productImgUrlRef} className="form-control" id="product_img_url" placeholder="Url de la imagen"/>
+                        <input type="url" value={productImgUrl} onChange={handleInput.imgUrl} className="form-control" id="product_img_url" placeholder="Url de la imagen"/>
                     </div>
                 </Card>
             </form>
