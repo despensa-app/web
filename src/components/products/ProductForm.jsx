@@ -1,8 +1,9 @@
+import {useParams, useHistory, Link} from "react-router-dom";
+import {useEffect, useState, useContext} from "react";
 import Content from "../common/Content";
 import Card from "../common/Card";
 import {InputNumber} from "primereact/inputnumber";
-import {useParams, useHistory, Link} from "react-router-dom";
-import {useEffect, useState, useContext} from "react";
+import {LoadingProcessScreenContext} from "../../App";
 
 const ProductForm = () => {
 
@@ -47,6 +48,8 @@ const ProductForm = () => {
             return;
         }
 
+        loadingProcessScreen.show();
+
         fetch(`${url}/${productId}`)
             .then(response => response.json())
             .then(data => {
@@ -56,7 +59,8 @@ const ProductForm = () => {
                 setProductCalories(data.data.calories);
                 setProductDescription(data.data.description);
             })
-            .catch(error => console.log(error));
+            .catch(error => console.log(error))
+            .finally(loadingProcessScreen.hide);
     }, [productId]);
 
     const PageHeader = () => (
@@ -74,6 +78,7 @@ const ProductForm = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        loadingProcessScreen.show();
 
         if (productId) {
             update();
@@ -98,7 +103,8 @@ const ProductForm = () => {
         fetch(`${url}`, requestOptions)
             .then(response => response.json())
             .then(data => history.push(`/products/form/${data.data.id}`))
-            .catch(error => console.log(error));
+            .catch(error => console.log(error))
+            .finally(loadingProcessScreen.hide);
     }
 
     const update = () => {
@@ -115,7 +121,8 @@ const ProductForm = () => {
         };
 
         fetch(`${url}/${productId}`, requestOptions)
-            .catch(error => console.log(error));
+            .catch(error => console.log(error))
+            .finally(loadingProcessScreen.hide)
     }
 
     const handleInput = {
