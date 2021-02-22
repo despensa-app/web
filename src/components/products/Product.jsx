@@ -1,9 +1,10 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import {Link, useParams} from "react-router-dom";
 import Content from "../common/Content";
 import Card from "../common/Card";
 import Pagination from "../common/Pagination";
 import CardProductShopping from "./CardProductShoppin";
+import {LoadingProcessScreenContext} from "../../App";
 
 const Product = () => {
 
@@ -143,7 +144,10 @@ const Product = () => {
 
     const [shoppingListUrlPage, setShoppingListUrlPage] = useState('');
 
+    const loadingProcessScreen = useContext(LoadingProcessScreenContext);
+
     useEffect(() => {
+        loadingProcessScreen.show();
         fetch(`${url}/${productId}`)
             .then(response => response.json())
             .then(data => setProduct(data))
@@ -151,17 +155,20 @@ const Product = () => {
         fetch(`${url}/${productId}/shopping-list`)
             .then(response => response.json())
             .then(data => setShoppingList(data))
-            .catch(error => console.log(error));
+            .catch(error => console.log(error))
+            .finally(loadingProcessScreen.hide);
     }, [productId]);
 
     const onPageClick = (url) => {
         url = url ? url : `${url}/${productId}/shopping-list`;
 
+        loadingProcessScreen.show();
         setShoppingListUrlPage(url);
         fetch(url)
             .then(response => response.json())
             .then(data => setShoppingList(data))
-            .catch(error => console.log(error));
+            .catch(error => console.log(error))
+            .finally(loadingProcessScreen.hide);
     };
 
     const onRelationshipDelete = ({product_id, shopping_list_id, unit_type_id}) => {
@@ -177,6 +184,7 @@ const Product = () => {
             )
         };
 
+        loadingProcessScreen.show();
         fetch(urlRelationship, requestOptions)
             .then(response => {
                 if (response.ok) {

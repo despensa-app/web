@@ -1,9 +1,10 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import Card from "../common/Card";
 import Pagination from "../common/Pagination";
 import Content from "../common/Content";
 import CardProduct from "./CardProduct";
 import {Link} from "react-router-dom";
+import {LoadingProcessScreenContext} from "../../App";
 
 const Products = () => {
 
@@ -50,11 +51,15 @@ const Products = () => {
 
     const [url, setUrl] = useState(urlBase);
 
+    const loadingProcessScreen = useContext(LoadingProcessScreenContext);
+
     useEffect(() => {
+        loadingProcessScreen.show();
         fetch(`${url}`)
             .then(response => response.json())
             .then(data => setProducts(data))
-            .catch(error => console.log(error));
+            .catch(error => console.log(error))
+            .finally(loadingProcessScreen.hide);
     }, [url]);
 
     const PageHeader = () => (
@@ -82,6 +87,7 @@ const Products = () => {
         };
 
     const onPageClick = (url) => {
+        loadingProcessScreen.show();
         setUrl(url);
     };
 
