@@ -13,6 +13,7 @@ import Products from "./products/Products";
 import ProductForm from "./products/ProductForm";
 import LoadingProcessScreen from "./common/LoadingProcessScreen";
 import {LoadingProcessScreenContext} from "../App";
+import UnitTypes from "./unit-types/UnitTypes";
 
 const Index = () => {
     const version = "1.0.0";
@@ -37,10 +38,10 @@ const Index = () => {
                     <Products/>
                 </Route>
                 <Route path="/unit-types/:unitTypeId">
-                    <Content/>
+                    <UnitTypes/>
                 </Route>
                 <Route path="/unit-types">
-                    <Content/>
+                    <UnitTypes/>
                 </Route>
                 <Route path="/shopping-list/form">
                     <Content/>
