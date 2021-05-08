@@ -17,6 +17,15 @@
     cursor: wait;
 }
 
+/* - table -------------------------- */
+.table td.td-btn-actions > div {
+    visibility: hidden;
+}
+
+.table tr:hover > td.td-btn-actions > div {
+    visibility: visible;
+}
+
 /* - full-screen -------------------------- */
 .full-screen,
 .full-screen-background {
