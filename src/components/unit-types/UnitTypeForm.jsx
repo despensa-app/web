@@ -1,7 +1,7 @@
 import {useContext, useState, useEffect} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import Card from "../common/Card";
-import {LoadingProcessScreenContext} from "../../App";
+import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
 
 const UnitTypeForm = ({onActionSubmit}) => {
 
@@ -14,6 +14,8 @@ const UnitTypeForm = ({onActionSubmit}) => {
     const {unitTypeId} = useParams();
 
     const history = useHistory();
+
+    const showMessage = useContext(ShowMessagesContext);
 
     useEffect(() => {
         setUnitTypeName('');
@@ -53,7 +55,13 @@ const UnitTypeForm = ({onActionSubmit}) => {
         };
 
         fetch(url, requestOptions)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    showMessage.success({message: "Tipo de unidad creada."});
+                }
+
+                return response.json();
+            })
             .then(data => history.push(`/unit-types/${data.data.id}`))
             .catch(error => console.log(error))
             .finally(onActionSubmit);
@@ -69,6 +77,11 @@ const UnitTypeForm = ({onActionSubmit}) => {
         };
 
         fetch(`${url}/${unitTypeId}`, requestOptions)
+            .then(response => {
+                if (response.ok) {
+                    showMessage.success({message: "Tipo de unidad actualizada."})
+                }
+            })
             .catch(error => console.log(error))
             .finally(onActionSubmit)
     }

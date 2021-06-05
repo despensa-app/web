@@ -1,7 +1,7 @@
-import {useContext, useState, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
 import Content from "../common/Content";
 import Card from "../common/Card";
-import {LoadingProcessScreenContext} from "../../App";
+import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
 import Pagination from "../common/Pagination";
 import UnitTypeForm from "./UnitTypeForm";
 import {Link, useParams} from "react-router-dom";
@@ -65,6 +65,8 @@ const UnitTypes = () => {
 
     const {unitTypeId} = useParams();
 
+    const showMessage = useContext(ShowMessagesContext);
+
     useEffect(() => {
         initData();
     }, [url]);
@@ -109,15 +111,15 @@ const UnitTypes = () => {
             .then(response => {
                 if (response.ok) {
                     initData();
+                    showMessage.success({message: "Tipo de unidad borrada."});
                 } else {
                     loadingProcessScreen.hide();
                     return response.json()
                 }
             })
             .then(response => {
-                //TODO: mostrar un mensaje en pantalla.
                 if (response && response.error) {
-                    console.log(response.error);
+                    showMessage.error(response.error);
                 }
             })
             .catch(error => console.log(error));
