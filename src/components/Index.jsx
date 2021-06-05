@@ -1,8 +1,4 @@
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {useContext} from "react";
 import Aside from './common/Aside';
 import Footer from './common/Footer';
@@ -12,16 +8,19 @@ import Product from "./products/Product";
 import Products from "./products/Products";
 import ProductForm from "./products/ProductForm";
 import LoadingProcessScreen from "./common/LoadingProcessScreen";
-import {LoadingProcessScreenContext} from "../App";
+import {LoadingProcessScreenContext, ShowMessagesContext} from "../App";
 import UnitTypes from "./unit-types/UnitTypes";
+import {Toast} from "primereact/toast";
 
 const Index = () => {
     const version = "1.0.0";
     const loadingProcessScreenContext = useContext(LoadingProcessScreenContext);
+    const showMessage = useContext(ShowMessagesContext);
 
     return (
         <Router>
             <LoadingProcessScreen {...loadingProcessScreenContext}/>
+            <Toast ref={showMessage.toast}/>
             <Nav/>
             <Aside/>
             <Switch>

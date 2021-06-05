@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback");
-@import '~primereact/resources/primereact.min.css';
+@import "~primereact/resources/themes/saga-blue/theme.css";
+@import "~primereact/resources/primereact.min.css";
+@import "~primeicons/primeicons.css";
 @import "~admin-lte/plugins/fontawesome-free/css/all.min.css";
 @import "~admin-lte/dist/css/adminlte.min.css";
 
