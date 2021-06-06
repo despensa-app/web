@@ -100,10 +100,15 @@ const UnitTypes = () => {
                                 <tr key={`unit-type-${i}`}>
                                     <td className="w-25 td-btn-actions">
                                         <div className="btn-group">
-                                            <Link to={`/unit-types/${unitType.id}`} className="btn btn-primary btn-sm" href="/">
+                                            <Link
+                                                to={`/unit-types/${unitType.id}`}
+                                                className="btn btn-primary btn-sm"
+                                                href="/">
                                                 <i className="fas fa-edit"/>
                                             </Link>
-                                            <button className="btn btn-danger btn-sm" onClick={(e) => onClickDelete(unitType.id)}>
+                                            <button
+                                                className="btn btn-danger btn-sm"
+                                                onClick={(e) => onClickDelete(unitType.id)}>
                                                 <i className="far fa-trash-alt"/>
                                             </button>
                                         </div>

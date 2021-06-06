@@ -75,7 +75,12 @@ const UnitTypeForm = ({onActionSubmit}) => {
                     <div className="row">
                         <label htmlFor="unit_type_name" className="col-sm-2 col-form-label">Nombre</label>
                         <div className="col-sm-10">
-                            <input type="text" id="unit_type_name" className="form-control" value={unitTypeName} onChange={(e) => setUnitTypeName(e.target.value)}/>
+                            <input
+                                type="text"
+                                id="unit_type_name"
+                                className="form-control"
+                                value={unitTypeName}
+                                onChange={(e) => setUnitTypeName(e.target.value)}/>
                         </div>
                     </div>
                     <br className="d-block d-sm-none"/>
