@@ -1,19 +1,16 @@
-import {useContext, useState, useEffect} from "react";
-import {useHistory, useParams} from "react-router-dom";
+import {useContext, useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 import Card from "../common/Card";
 import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
+import {UnitTypesRC} from "../rest-call/UnitTypesRC";
 
 const UnitTypeForm = ({onActionSubmit}) => {
-
-    const url = 'http://despensa-app.api/api/unit-types';
 
     const [unitTypeName, setUnitTypeName] = useState('');
 
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
     const {unitTypeId} = useParams();
-
-    const history = useHistory();
 
     const showMessage = useContext(ShowMessagesContext);
 
@@ -25,13 +22,13 @@ const UnitTypeForm = ({onActionSubmit}) => {
         }
 
         loadingProcessScreen.show();
-        fetch(`${url}/${unitTypeId}`)
-            .then(response => response.json())
-            .then(data => {
+        UnitTypesRC.get({
+            id: unitTypeId,
+            success: (data) => {
                 setUnitTypeName(data.data.name);
-            })
-            .catch(error => console.log(error))
-            .finally(loadingProcessScreen.hide);
+            },
+            final: loadingProcessScreen.hide
+        });
     }, [unitTypeId]);
 
     const onSubmit = (e) => {
@@ -46,46 +43,30 @@ const UnitTypeForm = ({onActionSubmit}) => {
     };
 
     const create = () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                name: unitTypeName,
-            })
-        };
-
-        fetch(url, requestOptions)
-            .then(response => {
-                if (response.ok) {
-                    showMessage.success({message: "Tipo de unidad creada."});
-                }
-
-                return response.json();
-            })
-            .then(data => history.push(`/unit-types/${data.data.id}`))
-            .catch(error => console.log(error))
-            .finally(onActionSubmit);
+        UnitTypesRC.post({
+            body: {name: unitTypeName},
+            success: () => {
+                showMessage.success({message: "Tipo de unidad creada."});
+            },
+            error: () => showMessage.success({message: "Tipo de unidad creada."}),
+            final: () => {
+                onActionSubmit();
+                setUnitTypeName("");
+            }
+        });
     }
 
     const update = () => {
-        const requestOptions = {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                name: unitTypeName,
-            })
-        };
-
-        fetch(`${url}/${unitTypeId}`, requestOptions)
-            .then(response => {
-                if (response.ok) {
-                    showMessage.success({message: "Tipo de unidad actualizada."})
-                }
-            })
-            .catch(error => console.log(error))
-            .finally(onActionSubmit)
+        UnitTypesRC.put({
+            body: {name: unitTypeName},
+            id: unitTypeId,
+            success: () => {
+                showMessage.success({message: "Tipo de unidad actualizada."})
+            },
+            error: () => showMessage.success({message: "Tipo de unidad creada."}),
+            final: onActionSubmit
+        });
     }
-
 
     return (
         <Card>
