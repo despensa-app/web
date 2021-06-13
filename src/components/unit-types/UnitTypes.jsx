@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import Content from "../common/Content";
 import Card from "../common/Card";
-import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
+import {LoadingProcessScreenContext, ShowMessagesContext, ConfirmDialogContext} from "../../App";
 import Pagination from "../common/Pagination";
 import UnitTypeForm from "./UnitTypeForm";
 import {Link, useParams} from "react-router-dom";
@@ -33,6 +33,8 @@ const UnitTypes = () => {
     const {unitTypeId} = useParams();
 
     const showMessage = useContext(ShowMessagesContext);
+
+    const confirmDialog = useContext(ConfirmDialogContext);
 
     useEffect(() => {
         initData();
@@ -83,6 +85,14 @@ const UnitTypes = () => {
         });
     }
 
+    const deleteConfirmDialog = (id) => {
+        confirmDialog.deleted({
+            accept: () => {
+                onClickDelete(id);
+            }
+        });
+    }
+
     return (
         <Content pageHeader={<PageHeader/>} breadcrumbItems={breadcrumbItems}>
             <UnitTypeForm onActionSubmit={onActionSubmit}/>
@@ -108,7 +118,7 @@ const UnitTypes = () => {
                                             </Link>
                                             <button
                                                 className="btn btn-danger btn-sm"
-                                                onClick={(e) => onClickDelete(unitType.id)}>
+                                                onClick={(e) => deleteConfirmDialog(unitType.id)}>
                                                 <i className="far fa-trash-alt"/>
                                             </button>
                                         </div>
