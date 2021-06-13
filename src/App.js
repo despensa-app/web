@@ -2,10 +2,13 @@ import Index from './components/Index';
 import 'admin-lte/plugins/bootstrap/js/bootstrap.min'
 import 'admin-lte/dist/js/adminlte';
 import {createContext, useRef, useState} from "react";
+import { confirmDialog } from 'primereact/confirmdialog';
 
 export const LoadingProcessScreenContext = createContext({});
 
 export const ShowMessagesContext = createContext({});
+
+export const ConfirmDialogContext = createContext({});
 
 const App = () => {
 
@@ -35,10 +38,34 @@ const App = () => {
         }
     };
 
+    const actionConfirmationDialog = {
+        confirmation: ({accept, reject}) => {
+            confirmDialog({
+                message: '¿Estás seguro de que quieres continuar?',
+                header: 'Confirmación',
+                icon: 'pi pi-exclamation-triangle',
+                accept,
+                reject
+            });
+        },
+        deleted: ({accept, reject}) => {
+            confirmDialog({
+                message: '¿Desea eliminar este registro?',
+                header: 'Confirmación de borrado',
+                icon: 'pi pi-info-circle',
+                acceptClassName: 'p-button-danger',
+                accept,
+                reject
+            });
+        }
+    };
+
     return (
         <LoadingProcessScreenContext.Provider value={valueLoadingProcessScreen}>
             <ShowMessagesContext.Provider value={showMessage}>
-                <Index/>
+                <ConfirmDialogContext.Provider value={actionConfirmationDialog}>
+                    <Index/>
+                </ConfirmDialogContext.Provider>
             </ShowMessagesContext.Provider>
         </LoadingProcessScreenContext.Provider>
     );
