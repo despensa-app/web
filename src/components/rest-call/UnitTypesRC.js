@@ -6,6 +6,9 @@ const getUnitTypeRute = ({uri, id} = {}) => {
 };
 
 export const UnitTypesRC = {
+    getPath: () => {
+        return routes.unit_types;
+    },
     get: ({uri, id, success, error, final}) => {
         call({
             uri: getUnitTypeRute({uri, id}),
