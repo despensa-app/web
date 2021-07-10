@@ -4,33 +4,40 @@ import Pagination from "../common/Pagination";
 import Content from "../common/Content";
 import CardProduct from "./CardProduct";
 import {Link} from "react-router-dom";
-import {LoadingProcessScreenContext} from "../../App";
+import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
 import productsInitState from "../../assests/responses/products.json";
 import BreadCrumbApp from "../../common/breadCrumbApp";
+import ProductsRC from "../../services/ProductsRC";
+import routes from "../../assests/routes.json";
 
 const Products = () => {
 
-    const urlBase = 'http://despensa-app.api/api/products';
-
     const [products, setProducts] = useState(productsInitState);
 
-    const [url, setUrl] = useState(urlBase);
+    const [url, setUrl] = useState("");
 
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
+    const showMessage = useContext(ShowMessagesContext);
+
     useEffect(() => {
-        loadingProcessScreen.show();
-        fetch(`${url}`)
-            .then(response => response.json())
-            .then(data => setProducts(data))
-            .catch(error => console.log(error))
-            .finally(loadingProcessScreen.hide);
+        initData();
     }, [url]);
+
+    const initData = () => {
+        loadingProcessScreen.show();
+        ProductsRC.get({
+            uri: url,
+            success: (data) => setProducts(data),
+            error: () => showMessage.error({message: "Error al obtener los productos"}),
+            final: () => loadingProcessScreen.hide()
+        });
+    }
 
     const PageHeader = () => (
         <>
             <span>Productos </span>
-            <Link to="/products/form" className="btn btn-success">
+            <Link to={routes.products_form} className="btn btn-success">
                 <i className="fas fa-plus"/>
             </Link>
         </>
