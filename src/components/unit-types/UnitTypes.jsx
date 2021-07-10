@@ -4,7 +4,7 @@ import Card from "../common/Card";
 import {LoadingProcessScreenContext, ShowMessagesContext, ConfirmDialogContext} from "../../App";
 import Pagination from "../common/Pagination";
 import UnitTypeForm from "./UnitTypeForm";
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, useHistory} from "react-router-dom";
 import {UnitTypesRC} from "../rest-call/UnitTypesRC";
 import unitTypeResponse from "../../assests/unit-type.json";
 
@@ -35,6 +35,8 @@ const UnitTypes = () => {
     const showMessage = useContext(ShowMessagesContext);
 
     const confirmDialog = useContext(ConfirmDialogContext);
+
+    const history = useHistory();
 
     useEffect(() => {
         initData();
@@ -83,6 +85,7 @@ const UnitTypes = () => {
                 }
             }
         });
+        history.push('/unit-types');
     }
 
     const deleteConfirmDialog = (id) => {
