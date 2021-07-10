@@ -7,22 +7,9 @@ import UnitTypeForm from "./UnitTypeForm";
 import {Link, useParams, useHistory} from "react-router-dom";
 import {UnitTypesRC} from "../../services/UnitTypesRC";
 import unitTypeInitState from "../../assests/responses/unit-type.json";
+import breadcrumb from "../../common/breadcrumb";
 
 const UnitTypes = () => {
-
-    const breadcrumbItems = {
-        home: {
-            preIconClassName: 'fas fa-home',
-            url: '/'
-        },
-        items:
-            [
-                {
-                    label: 'Tipo de unidades',
-                    active: true
-                }
-            ]
-    };
 
     const [unitTypes, setUnitTypes] = useState(unitTypeInitState);
 
@@ -98,7 +85,7 @@ const UnitTypes = () => {
     }
 
     return (
-        <Content pageHeader={<PageHeader/>} breadcrumbItems={breadcrumbItems}>
+        <Content pageHeader={<PageHeader/>} breadcrumbItems={breadcrumb.unitType()}>
             <UnitTypeForm onActionSubmit={onActionSubmit}/>
             <Card className="table-responsive">
                 <table className="table table-hover">
