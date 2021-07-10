@@ -1,6 +1,7 @@
 {
     "host": "http://despensa-app.api/api",
     "products": "/products",
+    "products_form": "/products/form",
     "products_shopping_list": "/products-shopping-list",
     "shopping_list": "/shopping-list",
     "unit_types": "/unit-types"
