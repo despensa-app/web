@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import Card from "../common/Card";
 import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
 import {UnitTypesRC} from "../../services/UnitTypesRC";
@@ -12,6 +12,8 @@ const UnitTypeForm = ({onActionSubmit}) => {
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
     const {unitTypeId} = useParams();
+
+    const history = useHistory();
 
     const showMessage = useContext(ShowMessagesContext);
 
@@ -27,6 +29,10 @@ const UnitTypeForm = ({onActionSubmit}) => {
             id: unitTypeId,
             success: (data) => {
                 setUnitType(data.data);
+            },
+            error: (data) => {
+                showMessage.error(data.error);
+                history.push(UnitTypesRC.getPath());
             },
             final: loadingProcessScreen.hide
         });
