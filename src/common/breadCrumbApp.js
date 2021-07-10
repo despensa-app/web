@@ -24,12 +24,12 @@ const product = (items = []) => {
         active: true
     };
 
-    if (items) {
+    if (items && items.length) {
         productLabel.active = false;
         productLabel.url = rutes.products;
-
-        items.unshift(productLabel);
     }
+
+    items.unshift(productLabel);
 
     return {
         home,
@@ -37,9 +37,9 @@ const product = (items = []) => {
     };
 };
 
-const breadcrumb = {
+const BreadCrumbApp = {
     unitType,
     product
 }
 
-export default breadcrumb;
+export default BreadCrumbApp;

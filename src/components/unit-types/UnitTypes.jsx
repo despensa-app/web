@@ -7,7 +7,7 @@ import UnitTypeForm from "./UnitTypeForm";
 import {Link, useParams, useHistory} from "react-router-dom";
 import {UnitTypesRC} from "../../services/UnitTypesRC";
 import unitTypesInitState from "../../assests/responses/unit-types.json";
-import breadcrumb from "../../common/breadcrumb";
+import BreadCrumbApp from "../../common/breadCrumbApp";
 
 const UnitTypes = () => {
 
@@ -85,7 +85,7 @@ const UnitTypes = () => {
     }
 
     return (
-        <Content pageHeader={<PageHeader/>} breadcrumbItems={breadcrumb.unitType()}>
+        <Content pageHeader={<PageHeader/>} breadcrumbItems={BreadCrumbApp.unitType()}>
             <UnitTypeForm onActionSubmit={onActionSubmit}/>
             <Card className="table-responsive">
                 <table className="table table-hover">
