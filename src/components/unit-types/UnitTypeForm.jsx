@@ -48,7 +48,7 @@ const UnitTypeForm = ({onActionSubmit}) => {
             success: () => {
                 showMessage.success({message: "Tipo de unidad creada."});
             },
-            error: () => showMessage.success({message: "Tipo de unidad creada."}),
+            error: (data) => showMessage.error(data.error),
             final: () => {
                 onActionSubmit();
                 setUnitTypeName("");
@@ -63,7 +63,7 @@ const UnitTypeForm = ({onActionSubmit}) => {
             success: () => {
                 showMessage.success({message: "Tipo de unidad actualizada."})
             },
-            error: () => showMessage.success({message: "Tipo de unidad creada."}),
+            error: (data) => showMessage.error(data.error),
             final: onActionSubmit
         });
     }
