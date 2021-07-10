@@ -44,8 +44,11 @@ export const getDeleteOptions = () => {
 export const call = ({uri, options, success, error, final}) => {
     fetch(uri, options)
         .then(async response => {
-            const status = response.status;
-            const responseJSON = status !== 204 && await response.json();
+            let responseJSON = {};
+
+            if (response.status !== 204) {
+                responseJSON = await response.json();
+            }
 
             if (response.ok) {
                 success && success(responseJSON);
