@@ -2,7 +2,7 @@ import Index from './components/Index';
 import 'admin-lte/plugins/bootstrap/js/bootstrap.min'
 import 'admin-lte/dist/js/adminlte';
 import {createContext, useRef, useState} from "react";
-import { confirmDialog } from 'primereact/confirmdialog';
+import {confirmDialog} from 'primereact/confirmdialog';
 
 export const LoadingProcessScreenContext = createContext({});
 
@@ -44,6 +44,8 @@ const App = () => {
                 message: '¿Estás seguro de que quieres continuar?',
                 header: 'Confirmación',
                 icon: 'pi pi-exclamation-triangle',
+                closable: false,
+                draggable: false,
                 accept,
                 reject
             });
@@ -54,6 +56,8 @@ const App = () => {
                 header: 'Confirmación de borrado',
                 icon: 'pi pi-info-circle',
                 acceptClassName: 'p-button-danger',
+                closable: false,
+                draggable: false,
                 accept,
                 reject
             });
