@@ -3,10 +3,11 @@ import {useParams} from "react-router-dom";
 import Card from "../common/Card";
 import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
 import {UnitTypesRC} from "../rest-call/UnitTypesRC";
+import unitTypesInitState from "../../assests/requests/unit-type.json";
 
 const UnitTypeForm = ({onActionSubmit}) => {
 
-    const [unitTypeName, setUnitTypeName] = useState('');
+    const [unitType, setUnitType] = useState(unitTypesInitState)
 
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
@@ -15,7 +16,7 @@ const UnitTypeForm = ({onActionSubmit}) => {
     const showMessage = useContext(ShowMessagesContext);
 
     useEffect(() => {
-        setUnitTypeName('');
+        setUnitType(unitTypesInitState);
 
         if (!unitTypeId) {
             return;
@@ -25,7 +26,7 @@ const UnitTypeForm = ({onActionSubmit}) => {
         UnitTypesRC.get({
             id: unitTypeId,
             success: (data) => {
-                setUnitTypeName(data.data.name);
+                setUnitType(data.data);
             },
             final: loadingProcessScreen.hide
         });
@@ -35,7 +36,7 @@ const UnitTypeForm = ({onActionSubmit}) => {
         e.preventDefault();
         loadingProcessScreen.show();
 
-        if (unitTypeId) {
+        if (unitType.id) {
             update();
         } else {
             create();
@@ -44,28 +45,32 @@ const UnitTypeForm = ({onActionSubmit}) => {
 
     const create = () => {
         UnitTypesRC.post({
-            body: {name: unitTypeName},
+            body: unitType,
             success: () => {
                 showMessage.success({message: "Tipo de unidad creada."});
             },
             error: (data) => showMessage.error(data.error),
             final: () => {
                 onActionSubmit();
-                setUnitTypeName("");
+                setUnitType(unitTypesInitState);
             }
         });
     }
 
     const update = () => {
         UnitTypesRC.put({
-            body: {name: unitTypeName},
-            id: unitTypeId,
+            body: unitType,
+            id: unitType.id,
             success: () => {
                 showMessage.success({message: "Tipo de unidad actualizada."})
             },
             error: (data) => showMessage.error(data.error),
             final: onActionSubmit
         });
+    }
+
+    const onChangeInput = (evt) => {
+        setUnitType({...unitType, [evt.target.name]: evt.target.value})
     }
 
     return (
@@ -79,8 +84,9 @@ const UnitTypeForm = ({onActionSubmit}) => {
                                 type="text"
                                 id="unit_type_name"
                                 className="form-control"
-                                value={unitTypeName}
-                                onChange={(e) => setUnitTypeName(e.target.value)}/>
+                                name="name"
+                                value={unitType.name}
+                                onChange={onChangeInput}/>
                         </div>
                     </div>
                     <br className="d-block d-sm-none"/>
