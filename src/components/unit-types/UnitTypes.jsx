@@ -55,7 +55,7 @@ const UnitTypes = () => {
     const PageHeader = () => (
         <>
             <span>Tipo de unidades de productos</span>
-            {unitTypeId && <Link to="/unit-types" className="btn btn-success">
+            {unitTypeId && <Link to={UnitTypesRC.getPath()} className="btn btn-success">
                 <i className="fas fa-plus"/>
             </Link>}
         </>
@@ -86,7 +86,7 @@ const UnitTypes = () => {
                 }
             }
         });
-        history.push('/unit-types');
+        history.push(UnitTypesRC.getPath());
     }
 
     const deleteConfirmDialog = (id) => {
