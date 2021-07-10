@@ -5,7 +5,7 @@ import {LoadingProcessScreenContext, ShowMessagesContext, ConfirmDialogContext} 
 import Pagination from "../common/Pagination";
 import UnitTypeForm from "./UnitTypeForm";
 import {Link, useParams, useHistory} from "react-router-dom";
-import {UnitTypesRC} from "../rest-call/UnitTypesRC";
+import {UnitTypesRC} from "../../services/UnitTypesRC";
 import unitTypeInitState from "../../assests/responses/unit-type.json";
 
 const UnitTypes = () => {

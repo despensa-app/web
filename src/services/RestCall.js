@@ -1,4 +1,4 @@
-import routes from '../../assests/rutes.json';
+import routes from '../assests/rutes.json';
 
 const getBaseRequestOptions = ({method, body}) => {
     const request = {

@@ -1,4 +1,4 @@
-import routes from "../../assests/rutes.json";
+import routes from "../assests/rutes.json";
 import {call, getDeleteOptions, getPostOptions, getPutOptions, getRuteIfID} from "./RestCall";
 
 const getUnitTypeRute = ({uri, id} = {}) => {
