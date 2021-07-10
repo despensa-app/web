@@ -1,4 +1,4 @@
-import rutes from "../assests/rutes.json";
+import rutes from "../assests/routes.json";
 
 const home = {
     preIconClassName: 'fas fa-home',
