@@ -6,12 +6,12 @@ import Pagination from "../common/Pagination";
 import UnitTypeForm from "./UnitTypeForm";
 import {Link, useParams, useHistory} from "react-router-dom";
 import {UnitTypesRC} from "../../services/UnitTypesRC";
-import unitTypeInitState from "../../assests/responses/unit-type.json";
+import unitTypesInitState from "../../assests/responses/unit-types.json";
 import breadcrumb from "../../common/breadcrumb";
 
 const UnitTypes = () => {
 
-    const [unitTypes, setUnitTypes] = useState(unitTypeInitState);
+    const [unitTypes, setUnitTypes] = useState(unitTypesInitState);
 
     const [url, setUrl] = useState("");
 
