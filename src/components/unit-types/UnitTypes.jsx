@@ -6,7 +6,7 @@ import Pagination from "../common/Pagination";
 import UnitTypeForm from "./UnitTypeForm";
 import {Link, useParams, useHistory} from "react-router-dom";
 import {UnitTypesRC} from "../rest-call/UnitTypesRC";
-import unitTypeResponse from "../../assests/unit-type.json";
+import unitTypeInitState from "../../assests/responses/unit-type.json";
 
 const UnitTypes = () => {
 
@@ -24,7 +24,7 @@ const UnitTypes = () => {
             ]
     };
 
-    const [unitTypes, setUnitTypes] = useState(unitTypeResponse);
+    const [unitTypes, setUnitTypes] = useState(unitTypeInitState);
 
     const [url, setUrl] = useState("");
 
@@ -80,6 +80,7 @@ const UnitTypes = () => {
             },
             error: (data) => {
                 loadingProcessScreen.hide();
+
                 if (data && data.error) {
                     showMessage.error(data.error);
                 }
