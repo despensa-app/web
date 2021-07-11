@@ -64,16 +64,15 @@ const UnitTypes = () => {
             success: () => {
                 initData();
                 showMessage.success({message: "Tipo de unidad borrada."});
+                history.push(UnitTypesRC.getPath());
             },
             error: (data) => {
-                loadingProcessScreen.hide();
-
                 if (data && data.error) {
                     showMessage.error(data.error);
                 }
-            }
+            },
+            final: loadingProcessScreen.hide
         });
-        history.push(UnitTypesRC.getPath());
     }
 
     const deleteConfirmDialog = (id) => {
@@ -109,8 +108,9 @@ const UnitTypes = () => {
                                             </Link>
                                             <button
                                                 className="btn btn-danger btn-sm"
+                                                type="button"
                                                 onClick={(e) => deleteConfirmDialog(unitType.id)}>
-                                                <i className="far fa-trash-alt"/>
+                                                <i className="fas fa-trash"/>
                                             </button>
                                         </div>
                                     </td>
