@@ -24,7 +24,7 @@ const Index = () => {
             <Nav/>
             <Aside/>
             <Switch>
-                <Route path="/products/form/:productId">
+                <Route path="/products/:productId/form">
                     <ProductForm/>
                 </Route>
                 <Route path="/products/form">
