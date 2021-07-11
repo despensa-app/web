@@ -26,7 +26,9 @@ export const getRute = ({path = [], host = true}) => {
         path.unshift(routes.host);
     }
 
-    return path.join('/');
+    path = path.join('/');
+
+    return host ? path : '/' + path;
 };
 
 export const getRuteIfID = ({uri, path = "", id}) => {
