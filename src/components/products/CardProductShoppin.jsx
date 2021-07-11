@@ -36,7 +36,9 @@ const CardProductShopping = ({title, unitTypes, units, onDelete, hrefEdit, hrefV
             <div className="card-footer">
                 <div className="row">
                     <div className="col-3">
-                        <Link preClassIcon="fas fa-trash" size="sm" btnColor="danger" onClick={onClickDelete}/>
+                        <button className="btn btn-sm btn-danger" type="button" onClick={onClickDelete}>
+                            <i className="fas fa-trash"/>
+                        </button>
                     </div>
                     <div className="col-9 text-right">
                         <Link href={hrefEdit} btnColor="success" size="sm">
