@@ -1,0 +1,58 @@
+{
+    "data": [
+        {
+            "units_per_product": 0,
+            "total_calories": 0,
+            "total_price": 0,
+            "product_id": 0,
+            "shopping_list_id": 0,
+            "unit_type_id": 0,
+            "unit_type": {
+                "id": 0,
+                "name": "",
+                "created_at": 0,
+                "updated_at": 0
+            },
+            "shopping_list": {
+                "id": 0,
+                "name": "",
+                "total_calories": 0,
+                "total_price": 0,
+                "created_at": 0,
+                "updated_at": 0
+            },
+            "product": {
+                "id": 0,
+                "name": "",
+                "price": 0,
+                "img_url": "",
+                "calories": 0,
+                "description": "",
+                "created_at": 0,
+                "updated_at": 0
+            }
+        }
+    ],
+    "links": {
+        "first": "",
+        "last": "",
+        "prev": null,
+        "next": ""
+    },
+    "meta": {
+        "current_page": 0,
+        "from": 0,
+        "last_page": 0,
+        "links": [
+            {
+                "url": null,
+                "label": "",
+                "active": false
+            }
+        ],
+        "path": "",
+        "per_page": 0,
+        "to": 0,
+        "total": 0
+    }
+}
