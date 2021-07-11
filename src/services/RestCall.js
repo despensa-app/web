@@ -13,20 +13,30 @@ const getBaseRequestOptions = ({method, body}) => {
     return request;
 };
 
-export const getRute = (path = "") => {
-    return `${routes.host}${path}`;
+export const getRute = ({path = [], host = true}) => {
+    path = path.map(value => {
+        if (typeof value !== "string") {
+            return value;
+        }
+
+        return value.startsWith("/") ? value.substring(1) : value;
+    });
+
+    if (host) {
+        path.unshift(routes.host);
+    }
+
+    return path.join('/');
 };
 
 export const getRuteIfID = ({uri, path = "", id}) => {
-    const rute = getRute(path);
-
     if (id) {
-        return `${rute}/${id}`;
+        return getRute({path: [path, id]});
     } else if (uri) {
         return uri;
     }
 
-    return rute;
+    return getRute({path: [path]});
 };
 
 export const getPostOptions = (body) => {
@@ -37,8 +47,8 @@ export const getPutOptions = (body) => {
     return getBaseRequestOptions({method: 'PUT', body})
 }
 
-export const getDeleteOptions = () => {
-    return getBaseRequestOptions({method: 'DELETE'})
+export const getDeleteOptions = (body) => {
+    return getBaseRequestOptions({method: 'DELETE', body})
 }
 
 export const call = ({uri, options, success, error, final}) => {
