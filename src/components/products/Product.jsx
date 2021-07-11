@@ -26,7 +26,7 @@ const Product = () => {
         }
     ]);
 
-    const [shoppingList, setShoppingList] = useState(productsShoppingListInitState)
+    const [productShoppingList, setProductShoppingList] = useState(productsShoppingListInitState)
 
     const [shoppingListUrlPage, setShoppingListUrlPage] = useState('');
 
@@ -62,7 +62,7 @@ const Product = () => {
         ProductsRC.get({
             uri,
             success: (data) => {
-                setShoppingList(data);
+                setProductShoppingList(data);
             },
             error: (data) => showMessage.error(data.error),
             final: loadingProcessScreen.hide
@@ -132,7 +132,7 @@ const Product = () => {
             <Card title="Listas de la compra">
                 <div className="row d-flex align-items-stretch">
                     {
-                        shoppingList.data.map((relationship, i) => (
+                        productShoppingList.data.map((relationship, i) => (
                             <div className="col-12 col-sm-6 col-md-4 d-flex align-items-stretch"
                                  key={`product-relationship-${i}`}>
                                 <CardProductShopping title={relationship.shopping_list.name}
@@ -146,7 +146,7 @@ const Product = () => {
                     }
                 </div>
                 <Pagination
-                    links={shoppingList.meta.links}
+                    links={productShoppingList.meta.links}
                     onClick={onPageClick}
                     nameKey="product-relationship"/>
             </Card>
