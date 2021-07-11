@@ -1,19 +1,17 @@
 import routes from "../assests/routes.json";
-import {call, getDeleteOptions, getPostOptions, getPutOptions, getRuteIfID} from "./RestCall";
+import {call, getDeleteOptions, getPostOptions, getPutOptions, getRute, getRuteIfID} from "./RestCall";
 
-const getRoute = ({uri, id} = {}) => {
+const getUri = ({uri, id} = {}) => {
     return getRuteIfID({uri, path: routes.products, id});
 }
 
 const ProductsRC = {
-    getPath: (path = []) => {
-        path.unshift(routes.products);
-
-        return path.join('/');
+    getPath: ({path = [], host = false} = {}) => {
+        return getRute({path: [routes.products, ...path], host});
     },
     get: ({uri, id, success, error, final}) => {
         call({
-            uri: getRoute({uri, id}),
+            uri: getUri({uri, id}),
             success,
             error,
             final
@@ -21,7 +19,7 @@ const ProductsRC = {
     },
     post: ({body, success, error, final}) => {
         call({
-            uri: getRoute(),
+            uri: getUri(),
             options: getPostOptions(body),
             success,
             error,
@@ -30,7 +28,7 @@ const ProductsRC = {
     },
     put: ({body, id, success, error, final}) => {
         call({
-            uri: getRoute({id}),
+            uri: getUri({id}),
             options: getPutOptions(body),
             success,
             error,
@@ -39,7 +37,7 @@ const ProductsRC = {
     },
     delete: ({id, success, error, final}) => {
         call({
-            uri: getRoute({id}),
+            uri: getUri({id}),
             options: getDeleteOptions(),
             success,
             error,
