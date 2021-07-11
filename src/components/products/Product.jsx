@@ -9,11 +9,9 @@ import productInitState from "../../assests/responses/products.json";
 import BreadCrumbApp from "../../common/BreadCrumbApp";
 import productsShoppingListInitState from "../../assests/responses/products-shopping-list.json"
 import ProductsRC from "../../services/ProductsRC";
-import routes from "../../assests/routes.json";
+import ProductsShoppingListRC from "../../services/ProductsShoppingListRC";
 
 const Product = () => {
-
-    const urlRelationship = 'http://despensa-app.api/api/products-shopping-list';
 
     const {productId} = useParams();
 
@@ -56,8 +54,8 @@ const Product = () => {
     };
 
     const initDataShoppingList = (url = null) => {
-        const path = ProductsRC.getPath([productId, 'shopping-list']);
-        const uri = url ? url : routes.host + path;
+        const path = ProductsRC.getPath({path: [productId, 'shopping-list'], host: true});
+        const uri = url ? url : path;
 
         ProductsRC.get({
             uri,
@@ -76,32 +74,19 @@ const Product = () => {
     };
 
     const onRelationshipDelete = ({product_id, shopping_list_id, unit_type_id}) => {
-        const requestOptions = {
-            method: 'DELETE',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(
-                {
-                    "product_id": product_id,
-                    "shopping_list_id": shopping_list_id,
-                    "unit_type_id": unit_type_id
-                }
-            )
-        };
-
         loadingProcessScreen.show();
-        fetch(urlRelationship, requestOptions)
-            .then(response => {
-                if (response.ok) {
-                    onPageClick(shoppingListUrlPage);
-                }
-            })
-            .catch(error => console.log(error));
+        ProductsShoppingListRC.delete({
+            body: {product_id, shopping_list_id, unit_type_id},
+            success: () => onPageClick(shoppingListUrlPage),
+            error: (data) => showMessage.error(data.error),
+            final: loadingProcessScreen.hide
+        })
     };
 
     const PageHeader = () => (
         <>
             <span>{product.data.name} </span>
-            <Link to={ProductsRC.getPath([productId, 'form'])} className="btn btn-primary">
+            <Link to={ProductsRC.getPath({path: [productId, 'form']})} className="btn btn-primary">
                 <i className="fas fa-edit"/>
             </Link>
             <Link to="/" className="btn btn-danger">
