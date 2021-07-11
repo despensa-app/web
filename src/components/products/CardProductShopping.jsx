@@ -1,8 +1,7 @@
 import Link from "../common/Link";
 
 const CardProductShopping = ({title, unitTypes, units, onDelete, hrefEdit, hrefView}) => {
-    const onClickDelete = (e) => {
-        e.preventDefault();
+    const onClickDelete = () => {
         onDelete();
     };
 
@@ -24,7 +23,11 @@ const CardProductShopping = ({title, unitTypes, units, onDelete, hrefEdit, hrefV
                                 <i className="fas fa-plus"/>
                             </span>
                         </div>
-                        <input type="number" className="form-control" id="units_per_product" value={units} disabled/>
+                        <input
+                            type="number"
+                            className="form-control"
+                            id="units_per_product"
+                            value={units} disabled/>
                         <div className="input-group-append">
                             <div className="input-group-text">
                                 <i className="fas fa-minus"/>
@@ -44,7 +47,11 @@ const CardProductShopping = ({title, unitTypes, units, onDelete, hrefEdit, hrefV
                         <Link href={hrefEdit} btnColor="success" size="sm">
                             Editar
                         </Link>
-                        <Link href={hrefView} btnColor="primary" size="sm" preClassIcon="fas fa-cart-arrow-down">
+                        <Link
+                            href={hrefView}
+                            btnColor="primary"
+                            size="sm"
+                            preClassIcon="fas fa-cart-arrow-down">
                             Ver lista
                         </Link>
                     </div>
