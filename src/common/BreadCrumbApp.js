@@ -29,11 +29,9 @@ const product = (items = []) => {
         productLabel.url = rutes.products;
     }
 
-    items.unshift(productLabel);
-
     return {
         home,
-        items
+        items: [productLabel, ...items]
     };
 };
 
