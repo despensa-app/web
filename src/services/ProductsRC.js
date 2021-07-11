@@ -6,8 +6,10 @@ const getRoute = ({uri, id} = {}) => {
 }
 
 const ProductsRC = {
-    getPath: () => {
-        return routes.products;
+    getPath: (path = []) => {
+        path.unshift(routes.products);
+
+        return path.join('/');
     },
     get: ({uri, id, success, error, final}) => {
         call({
