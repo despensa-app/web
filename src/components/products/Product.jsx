@@ -6,7 +6,7 @@ import Pagination from "../common/Pagination";
 import CardProductShopping from "./CardProductShoppin";
 import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
 import productInitState from "../../assests/responses/products.json";
-import BreadCrumbApp from "../../common/breadCrumbApp";
+import BreadCrumbApp from "../../common/BreadCrumbApp";
 import productsShoppingListInitState from "../../assests/responses/products-shopping-list.json"
 import ProductsRC from "../../services/ProductsRC";
 import routes from "../../assests/routes.json";

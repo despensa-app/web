@@ -7,7 +7,7 @@ import UnitTypeForm from "./UnitTypeForm";
 import {Link, useParams, useHistory} from "react-router-dom";
 import {UnitTypesRC} from "../../services/UnitTypesRC";
 import unitTypesInitState from "../../assests/responses/unit-types.json";
-import BreadCrumbApp from "../../common/breadCrumbApp";
+import BreadCrumbApp from "../../common/BreadCrumbApp";
 
 const UnitTypes = () => {
 

@@ -6,7 +6,7 @@ import CardProduct from "./CardProduct";
 import {Link} from "react-router-dom";
 import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
 import productsInitState from "../../assests/responses/products.json";
-import BreadCrumbApp from "../../common/breadCrumbApp";
+import BreadCrumbApp from "../../common/BreadCrumbApp";
 import ProductsRC from "../../services/ProductsRC";
 import routes from "../../assests/routes.json";
 
