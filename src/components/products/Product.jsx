@@ -4,7 +4,7 @@ import Content from "../common/Content";
 import Card from "../common/Card";
 import Pagination from "../common/Pagination";
 import CardProductShopping from "./CardProductShopping";
-import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
+import {ConfirmDialogContext, LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
 import productInitState from "../../assests/requests/product.json";
 import BreadCrumbApp from "../../common/BreadCrumbApp";
 import productsShoppingListInitState from "../../assests/responses/products-shopping-list.json"
@@ -31,6 +31,8 @@ const Product = () => {
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
     const showMessage = useContext(ShowMessagesContext);
+
+    const confirmDialog = useContext(ConfirmDialogContext);
 
     const history = useHistory();
 
@@ -111,13 +113,29 @@ const Product = () => {
         });
     };
 
+    const deleteConfirmDialog = () => {
+        confirmDialog.deleted({
+            accept: () => {
+                onClickDelete();
+            }
+        });
+    }
+
+    const relationshipDeleteConfirmDialog = (relationship) => {
+        confirmDialog.deleted({
+            accept: () => {
+                onRelationshipDelete(relationship);
+            }
+        });
+    };
+
     const PageHeader = () => (
         <>
             <span>{product.name} </span>
             <Link to={ProductsRC.getPath({path: [productId, 'form']})} className="btn btn-primary">
                 <i className="fas fa-edit"/>
             </Link>
-            <button className="btn btn-danger" type="button" onClick={onClickDelete}>
+            <button className="btn btn-danger" type="button" onClick={deleteConfirmDialog}>
                 <i className="fas fa-trash"/>
             </button>
         </>
@@ -151,7 +169,7 @@ const Product = () => {
                                 <CardProductShopping title={relationship.shopping_list.name}
                                                      unitTypes={relationship.unit_type.name}
                                                      units={relationship.units_per_product}
-                                                     onDelete={() => onRelationshipDelete(relationship)}
+                                                     onDelete={() => relationshipDeleteConfirmDialog(relationship)}
                                                      hrefEdit="/"
                                                      hrefView={`/shopping-list/${relationship.shopping_list_id}`}/>
                             </div>
