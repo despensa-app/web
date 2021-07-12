@@ -4,9 +4,9 @@ Despensa-app es una aplicación que te permite gestionar productos que compras d
 
 Este módulo se comunica con el módulo [rest-api](https://github.com/despensa-app/rest-api) el cual contiene todos los servicios a consumir.
 
-## Thanks
+## Agradecimientos
 
-Thanks to [JetBrains](https://www.jetbrains.com/?from=SoftN%20CMS) for providing a license for WebStorm to develop this project.
+Gracias a [JetBrains](https://www.jetbrains.com/?from=SoftN%20CMS) por proporcionar una licencia para WebStorm para desarrollar este proyecto.
 
 | JetBrains  | WebStorm |
 | ------------- | ------------- |
