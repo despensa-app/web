@@ -33,7 +33,6 @@ const ProductForm = () => {
         }
 
         loadingProcessScreen.show();
-
         ProductsRC.get({
             id: productId,
             success: ({data}) => {
