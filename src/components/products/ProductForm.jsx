@@ -3,8 +3,10 @@ import {useEffect, useState, useContext} from "react";
 import Content from "../common/Content";
 import Card from "../common/Card";
 import {InputNumber} from "primereact/inputnumber";
-import {LoadingProcessScreenContext} from "../../App";
+import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
 import BreadCrumbApp from "../../common/BreadCrumbApp";
+import productInitState from "../../assests/requests/product.json";
+import ProductsRC from "../../services/ProductsRC";
 
 const ProductForm = () => {
 
@@ -12,23 +14,15 @@ const ProductForm = () => {
 
     const history = useHistory();
 
-    const [productName, setProductName] = useState('');
-
-    const [productPrice, setProductPrice] = useState(0.0);
-
-    const [productImgUrl, setProductImgUrl] = useState('');
-
-    const [productCalories, setProductCalories] = useState(0.0);
-
-    const [productDescription, setProductDescription] = useState('');
+    const [product, setProduct] = useState(productInitState);
 
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
-    const url = 'http://despensa-app.api/api/products';
+    const showMessage = useContext(ShowMessagesContext);
 
     const breadcrumbItems = BreadCrumbApp.product([
         {
-            label: productId ? 'Modificar' : 'Nuevo',
+            label: product.id ? 'Modificar' : 'Nuevo',
             active: true
         }
     ]);
@@ -40,37 +34,38 @@ const ProductForm = () => {
 
         loadingProcessScreen.show();
 
-        fetch(`${url}/${productId}`)
-            .then(response => response.json())
-            .then(data => {
-                setProductName(data.data.name);
-                setProductPrice(data.data.price);
-                setProductImgUrl(data.data.img_url);
-                setProductCalories(data.data.calories);
-                setProductDescription(data.data.description);
-            })
-            .catch(error => console.log(error))
-            .finally(loadingProcessScreen.hide);
+        ProductsRC.get({
+            id: productId,
+            success: ({data}) => {
+                setProduct(data);
+            },
+            error: (data) => {
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+            },
+            final: loadingProcessScreen.hide
+        })
     }, [productId]);
 
     const PageHeader = () => (
         <>
-            <span>{productId ? 'Modificar' : 'Nuevo'} producto</span>
-            {productId && <Link to={`/products/${productId}`} className="btn btn-sm btn-primary">
+            <span>{product.id ? 'Modificar' : 'Nuevo'} producto</span>
+            {product.id && <Link to={ProductsRC.getPath({path: [product.id]})} className="btn btn-sm btn-primary">
                 Ver producto
             </Link>}
         </>
     );
 
     const CardFooter = () => (
-        <button type="submit" className="btn btn-primary">{productId ? 'Guardar' : 'Crear'}</button>
+        <button type="submit" className="btn btn-primary">{product.id ? 'Guardar' : 'Crear'}</button>
     );
 
     const onSubmit = (e) => {
         e.preventDefault();
         loadingProcessScreen.show();
 
-        if (productId) {
+        if (product.id) {
             update();
         } else {
             create();
@@ -78,49 +73,40 @@ const ProductForm = () => {
     };
 
     const create = () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                name: productName,
-                price: productPrice,
-                img_url: productImgUrl,
-                calories: productCalories,
-                description: productDescription
-            })
-        };
-
-        fetch(`${url}`, requestOptions)
-            .then(response => response.json())
-            .then(data => history.push(`/products/form/${data.data.id}`))
-            .catch(error => console.log(error))
-            .finally(loadingProcessScreen.hide);
+        ProductsRC.post({
+            body: product,
+            id: product.id,
+            success: ({data}) => {
+                showMessage.success({messages: "Producto creado."});
+                history.push(ProductsRC.getPath({path: [data.id, 'form']}));
+            },
+            error: (data) => {
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+            },
+            final: loadingProcessScreen.hide
+        });
     }
 
     const update = () => {
-        const requestOptions = {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                name: productName,
-                price: productPrice,
-                img_url: productImgUrl,
-                calories: productCalories,
-                description: productDescription
-            })
-        };
-
-        fetch(`${url}/${productId}`, requestOptions)
-            .catch(error => console.log(error))
-            .finally(loadingProcessScreen.hide)
+        ProductsRC.put({
+            body: product,
+            id: product.id,
+            success: () => {
+                showMessage.success({messages: "Producto actualizado."});
+            },
+            error: (data) => {
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+            },
+            final: loadingProcessScreen.hide
+        });
     }
 
-    const handleInput = {
-        name: (e) => setProductName(e.target.value),
-        price: (e) => setProductPrice(e.value),
-        imgUrl: (e) => setProductImgUrl(e.target.value),
-        calories: (e) => setProductCalories(e.value),
-        description: (e) => setProductDescription(e.target.value)
+    const onChangeInput = (evt) => {
+        setProduct({...product, [evt.target.name]: evt.target.value})
     }
 
     return (
@@ -129,23 +115,62 @@ const ProductForm = () => {
                 <Card footer={<CardFooter/>} className="p-fluid">
                     <div className="form-group">
                         <label htmlFor="product_name">Nombre</label>
-                        <input type="text" value={productName} onChange={handleInput.name} className="form-control" id="product_name" placeholder="Ingrese el nombre"/>
+                        <input
+                            type="text"
+                            value={product.name}
+                            name="name"
+                            onChange={onChangeInput}
+                            className="form-control"
+                            id="product_name"
+                            placeholder="Ingrese el nombre"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="product_price">Precio</label>
-                        <InputNumber id="product_price" value={productPrice} onValueChange={handleInput.price} mode="currency" currency="EUR" locale="es-ES" inputClassName="form-control" placeholder="Ingrese el precio"/>
+                        <InputNumber
+                            id="product_price"
+                            value={product.price}
+                            name="price"
+                            onValueChange={onChangeInput}
+                            mode="currency"
+                            currency="EUR"
+                            locale="es-ES"
+                            inputClassName="form-control"
+                            placeholder="Ingrese el precio"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="product_calories">Calorías</label>
-                        <InputNumber id="product_calories" value={productCalories} onValueChange={handleInput.calories} mode="decimal" minFractionDigits={2} maxFractionDigits={2} inputClassName="form-control" placeholder="Ingrese la cantidad de calorías"/>
+                        <InputNumber
+                            id="product_calories"
+                            value={product.calories}
+                            name="calories"
+                            onValueChange={onChangeInput}
+                            mode="decimal"
+                            minFractionDigits={2}
+                            maxFractionDigits={2}
+                            inputClassName="form-control"
+                            placeholder="Ingrese la cantidad de calorías"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="product_description">Descripción (Opcional)</label>
-                        <textarea id="product_description" value={productDescription} onChange={handleInput.description} className="form-control" rows="3" placeholder="Ingrese la descripción"/>
+                        <textarea
+                            id="product_description"
+                            value={product.description}
+                            name="description"
+                            onChange={onChangeInput}
+                            className="form-control"
+                            rows="3"
+                            placeholder="Ingrese la descripción"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="product_img_url">Imagen</label>
-                        <input type="url" value={productImgUrl} onChange={handleInput.imgUrl} className="form-control" id="product_img_url" placeholder="Url de la imagen"/>
+                        <input
+                            id="product_img_url"
+                            value={product.img_url}
+                            name="img_url"
+                            onChange={onChangeInput}
+                            type="url"
+                            className="form-control"
+                            placeholder="Url de la imagen"/>
                     </div>
                 </Card>
             </form>
