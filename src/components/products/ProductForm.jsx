@@ -4,6 +4,7 @@ import Content from "../common/Content";
 import Card from "../common/Card";
 import {InputNumber} from "primereact/inputnumber";
 import {LoadingProcessScreenContext} from "../../App";
+import BreadCrumbApp from "../../common/BreadCrumbApp";
 
 const ProductForm = () => {
 
@@ -25,23 +26,12 @@ const ProductForm = () => {
 
     const url = 'http://despensa-app.api/api/products';
 
-    const breadcrumbItems = {
-        home: {
-            preIconClassName: 'fas fa-home',
-            url: '/'
-        },
-        items:
-            [
-                {
-                    label: 'Productos',
-                    url: '/products'
-                },
-                {
-                    label: productId ? 'Modificar' : 'Nuevo',
-                    active: true
-                }
-            ]
-    };
+    const breadcrumbItems = BreadCrumbApp.product([
+        {
+            label: productId ? 'Modificar' : 'Nuevo',
+            active: true
+        }
+    ]);
 
     useEffect(() => {
         if (!productId) {
