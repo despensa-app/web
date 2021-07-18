@@ -28,9 +28,9 @@ const Products = () => {
         loadingProcessScreen.show();
         ProductsRC.get({
             uri: url,
-            success: (data) => setProducts(data),
+            success: setProducts,
             error: () => showMessage.error({message: "Error al obtener los productos"}),
-            final: () => loadingProcessScreen.hide()
+            final: loadingProcessScreen.hide
         });
     }
 

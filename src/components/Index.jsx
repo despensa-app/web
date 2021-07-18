@@ -58,7 +58,7 @@ const Index = () => {
                     <Content/>
                 </Route>
                 <Route path="*">
-                    <p>La pagina no existe</p>
+                    <p>La página no existe</p>
                 </Route>
             </Switch>
             <Footer version={version}/>

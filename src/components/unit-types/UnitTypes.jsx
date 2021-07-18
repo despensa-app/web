@@ -35,7 +35,7 @@ const UnitTypes = () => {
             uri: url,
             success: (data) => setUnitTypes(data),
             error: () => showMessage.error({message: "Error al obtener los tipos de unidad"}),
-            final: () => loadingProcessScreen.hide()
+            final: loadingProcessScreen.hide
         });
     };
 
