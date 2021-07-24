@@ -19,25 +19,43 @@ const unitType = () => {
 };
 
 const product = (items = []) => {
-    const productLabel = {
+    const item = {
         label: 'Productos',
         active: true
     };
 
     if (items && items.length) {
-        productLabel.active = false;
-        productLabel.url = rutes.products;
+        item.active = false;
+        item.url = rutes.products;
     }
 
     return {
         home,
-        items: [productLabel, ...items]
+        items: [item, ...items]
+    };
+};
+
+const shoppingList = (items = []) => {
+    const item = {
+        label: 'Lista de la compra',
+        active: true
+    };
+
+    if (items && items.length) {
+        item.active = false;
+        item.url = rutes.products;
+    }
+
+    return {
+        home,
+        items: [item, ...items]
     };
 };
 
 const BreadCrumbApp = {
     unitType,
-    product
+    product,
+    shoppingList
 }
 
 export default BreadCrumbApp;

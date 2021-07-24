@@ -4,5 +4,6 @@
     "products_form": "/products/form",
     "products_shopping_list": "/products-shopping-list",
     "shopping_list": "/shopping-list",
+    "shopping_list_form": "/shopping-list/form",
     "unit_types": "/unit-types"
 }
