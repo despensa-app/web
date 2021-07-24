@@ -31,7 +31,10 @@ const UnitTypeForm = ({onActionSubmit}) => {
                 setUnitType(data.data);
             },
             error: (data) => {
-                showMessage.error(data.error);
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+
                 history.push(UnitTypesRC.getPath());
             },
             final: loadingProcessScreen.hide
@@ -55,7 +58,11 @@ const UnitTypeForm = ({onActionSubmit}) => {
             success: () => {
                 showMessage.success({message: "Tipo de unidad creada."});
             },
-            error: (data) => showMessage.error(data.error),
+            error: (data) => {
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+            },
             final: () => {
                 onActionSubmit();
                 setUnitType(unitTypesInitState);
@@ -70,7 +77,11 @@ const UnitTypeForm = ({onActionSubmit}) => {
             success: () => {
                 showMessage.success({message: "Tipo de unidad actualizada."})
             },
-            error: (data) => showMessage.error(data.error),
+            error: (data) => {
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+            },
             final: onActionSubmit
         });
     }

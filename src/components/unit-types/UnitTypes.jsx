@@ -1,26 +1,23 @@
-import { useContext, useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import Content from "../common/Content";
 import Card from "../common/Card";
-import {
-    LoadingProcessScreenContext,
-    ShowMessagesContext,
-    ConfirmDialogContext,
-} from "../../App";
+import {LoadingProcessScreenContext, ShowMessagesContext, ConfirmDialogContext} from "../../App";
 import Pagination from "../common/Pagination";
 import UnitTypeForm from "./UnitTypeForm";
-import { Link, useParams, useHistory } from "react-router-dom";
-import { UnitTypesRC } from "../../services/UnitTypesRC";
+import {Link, useParams, useHistory} from "react-router-dom";
+import {UnitTypesRC} from "../../services/UnitTypesRC";
 import unitTypesInitState from "../../assests/responses/unit-types.json";
 import BreadCrumbApp from "../../common/BreadCrumbApp";
 
 const UnitTypes = () => {
+
     const [unitTypes, setUnitTypes] = useState(unitTypesInitState);
 
     const [url, setUrl] = useState("");
 
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
-    const { unitTypeId } = useParams();
+    const {unitTypeId} = useParams();
 
     const showMessage = useContext(ShowMessagesContext);
 
@@ -37,9 +34,8 @@ const UnitTypes = () => {
         UnitTypesRC.get({
             uri: url,
             success: (data) => setUnitTypes(data),
-            error: () =>
-                showMessage.error({ message: "Error al obtener los tipos de unidad" }),
-            final: loadingProcessScreen.hide,
+            error: () => showMessage.error({message: "Error al obtener los tipos de unidad"}),
+            final: loadingProcessScreen.hide
         });
     };
 
@@ -69,7 +65,7 @@ const UnitTypes = () => {
             id: id,
             success: () => {
                 initData();
-                showMessage.success({ message: "Tipo de unidad borrada." });
+                showMessage.success({message: "Tipo de unidad borrada."});
                 history.push(UnitTypesRC.getPath());
             },
             error: (data) => {
@@ -77,7 +73,7 @@ const UnitTypes = () => {
                     showMessage.error(data.error);
                 }
             },
-            final: loadingProcessScreen.hide,
+            final: loadingProcessScreen.hide
         });
     };
 
@@ -85,7 +81,7 @@ const UnitTypes = () => {
         confirmDialog.deleted({
             accept: () => {
                 onClickDelete(id);
-            },
+            }
         });
     };
 

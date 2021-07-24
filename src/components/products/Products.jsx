@@ -4,7 +4,7 @@ import Pagination from "../common/Pagination";
 import Content from "../common/Content";
 import CardProduct from "./CardProduct";
 import {Link} from "react-router-dom";
-import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
+import {ConfirmDialogContext, LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
 import productsInitState from "../../assests/responses/products.json";
 import BreadCrumbApp from "../../common/BreadCrumbApp";
 import ProductsRC from "../../services/ProductsRC";
@@ -20,6 +20,8 @@ const Products = () => {
 
     const showMessage = useContext(ShowMessagesContext);
 
+    const confirmDialog = useContext(ConfirmDialogContext);
+
     useEffect(() => {
         initData();
     }, [url]);
@@ -28,9 +30,9 @@ const Products = () => {
         loadingProcessScreen.show();
         ProductsRC.get({
             uri: url,
-            success: (data) => setProducts(data),
+            success: setProducts,
             error: () => showMessage.error({message: "Error al obtener los productos"}),
-            final: () => loadingProcessScreen.hide()
+            final: loadingProcessScreen.hide
         });
     }
 
@@ -48,6 +50,31 @@ const Products = () => {
         setUrl(url);
     };
 
+    const onClickDelete = (id) => {
+        loadingProcessScreen.show();
+        ProductsRC.delete({
+            id: id,
+            success: () => {
+                initData();
+                showMessage.success({message: "Producto borrado."});
+            },
+            error: (data) => {
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+            },
+            final: loadingProcessScreen.hide
+        });
+    }
+
+    const deleteConfirmDialog = (id) => {
+        confirmDialog.deleted({
+            accept: () => {
+                onClickDelete(id);
+            }
+        });
+    }
+
     return (
         <Content pageHeader={<PageHeader/>} breadcrumbItems={BreadCrumbApp.product()}>
             <Card>
@@ -56,7 +83,8 @@ const Products = () => {
                         products.data.map((product, i) => (
                             <div className="col-12 col-sm-6 col-md-4 d-flex align-items-stretch"
                                  key={`products-${i}`}>
-                                <CardProduct {...product}/>
+                                <CardProduct {...product}
+                                             onClickDelete={deleteConfirmDialog}/>
                             </div>
                         ))
                     }

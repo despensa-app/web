@@ -46,6 +46,7 @@ const App = () => {
                 icon: 'pi pi-exclamation-triangle',
                 closable: false,
                 draggable: false,
+                acceptLabel: "Si",
                 accept,
                 reject
             });
@@ -58,6 +59,7 @@ const App = () => {
                 acceptClassName: 'p-button-danger',
                 closable: false,
                 draggable: false,
+                acceptLabel: "Si",
                 accept,
                 reject
             });

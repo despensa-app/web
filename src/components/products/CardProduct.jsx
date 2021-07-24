@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 
-const CardProduct = ({id, name, price, img_url, calories, description}) => (
+const CardProduct = ({id, name, price, img_url, calories, description, onClickDelete}) => (
     <div className="card bg-light">
         <div className="card-header text-muted border-bottom-0">
             <h2 className="card-title">{name}</h2>
@@ -28,7 +28,8 @@ const CardProduct = ({id, name, price, img_url, calories, description}) => (
         <div className="card-footer">
             <div className="row">
                 <div className="col-3">
-                    <button className="btn btn-sm btn-danger">
+                    <button className="btn btn-sm btn-danger"
+                            onClick={(e) => onClickDelete(id)}>
                         <i className="fas fa-trash"/>
                     </button>
                 </div>
