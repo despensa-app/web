@@ -42,9 +42,11 @@ const UnitTypes = () => {
     const PageHeader = () => (
         <>
             <span>Tipo de unidades de productos</span>
-            {unitTypeId && <Link to={UnitTypesRC.getPath()} className="btn btn-success">
-                <i className="fas fa-plus"/>
-            </Link>}
+            {unitTypeId && (
+                <Link to={UnitTypesRC.getPath()} className="btn btn-success">
+                    <i className="fas fa-plus" />
+                </Link>
+            )}
         </>
     );
 
@@ -55,7 +57,7 @@ const UnitTypes = () => {
 
     const onActionSubmit = () => {
         initData();
-    }
+    };
 
     const onClickDelete = (id) => {
         loadingProcessScreen.show();
@@ -73,7 +75,7 @@ const UnitTypes = () => {
             },
             final: loadingProcessScreen.hide
         });
-    }
+    };
 
     const deleteConfirmDialog = (id) => {
         confirmDialog.deleted({
@@ -81,49 +83,49 @@ const UnitTypes = () => {
                 onClickDelete(id);
             }
         });
-    }
+    };
 
     return (
-        <Content pageHeader={<PageHeader/>} breadcrumbItems={BreadCrumbApp.unitType()}>
-            <UnitTypeForm onActionSubmit={onActionSubmit}/>
-            <Card className="table-responsive">
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th/>
-                            <th>Nombre</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            unitTypes.data.map((unitType, i) => (
-                                <tr key={`unit-type-${i}`}>
-                                    <td className="w-25 td-btn-actions">
-                                        <div className="btn-group">
-                                            <Link
-                                                to={`/unit-types/${unitType.id}`}
-                                                className="btn btn-primary btn-sm"
-                                                href="/">
-                                                <i className="fas fa-edit"/>
-                                            </Link>
-                                            <button
-                                                className="btn btn-danger btn-sm"
-                                                type="button"
-                                                onClick={(e) => deleteConfirmDialog(unitType.id)}>
-                                                <i className="fas fa-trash"/>
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td>{unitType.name}</td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
+        <Content pageHeader={<PageHeader />} breadcrumbItems={BreadCrumbApp.unitType()}>
+            <UnitTypeForm onActionSubmit={onActionSubmit} />
+            <Card>
+                <div className="cuadricula mb-3">
+                    {unitTypes.data.map((unitType) => {
+                        return (
+                            <div className="cuadricula-child" key={unitType.name}>
+                                <i className="fa fa-tint fa-4x py-2"></i>
+                                <div className="cuadricula-data">
+                                    <div className="cuadricula-name text-center">
+                                        <p className="m-0">{unitType.name}</p>
+                                    </div>
+                                    <div className="btn-group">
+                                        <Link
+                                            to={`/unit-types/${unitType.id}`}
+                                            className="btn btn-info btn-sm"
+                                        >
+                                            <i className="fas fa-edit"></i>
+                                        </Link>
+                                        <button
+                                            className="btn btn-danger btn-sm"
+                                            type="button"
+                                            onClick={(e) =>
+                                                deleteConfirmDialog(unitType.id)
+                                            }
+                                        >
+                                            <i className="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+
                 <Pagination
                     links={unitTypes.meta.links}
                     onClick={onPageClick}
-                    nameKey="unit-types"/>
+                    nameKey="unit-types"
+                />
             </Card>
         </Content>
     );
