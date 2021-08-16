@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 const ShoppingListCard = ({
     id,
     name,
@@ -35,9 +37,9 @@ const ShoppingListCard = ({
                         </button>
                     </div>
                     <div className="col-9 text-right">
-                        <a href="#" className="btn btn-sm btn-primary">
+                        <Link to={`/shopping-list/${id}`} className="btn btn-sm btn-primary">
                             Ver lista
-                        </a>
+                        </Link>
                         <a href="#" className="btn btn-sm btn-default">
                             <i className="fas fa-plus"/>
                         </a>
