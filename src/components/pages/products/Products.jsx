@@ -1,14 +1,14 @@
 import {useState, useEffect, useContext} from "react";
-import Card from "../common/Card";
-import Pagination from "../common/Pagination";
-import Content from "../common/Content";
+import Card from "../../common/Card";
+import Pagination from "../../common/Pagination";
+import Content from "../../common/Content";
 import CardProduct from "./CardProduct";
 import {Link} from "react-router-dom";
-import {ConfirmDialogContext, LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
-import productsInitState from "../../assests/responses/products.json";
-import BreadCrumbApp from "../../common/BreadCrumbApp";
-import ProductsRC from "../../services/ProductsRC";
-import routes from "../../assests/routes.json";
+import {ConfirmDialogContext, LoadingProcessScreenContext, ShowMessagesContext} from "../../../App";
+import productsInitState from "../../../assests/responses/products.json";
+import BreadCrumbApp from "../../../common/BreadCrumbApp";
+import ProductsRC from "../../../services/ProductsRC";
+import routes from "../../../assests/routes.json";
 
 const Products = () => {
 

@@ -4,12 +4,12 @@ import Aside from './common/Aside';
 import Footer from './common/Footer';
 import Content from "./common/Content";
 import Nav from "./common/nav/Nav";
-import Product from "./products/Product";
-import Products from "./products/Products";
-import ProductForm from "./products/ProductForm";
+import Product from "./pages/products/Product";
+import Products from "./pages/products/Products";
+import ProductForm from "./pages/products/ProductForm";
 import LoadingProcessScreen from "./common/LoadingProcessScreen";
 import {LoadingProcessScreenContext, ShowMessagesContext} from "../App";
-import UnitTypes from "./unit-types/UnitTypes";
+import UnitTypes from "./pages/unit-types/UnitTypes";
 import {Toast} from "primereact/toast";
 import ShoppingList from "./pages/shopping-list/ShoppingList";
 

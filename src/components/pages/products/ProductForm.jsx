@@ -1,12 +1,12 @@
 import {useParams, useHistory, Link} from "react-router-dom";
 import {useEffect, useState, useContext} from "react";
-import Content from "../common/Content";
-import Card from "../common/Card";
+import Content from "../../common/Content";
+import Card from "../../common/Card";
 import {InputNumber} from "primereact/inputnumber";
-import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
-import BreadCrumbApp from "../../common/BreadCrumbApp";
-import productInitState from "../../assests/requests/product.json";
-import ProductsRC from "../../services/ProductsRC";
+import {LoadingProcessScreenContext, ShowMessagesContext} from "../../../App";
+import BreadCrumbApp from "../../../common/BreadCrumbApp";
+import productInitState from "../../../assests/requests/product.json";
+import ProductsRC from "../../../services/ProductsRC";
 
 const ProductForm = () => {
 

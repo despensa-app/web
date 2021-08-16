@@ -1,4 +1,4 @@
-import Link from "../common/Link";
+import Link from "../../common/Link";
 
 const CardProductShopping = ({title, unitTypes, units, onDelete, hrefEdit, hrefView}) => {
     const onClickDelete = () => {

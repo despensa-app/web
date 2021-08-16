@@ -1,13 +1,13 @@
 import {useContext, useEffect, useState} from "react";
-import Content from "../common/Content";
-import Card from "../common/Card";
-import {LoadingProcessScreenContext, ShowMessagesContext, ConfirmDialogContext} from "../../App";
-import Pagination from "../common/Pagination";
+import Content from "../../common/Content";
+import Card from "../../common/Card";
+import {LoadingProcessScreenContext, ShowMessagesContext, ConfirmDialogContext} from "../../../App";
+import Pagination from "../../common/Pagination";
 import UnitTypeForm from "./UnitTypeForm";
 import {Link, useParams, useHistory} from "react-router-dom";
-import {UnitTypesRC} from "../../services/UnitTypesRC";
-import unitTypesInitState from "../../assests/responses/unit-types.json";
-import BreadCrumbApp from "../../common/BreadCrumbApp";
+import {UnitTypesRC} from "../../../services/UnitTypesRC";
+import unitTypesInitState from "../../../assests/responses/unit-types.json";
+import BreadCrumbApp from "../../../common/BreadCrumbApp";
 
 const UnitTypes = () => {
 

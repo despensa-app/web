@@ -1,9 +1,9 @@
 import {useContext, useEffect, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
-import Card from "../common/Card";
-import {LoadingProcessScreenContext, ShowMessagesContext} from "../../App";
-import {UnitTypesRC} from "../../services/UnitTypesRC";
-import unitTypesInitState from "../../assests/requests/unit-type.json";
+import Card from "../../common/Card";
+import {LoadingProcessScreenContext, ShowMessagesContext} from "../../../App";
+import {UnitTypesRC} from "../../../services/UnitTypesRC";
+import unitTypesInitState from "../../../assests/requests/unit-type.json";
 
 const UnitTypeForm = ({onActionSubmit}) => {
 
