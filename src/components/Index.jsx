@@ -11,7 +11,7 @@ import LoadingProcessScreen from "./common/LoadingProcessScreen";
 import {LoadingProcessScreenContext, ShowMessagesContext} from "../App";
 import UnitTypes from "./unit-types/UnitTypes";
 import {Toast} from "primereact/toast";
-import ShoppingList from "../pages/ShoppingList";
+import ShoppingList from "./pages/shopping-list/ShoppingList";
 
 const Index = () => {
     const version = "1.0.0";

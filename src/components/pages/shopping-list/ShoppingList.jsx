@@ -1,13 +1,13 @@
-import Content from "../components/common/Content";
+import Content from "../../common/Content";
 import {Link} from "react-router-dom";
-import routes from "../assests/routes.json";
-import BreadCrumbApp from "../common/BreadCrumbApp";
+import routes from "../../../assests/routes.json";
+import BreadCrumbApp from "../../../common/BreadCrumbApp";
 import ShoppingListCard from "./ShoppingListCard";
-import Pagination from "../components/common/Pagination";
+import Pagination from "../../common/Pagination";
 import {useContext, useEffect, useState} from "react";
-import shoppingListsInitState from "../assests/responses/shopping-lists.json"
-import {LoadingProcessScreenContext, ShowMessagesContext} from "../App";
-import ShoppingListsRC from "../services/ShoppingListsRC";
+import shoppingListsInitState from "../../../assests/responses/shopping-lists.json"
+import {LoadingProcessScreenContext, ShowMessagesContext} from "../../../App";
+import ShoppingListsRC from "../../../services/ShoppingListsRC";
 
 const ShoppingList = () => {
 
