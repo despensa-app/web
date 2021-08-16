@@ -43,7 +43,7 @@ const shoppingList = (items = []) => {
 
     if (items && items.length) {
         item.active = false;
-        item.url = rutes.products;
+        item.url = rutes.shopping_list;
     }
 
     return {
