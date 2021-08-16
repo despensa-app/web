@@ -6,7 +6,7 @@ import ShoppingListCard from "./ShoppingListCard";
 import Pagination from "../../common/Pagination";
 import {useContext, useEffect, useState} from "react";
 import shoppingListsInitState from "../../../assests/responses/shopping-lists.json"
-import {LoadingProcessScreenContext, ShowMessagesContext} from "../../../App";
+import {ConfirmDialogContext, LoadingProcessScreenContext, ShowMessagesContext} from "../../../App";
 import ShoppingListsRC from "../../../services/ShoppingListsRC";
 
 const ShoppingList = () => {
@@ -18,6 +18,8 @@ const ShoppingList = () => {
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
     const showMessage = useContext(ShowMessagesContext);
+
+    const confirmDialog = useContext(ConfirmDialogContext);
 
     useEffect(() => {
         initData();
@@ -47,6 +49,31 @@ const ShoppingList = () => {
         setUrl(url);
     };
 
+    const deleteConfirmDialog = (id) => {
+        confirmDialog.deleted({
+            accept: () => {
+                onClickDelete(id);
+            }
+        });
+    }
+
+    const onClickDelete = (id) => {
+        loadingProcessScreen.show();
+        ShoppingListsRC.delete({
+            id: id,
+            success: () => {
+                initData();
+                showMessage.success({message: "Lista borrada."});
+            },
+            error: (data) => {
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+            },
+            final: loadingProcessScreen.hide
+        });
+    }
+
     return (
         <Content pageHeader={<PageHeader/>} breadcrumbItems={BreadCrumbApp.shoppingList()}>
             <div className="card">
@@ -55,7 +82,8 @@ const ShoppingList = () => {
                         {
                             shoppingLists.data.map((shoppingList) => (
                                 <div className="col-12 col-sm-6 col-md-3 d-flex">
-                                    <ShoppingListCard {...shoppingList}/>
+                                    <ShoppingListCard {...shoppingList}
+                                                      onClickDelete={deleteConfirmDialog}/>
                                 </div>
                             ))
                         }

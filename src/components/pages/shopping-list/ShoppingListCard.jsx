@@ -2,7 +2,8 @@ const ShoppingListCard = ({
     id,
     name,
     total_calories,
-    total_price
+    total_price,
+    onClickDelete
 }) => {
     return (
         <div className="card bg-light flex-fill">
@@ -28,9 +29,10 @@ const ShoppingListCard = ({
             <div className="card-footer">
                 <div className="row">
                     <div className="col-3">
-                        <a href="#" className="btn btn-sm btn-danger">
+                        <button className="btn btn-sm btn-danger"
+                                onClick={(e) => onClickDelete(id)}>
                             <i className="fas fa-trash"/>
-                        </a>
+                        </button>
                     </div>
                     <div className="col-9 text-right">
                         <a href="#" className="btn btn-sm btn-primary">
