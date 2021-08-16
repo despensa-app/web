@@ -111,7 +111,7 @@ const ProductForm = () => {
     return (
         <Content pageHeader={<PageHeader/>} breadcrumbItems={breadcrumbItems}>
             <form onSubmit={onSubmit}>
-                <Card footer={<CardFooter/>} className="p-fluid">
+                <Card footer={<CardFooter/>}>
                     <div className="form-group">
                         <label htmlFor="product_name">Nombre</label>
                         <input
