@@ -76,7 +76,7 @@ const ProductForm = () => {
             body: product,
             id: product.id,
             success: ({data}) => {
-                showMessage.success({messages: "Producto creado."});
+                showMessage.success({message: "Producto creado."});
                 history.push(ProductsRC.getPath({path: [data.id, 'form']}));
             },
             error: (data) => {
@@ -93,7 +93,7 @@ const ProductForm = () => {
             body: product,
             id: product.id,
             success: () => {
-                showMessage.success({messages: "Producto actualizado."});
+                showMessage.success({message: "Producto actualizado."});
             },
             error: (data) => {
                 if (data && data.error) {
