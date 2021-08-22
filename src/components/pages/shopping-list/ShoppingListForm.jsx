@@ -82,7 +82,7 @@ const ShoppingListForm = () => {
             id: shoppingList.id,
             success: ({data}) => {
                 showMessage.success({message: "Lista creada."});
-                history.push(ShoppingListsRC.getPath({path: [data.id, 'form']}));
+                history.push(ShoppingListsRC.getPath({path: [data.id]}));
             },
             error: (data) => {
                 if (data && data.error) {
