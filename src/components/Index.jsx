@@ -2,7 +2,6 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {useContext} from "react";
 import Aside from './common/Aside';
 import Footer from './common/Footer';
-import Content from "./common/Content";
 import Nav from "./common/nav/Nav";
 import Product from "./pages/products/Product";
 import Products from "./pages/products/Products";
@@ -57,7 +56,7 @@ const Index = () => {
                     <ShoppingList/>
                 </Route>
                 <Route exact path="/">
-                    <Content/>
+                    <ShoppingList/>
                 </Route>
                 <Route path="*">
                     <p>La página no existe</p>
