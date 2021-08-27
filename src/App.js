@@ -70,7 +70,9 @@ const App = () => {
         <LoadingProcessScreenContext.Provider value={valueLoadingProcessScreen}>
             <ShowMessagesContext.Provider value={showMessage}>
                 <ConfirmDialogContext.Provider value={actionConfirmationDialog}>
-                    <Index/>
+                    <div className="wrapper">
+                        <Index/>
+                    </div>
                 </ConfirmDialogContext.Provider>
             </ShowMessagesContext.Provider>
         </LoadingProcessScreenContext.Provider>
