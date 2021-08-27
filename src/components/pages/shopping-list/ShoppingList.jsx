@@ -1,13 +1,10 @@
-import Content from "../../common/Content";
-import {Link} from "react-router-dom";
-import routes from "../../../assests/routes.json";
-import BreadCrumbApp from "../../../common/BreadCrumbApp";
-import ShoppingListCard from "./ShoppingListCard";
-import Pagination from "../../common/Pagination";
 import {useContext, useEffect, useState} from "react";
 import shoppingListsInitState from "../../../assests/responses/shopping-lists.json"
 import {ConfirmDialogContext, LoadingProcessScreenContext, ShowMessagesContext} from "../../../App";
 import ShoppingListsRC from "../../../services/ShoppingListsRC";
+import Content from "../../common/content/Content";
+import Card from "../../common/card/Card";
+import {dateFormat} from "../../../common/date-utils";
 
 const ShoppingList = () => {
 
@@ -34,15 +31,6 @@ const ShoppingList = () => {
             final: loadingProcessScreen.hide
         });
     }
-
-    const PageHeader = () => (
-        <>
-            <span>Lista de la compra </span>
-            <Link to={routes.shopping_list_form} className="btn btn-success">
-                <i className="fas fa-plus"/>
-            </Link>
-        </>
-    );
 
     const onPageClick = (url) => {
         loadingProcessScreen.show();
@@ -75,25 +63,30 @@ const ShoppingList = () => {
     }
 
     return (
-        <Content pageHeader={<PageHeader/>} breadcrumbItems={BreadCrumbApp.shoppingList()}>
-            <div className="card">
-                <div className="card-body">
-                    <div className="row d-flex align-items-stretch">
-                        {
-                            shoppingLists.data.map((shoppingList) => (
-                                <div className="col-12 col-sm-6 col-md-3 d-flex">
-                                    <ShoppingListCard {...shoppingList}
-                                                      onClickDelete={deleteConfirmDialog}/>
-                                </div>
-                            ))
-                        }
-                    </div>
-                    <Pagination
-                        links={shoppingLists.meta.links}
-                        onClick={onPageClick}
-                        nameKey="product-relationship"/>
+        <Content>
+            <Content.Header>
+                <div className="d-flex justify-content-between">
+                    <h1>Listas</h1>
+                    <button className="btn" type="button">
+                        <i className="fas fa-filter"/>
+                    </button>
                 </div>
-            </div>
+            </Content.Header>
+            <Content.Main>
+                {
+                    shoppingLists.data.map(data => (
+                        <Card className="card-primary card-outline" key={`shopping-list-${data.id}`}>
+                            <Card.Body>
+                                <h3 className="card-title">{data.name}</h3>
+                                <br/>
+                                <span className="text-muted">{data.total_products} Productos</span>
+                                <br/>
+                                <small className="text-muted">{dateFormat(data.updated_at)}</small>
+                            </Card.Body>
+                        </Card>
+                    ))
+                }
+            </Content.Main>
         </Content>
     );
 };
