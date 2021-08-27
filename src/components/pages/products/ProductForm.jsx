@@ -50,7 +50,7 @@ const ProductForm = () => {
     const PageHeader = () => (
         <>
             <span>{product.id ? 'Modificar' : 'Nuevo'} producto</span>
-            {product.id && <Link to={ProductsRC.getPath({path: [product.id]})} className="btn btn-sm btn-primary">
+            {product.id !== 0 && <Link to={ProductsRC.getPath({path: [product.id]})} className="btn btn-sm btn-primary">
                 Ver producto
             </Link>}
         </>
