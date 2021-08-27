@@ -6,6 +6,7 @@ import Card from "../../common/Card";
 import {LoadingProcessScreenContext, ShowMessagesContext} from "../../../App";
 import {Link, useHistory, useParams} from "react-router-dom";
 import ShoppingListsRC from "../../../services/ShoppingListsRC";
+import ShoppingListProducts from "./ShoppingListProducts";
 
 
 const ShoppingListForm = () => {
@@ -46,9 +47,8 @@ const ShoppingListForm = () => {
                 }
             },
             final: loadingProcessScreen.hide
-        })
+        });
     }, [shoppingListId]);
-
 
     const PageHeader = () => (
         <>
@@ -130,6 +130,7 @@ const ShoppingListForm = () => {
                     </div>
                 </Card>
             </form>
+            {shoppingList.id !== 0 && <ShoppingListProducts shoppingListId={shoppingListId}/>}
         </Content>
     );
 }
