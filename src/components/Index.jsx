@@ -1,7 +1,6 @@
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {useContext} from "react";
 import Aside from './common/Aside';
-import Footer from './common/Footer';
 import Product from "./pages/products/Product";
 import Products from "./pages/products/Products";
 import ProductForm from "./pages/products/ProductForm";
@@ -61,7 +60,6 @@ const Index = () => {
                     <p>La página no existe</p>
                 </Route>
             </Switch>
-            <Footer version={version}/>
             <Navbar/>
         </Router>
     );
