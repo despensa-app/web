@@ -1,14 +1,18 @@
 import {useContext, useEffect, useState} from "react";
-import shoppingListsInitState from "../../../assests/responses/shopping-lists.json"
+import shoppingListsResponseInitState from "../../../assests/responses/shopping-lists.json"
+import shoppingListsRequestInitState from "../../../assests/requests/shopping-list.json"
 import {ConfirmDialogContext, LoadingProcessScreenContext, ShowMessagesContext} from "../../../App";
 import ShoppingListsRC from "../../../services/ShoppingListsRC";
 import Content from "../../common/content/Content";
 import Card from "../../common/card/Card";
 import {dateFormat} from "../../../common/date-utils";
+import Button from "../../common/button/Button";
 
 const ShoppingList = () => {
 
-    const [shoppingLists, setShoppingLists] = useState(shoppingListsInitState);
+    const [shoppingListsResponse, setShoppingListsResponse] = useState(shoppingListsResponseInitState);
+
+    const [shoppingLists, setShoppingLists] = useState([shoppingListsRequestInitState]);
 
     const [url, setUrl] = useState("");
 
@@ -26,16 +30,19 @@ const ShoppingList = () => {
         loadingProcessScreen.show();
         ShoppingListsRC.get({
             uri: url,
-            success: setShoppingLists,
+            success: data => {
+                setShoppingListsResponse(data);
+
+                if (!shoppingLists[0].id) {
+                    setShoppingLists(data.data);
+                } else {
+                    setShoppingLists([...shoppingLists, ...data.data]);
+                }
+            },
             error: () => showMessage.error({message: "Error al obtener la lista de la compra."}),
             final: loadingProcessScreen.hide
         });
     }
-
-    const onPageClick = (url) => {
-        loadingProcessScreen.show();
-        setUrl(url);
-    };
 
     const deleteConfirmDialog = (id) => {
         confirmDialog.deleted({
@@ -62,6 +69,16 @@ const ShoppingList = () => {
         });
     }
 
+    const loadShoppingListHandle = () => {
+        setUrl(shoppingListsResponse.links.next);
+    };
+
+    const showButtonLoadShoppingList = () => {
+        const {current_page, last_page} = shoppingListsResponse.meta;
+
+        return current_page < last_page;
+    }
+
     return (
         <Content>
             <Content.Header>
@@ -74,7 +91,7 @@ const ShoppingList = () => {
             </Content.Header>
             <Content.Main>
                 {
-                    shoppingLists.data.map(data => (
+                    shoppingLists.map(data => (
                         <Card className="card-primary card-outline" key={`shopping-list-${data.id}`}>
                             <Card.Body>
                                 <h3 className="card-title">{data.name}</h3>
@@ -85,6 +102,14 @@ const ShoppingList = () => {
                             </Card.Body>
                         </Card>
                     ))
+                }
+                {
+                    showButtonLoadShoppingList() && (
+                        <Button className="btn-block mb-3" variant="default" onClick={loadShoppingListHandle}>
+                            <i className="fas fa-spinner pr-1"/>
+                            Cargar más
+                        </Button>
+                    )
                 }
             </Content.Main>
         </Content>
