@@ -2,7 +2,6 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {useContext} from "react";
 import Aside from './common/Aside';
 import Footer from './common/Footer';
-import Nav from "./common/nav/Nav";
 import Product from "./pages/products/Product";
 import Products from "./pages/products/Products";
 import ProductForm from "./pages/products/ProductForm";
@@ -12,6 +11,7 @@ import UnitTypes from "./pages/unit-types/UnitTypes";
 import {Toast} from "primereact/toast";
 import ShoppingList from "./pages/shopping-list/ShoppingList";
 import ShoppingListForm from "./pages/shopping-list/ShoppingListForm";
+import Navbar from "./common/navbar/Navbar";
 
 const Index = () => {
     const version = "1.0.0";
@@ -22,7 +22,6 @@ const Index = () => {
         <Router>
             <LoadingProcessScreen {...loadingProcessScreenContext}/>
             <Toast ref={showMessage.toast}/>
-            <Nav/>
             <Aside/>
             <Switch>
                 <Route path="/products/:productId/form">
@@ -63,6 +62,7 @@ const Index = () => {
                 </Route>
             </Switch>
             <Footer version={version}/>
+            <Navbar/>
         </Router>
     );
 };
