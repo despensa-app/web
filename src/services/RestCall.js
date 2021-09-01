@@ -13,7 +13,15 @@ const getBaseRequestOptions = ({method, body}) => {
     return request;
 };
 
-export const getRute = ({path = [], host = true}) => {
+export const getRute = ({path = [], host = true, params = null}) => {
+    let paramsToAdd = "";
+
+    if (params) {
+        paramsToAdd = "?" + Object.keys(params)
+            .map(key => `${key}=${params[key]}`)
+            .join("&");
+    }
+
     path = path.map(value => {
         if (typeof value !== "string") {
             return value;
@@ -28,17 +36,17 @@ export const getRute = ({path = [], host = true}) => {
 
     path = path.join('/');
 
-    return host ? path : '/' + path;
+    return (host ? path : '/' + path) + paramsToAdd;
 };
 
-export const getRuteIfID = ({uri, path = "", id}) => {
+export const getRuteIfID = ({uri, path = "", id, params}) => {
     if (id) {
-        return getRute({path: [path, id]});
+        return getRute({path: [path, id], params});
     } else if (uri) {
         return uri;
     }
 
-    return getRute({path: [path]});
+    return getRute({path: [path], params});
 };
 
 export const getPostOptions = (body) => {
