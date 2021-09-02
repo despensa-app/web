@@ -14,6 +14,8 @@ import {dateFormat} from "../../../common/date-utils";
 import Button from "../../common/button/Button";
 import ShoppingListButtonCreate from "./ShoppingListButtonCreate";
 import ButtonNavbarSearch from "../../common/ButtonNavbarSearch";
+import $ from 'jquery';
+import ShoppingListSearchModal from "./ShoppingListSearchModal";
 
 const ShoppingList = () => {
 
@@ -30,6 +32,8 @@ const ShoppingList = () => {
     const confirmDialog = useContext(ConfirmDialogContext);
 
     const navbarHandle = useContext(NavbarHandleContext);
+
+    const searchModalId = "shopping-list-search-modal";
 
     useEffect(() => {
         navbarHandle.setItems({
@@ -99,6 +103,10 @@ const ShoppingList = () => {
         return current_page < last_page;
     }
 
+    const showModalHandle = () => {
+        $(`#${searchModalId}`).modal('show');
+    }
+
     return (
         <Content>
             <Content.Header>
@@ -131,6 +139,7 @@ const ShoppingList = () => {
                         </Button>
                     )
                 }
+                <ShoppingListSearchModal searchModalId={searchModalId}/>
             </Content.Main>
         </Content>
     );
