@@ -17,7 +17,7 @@ import ButtonNavbarSearch from "../../common/ButtonNavbarSearch";
 import $ from 'jquery';
 import ShoppingListSearchModal from "./ShoppingListSearchModal";
 
-const ShoppingList = () => {
+const ShoppingLists = () => {
 
     const [shoppingListsResponse, setShoppingListsResponse] = useState(shoppingListsResponseInitState);
 
@@ -145,4 +145,4 @@ const ShoppingList = () => {
     );
 };
 
-export default ShoppingList;
+export default ShoppingLists;

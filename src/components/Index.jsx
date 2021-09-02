@@ -8,7 +8,7 @@ import LoadingProcessScreen from "./common/LoadingProcessScreen";
 import {LoadingProcessScreenContext, ShowMessagesContext} from "../App";
 import UnitTypes from "./pages/unit-types/UnitTypes";
 import {Toast} from "primereact/toast";
-import ShoppingList from "./pages/shopping-list/ShoppingList";
+import ShoppingLists from "./pages/shopping-list/ShoppingLists";
 import ShoppingListForm from "./pages/shopping-list/ShoppingListForm";
 import Navbar from "./common/navbar/Navbar";
 
@@ -51,10 +51,10 @@ const Index = () => {
                     <ShoppingListForm/>
                 </Route>
                 <Route path="/shopping-list">
-                    <ShoppingList/>
+                    <ShoppingLists/>
                 </Route>
                 <Route exact path="/">
-                    <ShoppingList/>
+                    <ShoppingLists/>
                 </Route>
                 <Route path="*">
                     <p>La página no existe</p>
