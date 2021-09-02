@@ -41,10 +41,10 @@ const Index = () => {
                 <Route path="/unit-types">
                     <UnitTypes/>
                 </Route>
-                <Route path="/shopping-list/form">
+                <Route path="/shopping-list/create">
                     <ShoppingListForm/>
                 </Route>
-                <Route path="/shopping-list/:shoppingListId/form">
+                <Route path="/shopping-list/:shoppingListId/edit">
                     <ShoppingListForm/>
                 </Route>
                 <Route path="/shopping-list/:shoppingListId">
