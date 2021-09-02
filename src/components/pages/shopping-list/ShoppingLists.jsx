@@ -16,6 +16,7 @@ import ShoppingListButtonCreate from "./ShoppingListButtonCreate";
 import ButtonNavbarSearch from "../../common/ButtonNavbarSearch";
 import $ from 'jquery';
 import ShoppingListSearchModal from "./ShoppingListSearchModal";
+import {useHistory} from "react-router-dom";
 
 const ShoppingLists = () => {
 
@@ -34,6 +35,8 @@ const ShoppingLists = () => {
     const navbarHandle = useContext(NavbarHandleContext);
 
     const searchModalId = "shopping-list-search-modal";
+
+    const history = useHistory();
 
     useEffect(() => {
         navbarHandle.setItems({
@@ -107,6 +110,10 @@ const ShoppingLists = () => {
         $(`#${searchModalId}`).modal('show');
     }
 
+    const cardClickHandle = (shoppingListId) => {
+        history.push(`/shopping-list/${shoppingListId}`);
+    }
+
     return (
         <Content>
             <Content.Header>
@@ -120,7 +127,11 @@ const ShoppingLists = () => {
             <Content.Main>
                 {
                     shoppingLists.map(data => (
-                        <Card className="card-primary card-outline" key={`shopping-list-${data.id}`}>
+                        <Card
+                            className="card-outline cursor-pointer"
+                            variant="primary"
+                            onClick={() => cardClickHandle(data.id)}
+                            key={`shopping-list-${data.id}`}>
                             <Card.Body>
                                 <h3 className="card-title">{data.name}</h3>
                                 <br/>

@@ -36,6 +36,10 @@
     width: 40px;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 /* - table -------------------------- */
 .table td.td-btn-actions > div {
     visibility: hidden;
