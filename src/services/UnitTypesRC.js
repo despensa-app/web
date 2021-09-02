@@ -1,17 +1,17 @@
 import routes from "../assests/routes.json";
 import {call, getDeleteOptions, getPostOptions, getPutOptions, getRuteIfID} from "./RestCall";
 
-const getUnitTypeRute = ({uri, id} = {}) => {
-    return getRuteIfID({uri, path: routes.unit_types, id});
+const getUnitTypeRute = ({uri, id, params} = {}) => {
+    return getRuteIfID({uri, path: routes.unit_types, id, params});
 };
 
 export const UnitTypesRC = {
     getPath: () => {
         return routes.unit_types;
     },
-    get: ({uri, id, success, error, final}) => {
+    get: ({uri, id, params, success, error, final}) => {
         call({
-            uri: getUnitTypeRute({uri, id}),
+            uri: getUnitTypeRute({uri, id, params}),
             success,
             error,
             final
