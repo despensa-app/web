@@ -1,12 +1,19 @@
 import {useContext, useEffect, useState} from "react";
 import shoppingListsResponseInitState from "../../../assests/responses/shopping-lists.json"
 import shoppingListsRequestInitState from "../../../assests/requests/shopping-list.json"
-import {ConfirmDialogContext, LoadingProcessScreenContext, ShowMessagesContext} from "../../../App";
+import {
+    ConfirmDialogContext,
+    LoadingProcessScreenContext,
+    NavbarHandleContext,
+    ShowMessagesContext
+} from "../../../App";
 import ShoppingListsRC from "../../../services/ShoppingListsRC";
 import Content from "../../common/content/Content";
 import Card from "../../common/card/Card";
 import {dateFormat} from "../../../common/date-utils";
 import Button from "../../common/button/Button";
+import ShoppingListButtonCreate from "./ShoppingListButtonCreate";
+import ButtonNavbarSearch from "../../common/ButtonNavbarSearch";
 
 const ShoppingList = () => {
 
@@ -21,6 +28,19 @@ const ShoppingList = () => {
     const showMessage = useContext(ShowMessagesContext);
 
     const confirmDialog = useContext(ConfirmDialogContext);
+
+    const navbarHandle = useContext(NavbarHandleContext);
+
+    useEffect(() => {
+        navbarHandle.setItems({
+            middle: [
+                (<ShoppingListButtonCreate/>)
+            ],
+            right: [
+                (<ButtonNavbarSearch onClick={showModalHandle}/>)
+            ]
+        });
+    }, []);
 
     useEffect(() => {
         initData();
