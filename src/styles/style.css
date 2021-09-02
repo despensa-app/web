@@ -28,6 +28,14 @@
     cursor: wait;
 }
 
+.border-radius-0 {
+    border-radius: 0;
+}
+
+.w-fixed-40 {
+    width: 40px;
+}
+
 /* - table -------------------------- */
 .table td.td-btn-actions > div {
     visibility: hidden;
@@ -87,6 +95,24 @@
     background-color: #007bff;
     color: #fff;
     border: 1px solid #007bff;
+}
+
+/* - list-group-custom-button -------------------------- */
+.list-group.list-group-custom-button .list-group-item > .list-group-item-button {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: none;
+}
+
+.list-group.list-group-custom-button .list-group-item > .list-group-item-content.button-active {
+    width: 80%;
+    padding-right: 10px;
+}
+
+.list-group.list-group-custom-button .list-group-item > .list-group-item-button.button-active {
+    display: block;
 }
 
 .cuadricula {
