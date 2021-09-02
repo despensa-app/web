@@ -3,9 +3,13 @@ import CardFooter from "./CardFooter";
 import CardHeader from "./CardHeader";
 import clsx from "clsx";
 
-const Card = ({children, className}) => {
+const Card = ({children, variant, className, onClick}) => {
+    const prefix = "card";
+
     return (
-        <div className={clsx('card', className)}>
+        <div
+            className={clsx(prefix, variant && `${prefix}-${variant}`, className)}
+            onClick={onClick}>
             {children}
         </div>
     );
