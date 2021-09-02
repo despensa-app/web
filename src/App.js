@@ -10,9 +10,16 @@ export const ShowMessagesContext = createContext({});
 
 export const ConfirmDialogContext = createContext({});
 
+export const NavbarHandleContext = createContext({});
+
 const App = () => {
 
     const [loadingProcessScreen, setLoadingProcessScreen] = useState(false);
+
+    const [navbarNavItems, setNavbarNavItems] = useState({
+        middle: [],
+        right: []
+    });
 
     const toast = useRef(null);
 
@@ -66,13 +73,20 @@ const App = () => {
         }
     };
 
+    const navbarNavItemsValue = {
+        items: navbarNavItems,
+        setItems: setNavbarNavItems
+    };
+
     return (
         <LoadingProcessScreenContext.Provider value={valueLoadingProcessScreen}>
             <ShowMessagesContext.Provider value={showMessage}>
                 <ConfirmDialogContext.Provider value={actionConfirmationDialog}>
-                    <div className="wrapper">
-                        <Index/>
-                    </div>
+                    <NavbarHandleContext.Provider value={navbarNavItemsValue}>
+                        <div className="wrapper">
+                            <Index/>
+                        </div>
+                    </NavbarHandleContext.Provider>
                 </ConfirmDialogContext.Provider>
             </ShowMessagesContext.Provider>
         </LoadingProcessScreenContext.Provider>
