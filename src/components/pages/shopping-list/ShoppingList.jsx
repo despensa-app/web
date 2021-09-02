@@ -128,6 +128,10 @@ const ShoppingList = () => {
         });
     };
 
+    const checkProductHandle = () => {
+        //TODO: realizar la peticion api, para establecer que se ha marcado el producto.
+    }
+
     return (
         <Content>
             <Content.Header>
@@ -159,7 +163,7 @@ const ShoppingList = () => {
                             <ListGroup.Item className="pl-3" key={`product-shopping-list-${i}`}>
                                 <ListGroup.Item.Custom type="content" active={isEdit}>
                                     <div className="d-flex justify-content-between">
-                                        <CheckboxCustomLabel/>
+                                        <CheckboxCustomLabel onClick={checkProductHandle}/>
                                         <div className="flex-grow-1 text-truncate">
                                             {value.product.name}
                                         </div>
