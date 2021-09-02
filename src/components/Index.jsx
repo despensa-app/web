@@ -11,6 +11,7 @@ import {Toast} from "primereact/toast";
 import ShoppingLists from "./pages/shopping-list/ShoppingLists";
 import ShoppingListForm from "./pages/shopping-list/ShoppingListForm";
 import Navbar from "./common/navbar/Navbar";
+import ShoppingList from "./pages/shopping-list/ShoppingList";
 
 const Index = () => {
     const version = "1.0.0";
@@ -45,10 +46,10 @@ const Index = () => {
                     <ShoppingListForm/>
                 </Route>
                 <Route path="/shopping-list/:shoppingListId/edit">
-                    <ShoppingListForm/>
+                    <ShoppingList/>
                 </Route>
                 <Route path="/shopping-list/:shoppingListId">
-                    <ShoppingListForm/>
+                    <ShoppingList/>
                 </Route>
                 <Route path="/shopping-list">
                     <ShoppingLists/>
