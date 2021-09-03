@@ -13,6 +13,8 @@ import productsShoppingListResponseInitState from "../../../assests/responses/pr
 import productShoppingListInitState from "../../../assests/responses/product-shopping-list.json";
 import ButtonGroup from "../../common/button/ButtonGroup";
 import ProductsShoppingListRC from "../../../services/ProductsShoppingListRC";
+import ShoppingListProductDetailModal from "./ShoppingListProductDetailModal";
+import $ from 'jquery';
 
 const ShoppingList = () => {
 
@@ -26,11 +28,15 @@ const ShoppingList = () => {
 
     const [isEdit, setIsEdit] = useState(false);
 
+    const [selectProduct, setSelectProduct] = useState(productShoppingListInitState);
+
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
     const showMessage = useContext(ShowMessagesContext);
 
     const navbarHandle = useContext(NavbarHandleContext);
+
+    const productDetailModalId = "product-detail-modal";
 
     useEffect(() => {
         initNavbarItems();
@@ -132,6 +138,11 @@ const ShoppingList = () => {
         //TODO: realizar la peticion api, para establecer que se ha marcado el producto.
     }
 
+    const showProductDetailHandle = (productShoppingList) => {
+        setSelectProduct(productShoppingList);
+        $(`#${productDetailModalId}`).modal('show');
+    };
+
     return (
         <Content>
             <Content.Header>
@@ -171,7 +182,10 @@ const ShoppingList = () => {
                                 </ListGroup.Item.Custom>
                                 <ListGroup.Item.Custom type="button" active={isEdit}>
                                     <ButtonGroup className="h-100">
-                                        <Button variant="primary" className="border-radius-0">
+                                        <Button
+                                            variant="primary"
+                                            className="border-radius-0"
+                                            onClick={evt => showProductDetailHandle(value)}>
                                             Ver
                                         </Button>
                                         <Button
@@ -186,6 +200,9 @@ const ShoppingList = () => {
                         ))
                     }
                 </ListGroup>
+                <ShoppingListProductDetailModal
+                    productDetailModalId={productDetailModalId}
+                    productShoppingList={selectProduct}/>
             </Content.Main>
         </Content>
     );
