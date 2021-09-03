@@ -82,7 +82,9 @@ const ShoppingList = () => {
         setIsEdit(true);
         navbarHandle.setItems({
             middle: [
-                (<Button variant="primary" onClick={initNavbarItems}>
+                (<Button variant="primary"
+                         className="mr-1"
+                         onClick={initNavbarItems}>
                     <i className="fas fa-edit pr-1"/>
                     Guardar
                 </Button>),
