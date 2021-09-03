@@ -1,5 +1,6 @@
 import ModalHeader from "./ModalHeader";
 import ModalBody from "./ModalBody";
+import ModalHeaderTitle from "./ModalHeaderTitle";
 
 const Modal = ({children, id}) => {
     return (
@@ -14,6 +15,8 @@ const Modal = ({children, id}) => {
 };
 
 export default Object.assign(Modal, {
-    Header: ModalHeader,
+    Header: Object.assign(ModalHeader, {
+        Title: ModalHeaderTitle
+    }),
     Body: ModalBody
 });
