@@ -77,12 +77,12 @@
     z-index: 1052;
 }
 
-/* - checkbox-custom-label -------------------------- */
-.checkbox-custom-label {
+/* - custom-checkbox -------------------------- */
+.custom-checkbox {
     margin-right: 10px;
 }
 
-.checkbox-custom-label > div {
+.custom-checkbox > .custom-checkbox-box {
     padding-left: 2px;
     line-height: 20px;
     display: inline-block;
@@ -95,7 +95,7 @@
     border: 1px solid #D3CFC8;
 }
 
-.checkbox-custom-label > div.check {
+.custom-checkbox > .custom-checkbox-box.active {
     background-color: #007bff;
     color: #fff;
     border: 1px solid #007bff;

@@ -15,8 +15,8 @@ const CustomCheckBox = ({onClick, selected = false}) => {
     }
 
     return (
-        <div className="checkbox-custom-label" onClick={onClickHandle}>
-            <div className={clsx({check: isCheck})}>
+        <div className="custom-checkbox" onClick={onClickHandle}>
+            <div className={clsx("custom-checkbox-box", {active: isCheck})}>
                 {isCheck && <i className="fas fa-check"/>}
             </div>
         </div>
