@@ -187,7 +187,7 @@ const ShoppingList = () => {
                                     <div className="d-flex justify-content-between">
                                         <CustomCheckBox
                                             onClick={selected => checkProductHandle({selected, value})}
-                                            selected={value.selected}/>
+                                            active={value.selected}/>
                                         <div className="flex-grow-1 text-truncate">
                                             {value.product.name}
                                         </div>
