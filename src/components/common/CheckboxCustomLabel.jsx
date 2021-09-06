@@ -1,21 +1,24 @@
 import clsx from "clsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-const CheckboxCustomLabel = ({id, value, onClick}) => {
+const CheckboxCustomLabel = ({onClick, selected = false}) => {
 
     const [isCheck, setIsCheck] = useState(false);
 
+    useEffect(() => {
+        setIsCheck(selected);
+    }, [selected])
+
     const onClickHandle = () => {
         setIsCheck(!isCheck);
-        onClick();
+        onClick(!isCheck);
     }
 
     return (
         <div className="checkbox-custom-label" onClick={onClickHandle}>
-            <input className="d-none" type="checkbox" id={id} value={value}/>
-            <label className={clsx({check: isCheck})} htmlFor={id}>
+            <div className={clsx({check: isCheck})}>
                 {isCheck && <i className="fas fa-check"/>}
-            </label>
+            </div>
         </div>
     );
 };

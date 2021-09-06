@@ -82,7 +82,7 @@
     margin-right: 10px;
 }
 
-.checkbox-custom-label > label {
+.checkbox-custom-label > div {
     padding-left: 2px;
     line-height: 20px;
     display: inline-block;
@@ -95,7 +95,7 @@
     border: 1px solid #D3CFC8;
 }
 
-.checkbox-custom-label > label.check {
+.checkbox-custom-label > div.check {
     background-color: #007bff;
     color: #fff;
     border: 1px solid #007bff;
