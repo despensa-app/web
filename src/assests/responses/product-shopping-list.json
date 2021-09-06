@@ -5,6 +5,7 @@
     "product_id": 0,
     "shopping_list_id": 0,
     "unit_type_id": 0,
+    "selected": false,
     "unit_type": {
         "id": 0,
         "name": "",
