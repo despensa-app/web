@@ -136,8 +136,17 @@ const ShoppingList = () => {
         });
     };
 
-    const checkProductHandle = () => {
-        //TODO: realizar la peticion api, para establecer que se ha marcado el producto.
+    const checkProductHandle = ({selected, value}) => {
+        const {product_id, shopping_list_id, unit_type_id} = value;
+
+        ProductsShoppingListRC.put({
+            body: {product_id, shopping_list_id, unit_type_id, selected},
+            error: (data) => {
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+            }
+        });
     }
 
     const showProductDetailHandle = (productShoppingList) => {
@@ -176,7 +185,9 @@ const ShoppingList = () => {
                             <ListGroup.Item className="pl-3" key={`product-shopping-list-${i}`}>
                                 <ListGroup.Item.Custom type="content" active={isEdit}>
                                     <div className="d-flex justify-content-between">
-                                        <CheckboxCustomLabel onClick={checkProductHandle}/>
+                                        <CheckboxCustomLabel
+                                            onClick={selected => checkProductHandle({selected, value})}
+                                            selected={value.selected}/>
                                         <div className="flex-grow-1 text-truncate">
                                             {value.product.name}
                                         </div>
