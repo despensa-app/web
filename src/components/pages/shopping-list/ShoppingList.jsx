@@ -1,6 +1,6 @@
 import Content from "../../common/content/Content";
 import ListGroup from "../../common/list-group/ListGroup";
-import CheckboxCustomLabel from "../../common/CheckboxCustomLabel";
+import CustomCheckBox from "../../common/CustomCheckBox";
 import Button from "../../common/button/Button";
 import {useContext, useEffect, useState} from "react";
 import shoppingListsResponseInitState from "../../../assests/requests/shopping-list.json";
@@ -185,7 +185,7 @@ const ShoppingList = () => {
                             <ListGroup.Item className="pl-3" key={`product-shopping-list-${i}`}>
                                 <ListGroup.Item.Custom type="content" active={isEdit}>
                                     <div className="d-flex justify-content-between">
-                                        <CheckboxCustomLabel
+                                        <CustomCheckBox
                                             onClick={selected => checkProductHandle({selected, value})}
                                             selected={value.selected}/>
                                         <div className="flex-grow-1 text-truncate">

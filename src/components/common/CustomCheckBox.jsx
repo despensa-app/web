@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import {useEffect, useState} from "react";
 
-const CheckboxCustomLabel = ({onClick, selected = false}) => {
+const CustomCheckBox = ({onClick, selected = false}) => {
 
     const [isCheck, setIsCheck] = useState(false);
 
@@ -23,4 +23,4 @@ const CheckboxCustomLabel = ({onClick, selected = false}) => {
     );
 };
 
-export default CheckboxCustomLabel;
+export default CustomCheckBox;
