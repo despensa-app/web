@@ -12,6 +12,7 @@ import ShoppingLists from "./pages/shopping-list/ShoppingLists";
 import ShoppingListForm from "./pages/shopping-list/ShoppingListForm";
 import Navbar from "./common/navbar/Navbar";
 import ShoppingList from "./pages/shopping-list/ShoppingList";
+import ShoppingListAddProducts from "./pages/shopping-list/ShoppingListAddProducts";
 
 const Index = () => {
     const version = "1.0.0";
@@ -44,6 +45,9 @@ const Index = () => {
                 </Route>
                 <Route path="/shopping-list/create">
                     <ShoppingListForm/>
+                </Route>
+                <Route path="/shopping-list/:shoppingListId/add-products">
+                    <ShoppingListAddProducts/>
                 </Route>
                 <Route path="/shopping-list/:shoppingListId/edit">
                     <ShoppingList/>

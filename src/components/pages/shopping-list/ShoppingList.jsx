@@ -6,7 +6,7 @@ import {useContext, useEffect, useState} from "react";
 import shoppingListsResponseInitState from "../../../assests/requests/shopping-list.json";
 import shoppingListInitState from "../../../assests/requests/shopping-list.json";
 import Form from "../../common/form/Form";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import ShoppingListsRC from "../../../services/ShoppingListsRC";
 import {LoadingProcessScreenContext, NavbarHandleContext, ShowMessagesContext} from "../../../App";
 import productsShoppingListResponseInitState from "../../../assests/responses/products-shopping-list.json";
@@ -88,10 +88,12 @@ const ShoppingList = () => {
                     <i className="fas fa-edit pr-1"/>
                     Guardar
                 </Button>),
-                (<Button variant="success" onClick={initNavbarItems}>
+                (<Link
+                    to={`/shopping-list/${shoppingListId}/add-products`}
+                    className="btn btn-success">
                     <i className="fas fa-plus pr-1"/>
                     Agregar producto
-                </Button>)
+                </Link>)
             ],
             right: []
         });
