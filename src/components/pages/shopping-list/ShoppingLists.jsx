@@ -17,6 +17,7 @@ import ButtonNavbarSearch from "../../common/ButtonNavbarSearch";
 import $ from 'jquery';
 import ShoppingListSearchModal from "./ShoppingListSearchModal";
 import {useHistory} from "react-router-dom";
+import CustomButtonLoad from "../../common/CustomButtonLoad";
 
 const ShoppingLists = () => {
 
@@ -100,12 +101,6 @@ const ShoppingLists = () => {
         setUrl(shoppingListsResponse.links.next);
     };
 
-    const showButtonLoadShoppingList = () => {
-        const {current_page, last_page} = shoppingListsResponse.meta;
-
-        return current_page < last_page;
-    }
-
     const showModalHandle = () => {
         $(`#${searchModalId}`).modal('show');
     }
@@ -142,14 +137,9 @@ const ShoppingLists = () => {
                         </Card>
                     ))
                 }
-                {
-                    showButtonLoadShoppingList() && (
-                        <Button className="btn-block mb-3" variant="default" onClick={loadShoppingListHandle}>
-                            <i className="fas fa-spinner pr-1"/>
-                            Cargar más
-                        </Button>
-                    )
-                }
+                <CustomButtonLoad
+                    onClick={loadShoppingListHandle}
+                    metaPage={shoppingListsResponse.meta}/>
                 <ShoppingListSearchModal searchModalId={searchModalId}/>
             </Content.Main>
         </Content>
