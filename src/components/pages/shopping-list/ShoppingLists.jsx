@@ -119,9 +119,9 @@ const ShoppingLists = () => {
             <Content.Header>
                 <div className="d-flex justify-content-between">
                     <h1>Listas</h1>
-                    <button className="btn" type="button">
+                    <Button>
                         <i className="fas fa-filter"/>
-                    </button>
+                    </Button>
                 </div>
             </Content.Header>
             <Content.Main>
