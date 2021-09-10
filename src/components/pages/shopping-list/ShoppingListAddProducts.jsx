@@ -8,6 +8,11 @@ import Button from "../../common/button/Button";
 import ListGroup from "../../common/list-group/ListGroup";
 import CustomButtonLoad from "../../common/CustomButtonLoad";
 import {Link, useParams} from "react-router-dom";
+import ShoppingListAddProductModal from "./ShoppingListAddProductModal";
+import $ from 'jquery';
+import ProductsShoppingListRC from "../../../services/ProductsShoppingListRC";
+import UnitTypeSearchModal from "./UnitTypeSearchModal";
+import unitTypeRequestInitState from "../../../assests/requests/unit-type.json";
 
 const ShoppingListAddProducts = () => {
 
@@ -17,6 +22,10 @@ const ShoppingListAddProducts = () => {
 
     const [products, setProducts] = useState([productRequestInitState]);
 
+    const [selectedProduct, setSelectedProduct] = useState(productRequestInitState);
+
+    const [selectedUnitType, setSelectedUnitType] = useState(unitTypeRequestInitState);
+
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
     const showMessage = useContext(ShowMessagesContext);
@@ -24,6 +33,10 @@ const ShoppingListAddProducts = () => {
     const navbarHandle = useContext(NavbarHandleContext);
 
     const {shoppingListId} = useParams();
+
+    const productModalId = "add-product-modal";
+
+    const unitTypeSearchModalId = "unit-type-search-modal";
 
     useEffect(() => {
         navbarHandle.setItems({
@@ -67,6 +80,53 @@ const ShoppingListAddProducts = () => {
         setProductsUrlPage(productsResponse.links.next);
     };
 
+    const selectedProductHandle = (product) => {
+        setSelectedProduct(product);
+        $(`#${productModalId}`).modal('show');
+    };
+
+    const addSelectedProductToList = ({product_id, unit_type_id, units_per_product, successHandle}) => {
+        const request = {
+            product_id,
+            shopping_list_id: shoppingListId,
+            unit_type_id,
+            units_per_product
+        };
+
+        loadingProcessScreen.show();
+        ProductsShoppingListRC.post({
+            body: request,
+            success: () => {
+                showMessage.success({message: "Producto agregado"});
+                setSelectedUnitType(unitTypeRequestInitState);
+                successHandle();
+            },
+            error: (data) => {
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+            },
+            final: loadingProcessScreen.hide
+        });
+    };
+
+    const unitTypeProductModalHandle = () => {
+        $(`#${unitTypeSearchModalId}`).modal('show');
+        $(`#${productModalId}`).modal('hide');
+    };
+
+    const selectedUnitTypeSearchModalHandle = (unitType) => {
+        setSelectedUnitType(unitType);
+    };
+
+    const closeUnitTypeSearchModalHandle = () => {
+        $(`#${productModalId}`).modal('show');
+    };
+
+    const closeProductModalHandle = () => {
+        setSelectedUnitType(unitTypeRequestInitState);
+    };
+
     return (
         <Content>
             <Content.Header>
@@ -84,6 +144,7 @@ const ShoppingListAddProducts = () => {
                             <ListGroup.Item
                                 key={`products-${i}`}
                                 action
+                                onClick={() => selectedProductHandle(value)}
                                 className="text-truncate">
                                 {value.name}
                             </ListGroup.Item>
@@ -93,6 +154,17 @@ const ShoppingListAddProducts = () => {
                 <CustomButtonLoad
                     onClick={loadProductsHandle}
                     metaPage={productsResponse.meta}/>
+                <ShoppingListAddProductModal
+                    modalId={productModalId}
+                    product={selectedProduct}
+                    unitType={selectedUnitType}
+                    addHandle={addSelectedProductToList}
+                    unitTypeHandle={unitTypeProductModalHandle}
+                    closeHandle={closeProductModalHandle}/>
+                <UnitTypeSearchModal
+                    modalId={unitTypeSearchModalId}
+                    onClickItem={selectedUnitTypeSearchModalHandle}
+                    onClose={closeUnitTypeSearchModalHandle}/>
             </Content.Main>
         </Content>
     );
