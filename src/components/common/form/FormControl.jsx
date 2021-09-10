@@ -1,4 +1,4 @@
-const FormControl = ({type, name, id, placeholder, value, onChange, autoComplete}) => {
+const FormControl = ({type, name, id, placeholder, value, onChange, autoComplete, disabled}) => {
     return (
         <input autoComplete={autoComplete}
                type={type}
@@ -7,7 +7,8 @@ const FormControl = ({type, name, id, placeholder, value, onChange, autoComplete
                className="form-control"
                name={name}
                id={id}
-               placeholder={placeholder}/>
+               placeholder={placeholder}
+               disabled={disabled}/>
     );
 };
 
