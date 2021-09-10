@@ -181,6 +181,15 @@ const ShoppingList = () => {
                 </div>
             </Content.Header>
             <Content.Main>
+                {
+                    !productsShoppingList.length
+                    && <Link
+                        to={`/shopping-list/${shoppingListId}/add-products`}
+                        className="btn btn-success btn-block">
+                        <i className="fas fa-plus pr-1"/>
+                        Agregar producto
+                    </Link>
+                }
                 <ListGroup className="list-group-custom-button">
                     {
                         productsShoppingList.map((value, i) => (
