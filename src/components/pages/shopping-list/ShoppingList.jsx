@@ -120,7 +120,7 @@ const ShoppingList = () => {
         } else {
             create({success: initNavbarItems});
         }
-    }
+    };
 
     const create = ({success}) => {
         ShoppingListsRC.post({
@@ -137,7 +137,7 @@ const ShoppingList = () => {
                 }
             }
         });
-    }
+    };
 
     const update = ({success}) => {
         ShoppingListsRC.put({
@@ -153,7 +153,7 @@ const ShoppingList = () => {
                 }
             }
         });
-    }
+    };
 
     const initDataProducts = () => {
         const uri = ShoppingListsRC.getPath({path: [shoppingListId, 'products'], host: true});
@@ -205,7 +205,7 @@ const ShoppingList = () => {
                 }
             }
         });
-    }
+    };
 
     const showProductDetailHandle = (productShoppingList) => {
         setSelectProduct(productShoppingList);
