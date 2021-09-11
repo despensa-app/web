@@ -9,7 +9,6 @@ import {LoadingProcessScreenContext, ShowMessagesContext} from "../App";
 import UnitTypes from "./pages/unit-types/UnitTypes";
 import {Toast} from "primereact/toast";
 import ShoppingLists from "./pages/shopping-list/ShoppingLists";
-import ShoppingListForm from "./pages/shopping-list/ShoppingListForm";
 import Navbar from "./common/navbar/Navbar";
 import ShoppingList from "./pages/shopping-list/ShoppingList";
 import ShoppingListAddProducts from "./pages/shopping-list/ShoppingListAddProducts";
@@ -44,7 +43,7 @@ const Index = () => {
                     <UnitTypes/>
                 </Route>
                 <Route path="/shopping-list/create">
-                    <ShoppingListForm/>
+                    <ShoppingList/>
                 </Route>
                 <Route path="/shopping-list/:shoppingListId/add-products">
                     <ShoppingListAddProducts/>
