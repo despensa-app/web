@@ -59,13 +59,17 @@ const ShoppingLists = () => {
         ShoppingListsRC.get({
             uri: nextShoppingListPageURL,
             success: data => {
-                setShoppingListsResponse(data);
-
-                if (!shoppingLists[0].id) {
-                    setShoppingLists(data.data);
-                } else {
-                    setShoppingLists([...shoppingLists, ...data.data]);
+                if (data.meta.current_page === shoppingListsResponse.meta.current_page) {
+                    return;
                 }
+
+                if (shoppingListsResponse.meta.current_page) {
+                    setShoppingLists([...shoppingLists, ...data.data]);
+                } else {
+                    setShoppingLists(data.data);
+                }
+
+                setShoppingListsResponse(data);
             },
             error: () => showMessage.error({message: "Error al obtener la lista de la compra."}),
             final: loadingProcessScreen.hide
