@@ -25,7 +25,7 @@ const ShoppingLists = () => {
 
     const [shoppingLists, setShoppingLists] = useState([shoppingListsRequestInitState]);
 
-    const [url, setUrl] = useState("");
+    const [nextShoppingListPageURL, setNextShoppingListPageURL] = useState("");
 
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
@@ -52,12 +52,12 @@ const ShoppingLists = () => {
 
     useEffect(() => {
         initData();
-    }, [url]);
+    }, [nextShoppingListPageURL]);
 
     const initData = () => {
         loadingProcessScreen.show();
         ShoppingListsRC.get({
-            uri: url,
+            uri: nextShoppingListPageURL,
             success: data => {
                 setShoppingListsResponse(data);
 
@@ -97,8 +97,8 @@ const ShoppingLists = () => {
         });
     }
 
-    const loadShoppingListHandle = () => {
-        setUrl(shoppingListsResponse.links.next);
+    const loadNextShoppingListPageHandle = () => {
+        setNextShoppingListPageURL(shoppingListsResponse.links.next);
     };
 
     const showModalHandle = () => {
@@ -138,7 +138,7 @@ const ShoppingLists = () => {
                     ))
                 }
                 <CustomButtonLoad
-                    onClick={loadShoppingListHandle}
+                    onClick={loadNextShoppingListPageHandle}
                     metaPage={shoppingListsResponse.meta}/>
                 <ShoppingListSearchModal searchModalId={searchModalId}/>
             </Content.Main>
