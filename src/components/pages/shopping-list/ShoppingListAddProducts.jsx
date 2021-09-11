@@ -16,7 +16,7 @@ import unitTypeRequestInitState from "../../../assests/requests/unit-type.json";
 
 const ShoppingListAddProducts = () => {
 
-    const [productsUrlPage, setProductsUrlPage] = useState('');
+    const [nexProductsPageURL, setNexProductsPageURL] = useState('');
 
     const [productsResponse, setProductsResponse] = useState(productsResponseInitState);
 
@@ -53,11 +53,11 @@ const ShoppingListAddProducts = () => {
 
     useEffect(() => {
         initDataProducts();
-    }, [productsUrlPage])
+    }, [nexProductsPageURL]);
 
     const initDataProducts = () => {
         ProductsRC.get({
-            uri: productsUrlPage,
+            uri: nexProductsPageURL,
             success: (data) => {
                 setProductsResponse(data);
 
@@ -76,8 +76,8 @@ const ShoppingListAddProducts = () => {
         });
     };
 
-    const loadProductsHandle = () => {
-        setProductsUrlPage(productsResponse.links.next);
+    const loadNextProductsPageHandle = () => {
+        setNexProductsPageURL(productsResponse.links.next);
     };
 
     const selectedProductHandle = (product) => {
@@ -152,7 +152,7 @@ const ShoppingListAddProducts = () => {
                     }
                 </ListGroup>
                 <CustomButtonLoad
-                    onClick={loadProductsHandle}
+                    onClick={loadNextProductsPageHandle}
                     metaPage={productsResponse.meta}/>
                 <ShoppingListAddProductModal
                     modalId={productModalId}
