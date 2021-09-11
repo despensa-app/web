@@ -69,7 +69,7 @@ const ShoppingListSearchModal = ({searchModalId}) => {
                             type="text"
                             name="name"
                             id="shopping_list_name"
-                            placeholder="Buscar por nombre"/>
+                            placeholder="Buscar lista"/>
                         <Form.InputGroup.Append>
                             <Button variant="default" onClick={closeModalHandle}>
                                 <i className="fas fa-times"/>
@@ -86,7 +86,7 @@ const ShoppingListSearchModal = ({searchModalId}) => {
                                 action
                                 className="align-items-center"
                                 onClick={() => itemHandle(value.id)}
-                                key={`shopping-list-search-${value.id}`}>
+                                key={`shopping-list-search-modal-${i}`}>
                                 <i className="fas fa-search pr-1"/>
                                 {value.name}
                             </ListGroup.Item>
