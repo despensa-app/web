@@ -22,6 +22,8 @@ const ShoppingList = () => {
 
     const [shoppingList, setShoppingList] = useState(shoppingListsRequestInitState);
 
+    const [unchangedShoppingList, setUnchangedShoppingList] = useState(shoppingListsRequestInitState);
+
     const [productShoppingListResponse, setProductShoppingListResponse] = useState(productsShoppingListResponseInitState);
 
     const [productsShoppingList, setProductsShoppingList] = useState([productShoppingListInitState]);
@@ -45,6 +47,8 @@ const ShoppingList = () => {
     useEffect(() => {
         if (isEdit) {
             shoppingListEditHandle();
+        } else {
+            setUnchangedShoppingList(shoppingList);
         }
     }, [isEdit, shoppingList]);
 
@@ -178,6 +182,14 @@ const ShoppingList = () => {
         $(`#${productDetailModalId}`).modal('show');
     };
 
+    const shoppingListNameHandle = (evt) => {
+        setShoppingList({...shoppingList, [evt.target.name]: evt.target.value});
+    };
+
+    const resetNameHandle = () => {
+        setShoppingList({...shoppingList, name: unchangedShoppingList.name});
+    }
+
     return (
         <Content>
             <Content.Header>
@@ -185,12 +197,20 @@ const ShoppingList = () => {
                     {
                         isEdit
                             ? <Form className="flex-grow-1">
-                                <Form.Label hide htmlFor="name">Nombre</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    value={shoppingList.name}
-                                    id="name"
-                                    name="name"/>
+                                <Form.InputGroup>
+                                    <Form.Label hide htmlFor="name">Nombre</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={shoppingList.name}
+                                        onChange={shoppingListNameHandle}
+                                        id="name"
+                                        name="name"/>
+                                    <Form.InputGroup.Append>
+                                        <Button variant="default" onClick={resetNameHandle}>
+                                            <i className="fas fa-undo-alt"/>
+                                        </Button>
+                                    </Form.InputGroup.Append>
+                                </Form.InputGroup>
                             </Form>
                             : <h1 className="flex-grow-1">{shoppingList.name}</h1>
                     }
