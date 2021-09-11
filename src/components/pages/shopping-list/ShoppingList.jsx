@@ -43,6 +43,12 @@ const ShoppingList = () => {
     }, []);
 
     useEffect(() => {
+        if (isEdit) {
+            shoppingListEditHandle();
+        }
+    }, [isEdit, shoppingList]);
+
+    useEffect(() => {
         setShoppingList(shoppingListInitState);
 
         if (!shoppingListId) {
@@ -84,7 +90,7 @@ const ShoppingList = () => {
             middle: [
                 (<Button variant="primary"
                          className="mr-1"
-                         onClick={initNavbarItems}>
+                         onClick={saveChangesHandle}>
                     <i className="fas fa-edit pr-1"/>
                     Guardar
                 </Button>),
@@ -98,6 +104,22 @@ const ShoppingList = () => {
             right: []
         });
     };
+
+    const saveChangesHandle = () => {
+        initNavbarItems();
+        ShoppingListsRC.put({
+            body: shoppingList,
+            id: shoppingList.id,
+            success: () => {
+                showMessage.success({message: "Lista actualizada."});
+            },
+            error: (data) => {
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+            }
+        });
+    }
 
     const initDataProducts = () => {
         const uri = ShoppingListsRC.getPath({path: [shoppingListId, 'products'], host: true});
