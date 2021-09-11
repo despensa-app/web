@@ -15,6 +15,7 @@ import ButtonGroup from "../../common/button/ButtonGroup";
 import ProductsShoppingListRC from "../../../services/ProductsShoppingListRC";
 import ShoppingListProductDetailModal from "./ShoppingListProductDetailModal";
 import $ from 'jquery';
+import CustomButtonLoad from "../../common/CustomButtonLoad";
 
 const ShoppingList = () => {
 
@@ -31,6 +32,8 @@ const ShoppingList = () => {
     const [isEdit, setIsEdit] = useState(false);
 
     const [selectProduct, setSelectProduct] = useState(productShoppingListInitState);
+
+    const [nextProductPageURL, setNextProductPageURL] = useState("");
 
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
@@ -77,8 +80,11 @@ const ShoppingList = () => {
             },
             final: loadingProcessScreen.hide
         });
-        initDataProducts();
     }, [shoppingListId]);
+
+    useEffect(() => {
+        initDataProducts();
+    }, [nextProductPageURL]);
 
     const initNavbarItems = () => {
         setIsEdit(false);
@@ -156,7 +162,11 @@ const ShoppingList = () => {
     };
 
     const initDataProducts = () => {
-        const uri = ShoppingListsRC.getPath({path: [shoppingListId, 'products'], host: true});
+        let uri = nextProductPageURL;
+
+        if (!nextProductPageURL) {
+            uri = ShoppingListsRC.getPath({path: [shoppingListId, 'products'], host: true});
+        }
 
         ShoppingListsRC.get({
             uri,
@@ -224,6 +234,10 @@ const ShoppingList = () => {
         return !productsShoppingList.length && !isEdit;
     };
 
+    const loadNexProductPageHandle = () => {
+        setNextProductPageURL(productShoppingListResponse.links.next);
+    };
+
     return (
         <Content>
             <Content.Header>
@@ -272,7 +286,7 @@ const ShoppingList = () => {
                         Agregar producto
                     </Link>
                 }
-                <ListGroup className="list-group-custom-button">
+                <ListGroup className="list-group-custom-button mb-3">
                     {
                         productsShoppingList.map((value, i) => (
                             <ListGroup.Item className="pl-3" key={`product-shopping-list-${i}`}>
@@ -306,6 +320,9 @@ const ShoppingList = () => {
                         ))
                     }
                 </ListGroup>
+                <CustomButtonLoad
+                    onClick={loadNexProductPageHandle}
+                    metaPage={productShoppingListResponse.meta}/>
                 <ShoppingListProductDetailModal
                     productDetailModalId={productDetailModalId}
                     productShoppingList={selectProduct}/>
