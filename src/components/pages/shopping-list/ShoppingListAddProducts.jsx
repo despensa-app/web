@@ -140,7 +140,7 @@ const ShoppingListAddProducts = () => {
             <Content.Main>
                 <ListGroup className="mb-3">
                     {
-                        products && products.map((value, i) => (
+                        products.map((value, i) => (
                             <ListGroup.Item
                                 key={`products-${i}`}
                                 action
