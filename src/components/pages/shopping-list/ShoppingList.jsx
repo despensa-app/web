@@ -218,7 +218,11 @@ const ShoppingList = () => {
 
     const resetNameHandle = () => {
         setShoppingList({...shoppingList, name: unchangedShoppingList.name});
-    }
+    };
+
+    const showButtonAddProductContentMain = () => {
+        return !productsShoppingList.length && !isEdit;
+    };
 
     return (
         <Content>
@@ -259,7 +263,7 @@ const ShoppingList = () => {
             </Content.Header>
             <Content.Main>
                 {
-                    !productsShoppingList.length
+                    showButtonAddProductContentMain()
                     && <Link
                         to={`/shopping-list/${shoppingListId}/add-products`}
                         className="btn btn-success btn-block">
