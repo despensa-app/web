@@ -3,7 +3,7 @@ import ListGroup from "../../common/list-group/ListGroup";
 import CustomCheckBox from "../../common/CustomCheckBox";
 import Button from "../../common/button/Button";
 import {useContext, useEffect, useState} from "react";
-import shoppingListsResponseInitState from "../../../assests/requests/shopping-list.json";
+import shoppingListsRequestInitState from "../../../assests/requests/shopping-list.json";
 import shoppingListInitState from "../../../assests/requests/shopping-list.json";
 import Form from "../../common/form/Form";
 import {Link, useParams} from "react-router-dom";
@@ -20,7 +20,7 @@ const ShoppingList = () => {
 
     const {shoppingListId} = useParams();
 
-    const [shoppingList, setShoppingList] = useState(shoppingListsResponseInitState);
+    const [shoppingList, setShoppingList] = useState(shoppingListsRequestInitState);
 
     const [productShoppingListResponse, setProductShoppingListResponse] = useState(productsShoppingListResponseInitState);
 
