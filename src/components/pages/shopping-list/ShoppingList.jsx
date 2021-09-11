@@ -171,13 +171,17 @@ const ShoppingList = () => {
         ShoppingListsRC.get({
             uri,
             success: (data) => {
-                setProductShoppingListResponse(data);
-
-                if (!productsShoppingList[0].shopping_list_id) {
-                    setProductsShoppingList(data.data);
-                } else {
-                    setProductsShoppingList([...productsShoppingList, ...data.data]);
+                if (data.meta.current_page === productShoppingListResponse.meta.current_page) {
+                    return true;
                 }
+
+                if (productShoppingListResponse.meta.current_page) {
+                    setProductsShoppingList([...productsShoppingList, ...data.data]);
+                } else {
+                    setProductsShoppingList(data.data);
+                }
+
+                setProductShoppingListResponse(data);
             },
             error: (data) => {
                 if (data && data.error) {
