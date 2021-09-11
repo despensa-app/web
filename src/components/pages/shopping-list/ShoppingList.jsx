@@ -244,12 +244,17 @@ const ShoppingList = () => {
                             </Form>
                             : <h1 className="flex-grow-1">{shoppingList.name}</h1>
                     }
-                    <Button>
-                        <i className="fas fa-filter"/>
-                    </Button>
-                    <Button>
-                        <i className="fas fa-ellipsis-h"/>
-                    </Button>
+                    {
+                        shoppingListId
+                        && <>
+                            <Button>
+                                <i className="fas fa-filter"/>
+                            </Button>
+                            <Button>
+                                <i className="fas fa-ellipsis-h"/>
+                            </Button>
+                        </>
+                    }
                 </div>
             </Content.Header>
             <Content.Main>
