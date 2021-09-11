@@ -6,7 +6,7 @@ import {useContext, useEffect, useState} from "react";
 import shoppingListsRequestInitState from "../../../assests/requests/shopping-list.json";
 import shoppingListInitState from "../../../assests/requests/shopping-list.json";
 import Form from "../../common/form/Form";
-import {Link, useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import ShoppingListsRC from "../../../services/ShoppingListsRC";
 import {LoadingProcessScreenContext, NavbarHandleContext, ShowMessagesContext} from "../../../App";
 import productsShoppingListResponseInitState from "../../../assests/responses/products-shopping-list.json";
@@ -38,6 +38,8 @@ const ShoppingList = () => {
 
     const navbarHandle = useContext(NavbarHandleContext);
 
+    const history = useHistory();
+
     const productDetailModalId = "product-detail-modal";
 
     useEffect(() => {
@@ -56,6 +58,9 @@ const ShoppingList = () => {
         setShoppingList(shoppingListInitState);
 
         if (!shoppingListId) {
+            setIsEdit(true);
+            setProductsShoppingList([]);
+
             return;
         }
 
@@ -110,12 +115,37 @@ const ShoppingList = () => {
     };
 
     const saveChangesHandle = () => {
-        initNavbarItems();
+        if (shoppingListId) {
+            update({success: initNavbarItems});
+        } else {
+            create({success: initNavbarItems});
+        }
+    }
+
+    const create = ({success}) => {
+        ShoppingListsRC.post({
+            body: shoppingList,
+            id: shoppingList.id,
+            success: ({data}) => {
+                success();
+                showMessage.success({message: "Lista creada."});
+                history.push("/shopping-list/" + data.id);
+            },
+            error: (data) => {
+                if (data && data.error) {
+                    showMessage.error(data.error);
+                }
+            }
+        });
+    }
+
+    const update = ({success}) => {
         ShoppingListsRC.put({
             body: shoppingList,
             id: shoppingList.id,
             success: () => {
                 showMessage.success({message: "Lista actualizada."});
+                success();
             },
             error: (data) => {
                 if (data && data.error) {
