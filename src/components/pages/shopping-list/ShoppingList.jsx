@@ -237,6 +237,7 @@ const ShoppingList = () => {
                                         type="text"
                                         value={shoppingList.name}
                                         onChange={shoppingListNameHandle}
+                                        placeholder="Nombre de la lista"
                                         id="name"
                                         name="name"/>
                                     <Form.InputGroup.Append>
