@@ -13,40 +13,53 @@ const getBaseRequestOptions = ({method, body}) => {
     return request;
 };
 
-export const getRute = ({path = [], host = true, params = null}) => {
+export const getRute = ({path = [], host = true, params = null, uri = ""}) => {
     let paramsToAdd = "";
+    let pathFinal = "";
+    let pathFinalContainsParams = false;
 
     if (params) {
-        paramsToAdd = "?" + Object.keys(params)
+        paramsToAdd = Object.keys(params)
             .map(key => `${key}=${params[key]}`)
             .join("&");
     }
 
-    path = path.map(value => {
-        if (typeof value !== "string") {
-            return value;
+    if (uri) {
+        pathFinal = uri;
+        pathFinalContainsParams = uri.includes("?")
+    } else {
+        path = path.map(value => {
+            if (typeof value !== "string") {
+                return value;
+            }
+
+            return value.startsWith("/") ? value.substring(1) : value;
+        });
+
+        if (host) {
+            path.unshift(routes.host);
         }
 
-        return value.startsWith("/") ? value.substring(1) : value;
-    });
+        pathFinal = path.join('/');
 
-    if (host) {
-        path.unshift(routes.host);
+        if (!host) {
+            pathFinal = '/' + pathFinal;
+        }
     }
 
-    path = path.join('/');
+    if (paramsToAdd) {
+        paramsToAdd = (pathFinalContainsParams ? "&" : "?") + paramsToAdd;
+    }
 
-    return (host ? path : '/' + path) + paramsToAdd;
+    return pathFinal + paramsToAdd;
 };
 
 export const getRuteIfID = ({uri, path = "", id, params}) => {
     if (id) {
         return getRute({path: [path, id], params});
-    } else if (uri) {
-        return uri;
     }
 
-    return getRute({path: [path], params});
+    return getRute({path: [path], params, uri});
 };
 
 export const getPostOptions = (body) => {
