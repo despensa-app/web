@@ -10,10 +10,14 @@ const CustomButtonLoad = ({onClick, metaPage}) => {
     }, [metaPage]);
 
     const canRender = () => {
+        if (!metaPage) {
+            return false;
+        }
+
         const {current_page, last_page} = metaPage;
 
         return current_page < last_page;
-    }
+    };
 
     return (
         <>
