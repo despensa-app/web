@@ -13,10 +13,12 @@ import $ from 'jquery';
 import ProductsShoppingListRC from "../../../services/ProductsShoppingListRC";
 import UnitTypeSearchModal from "./UnitTypeSearchModal";
 import unitTypeRequestInitState from "../../../assests/requests/unit-type.json";
+import Form from "../../common/form/Form";
+import linksPaginationInitState from "../../../assests/links.json";
 
 const ShoppingListAddProducts = () => {
 
-    const [nexProductsPageURL, setNexProductsPageURL] = useState('');
+    const [linksPaginationProducts, setLinksPaginationProducts] = useState(linksPaginationInitState);
 
     const [productsResponse, setProductsResponse] = useState(productsResponseInitState);
 
@@ -25,6 +27,8 @@ const ShoppingListAddProducts = () => {
     const [selectedProduct, setSelectedProduct] = useState(productRequestInitState);
 
     const [selectedUnitType, setSelectedUnitType] = useState(unitTypeRequestInitState);
+
+    const [productRequest, setProductRequest] = useState(productRequestInitState);
 
     const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
@@ -52,20 +56,40 @@ const ShoppingListAddProducts = () => {
     }, []);
 
     useEffect(() => {
-        initDataProducts();
-    }, [nexProductsPageURL]);
+        initDataProducts(true);
+    }, [productRequest]);
 
-    const initDataProducts = () => {
+    const initDataProducts = (isSearch = false) => {
+        const getUri = () => {
+            if (!linksPaginationProducts) {
+                return "";
+            }
+
+            return isSearch ? linksPaginationProducts.first : linksPaginationProducts.next;
+        }
+
         ProductsRC.get({
-            uri: nexProductsPageURL,
+            params: {
+                query: productRequest.name
+            },
+            uri: getUri(),
             success: (data) => {
-                setProductsResponse(data);
-
-                if (!products[0].id) {
-                    setProducts(data.data);
-                } else {
-                    setProducts([...products, ...data.data]);
+                if (!isSearch && data.meta && data.meta.current_page === productsResponse.meta.current_page) {
+                    return;
                 }
+
+                if (data.data) {
+                    if (!isSearch && productsResponse.meta.current_page) {
+                        setProducts([...products, ...data.data]);
+                    } else {
+                        setProducts(data.data);
+                    }
+                } else {
+                    setProducts([]);
+                }
+
+                setLinksPaginationProducts(data.links);
+                setProductsResponse(data);
             },
             error: (data) => {
                 if (data && data.error) {
@@ -77,7 +101,7 @@ const ShoppingListAddProducts = () => {
     };
 
     const loadNextProductsPageHandle = () => {
-        setNexProductsPageURL(productsResponse.links.next);
+        initDataProducts();
     };
 
     const selectedProductHandle = (product) => {
@@ -127,6 +151,10 @@ const ShoppingListAddProducts = () => {
         setSelectedUnitType(unitTypeRequestInitState);
     };
 
+    const inputSearchHandle = (evt) => {
+        setProductRequest({...productRequest, [evt.target.name]: evt.target.value})
+    };
+
     return (
         <Content>
             <Content.Header>
@@ -138,6 +166,23 @@ const ShoppingListAddProducts = () => {
                 </div>
             </Content.Header>
             <Content.Main>
+                <Form className="mb-3">
+                    <Form.InputGroup>
+                        <Form.Label hide htmlFor="product_name"/>
+                        <Form.Control
+                            autoComplete="off"
+                            id="product_name"
+                            name="name"
+                            value={productRequest.name}
+                            onChange={inputSearchHandle}
+                            placeholder="Buscar producto"/>
+                        <Form.InputGroup.Append>
+                            <Button variant="default">
+                                <i className="fas fa-search"/>
+                            </Button>
+                        </Form.InputGroup.Append>
+                    </Form.InputGroup>
+                </Form>
                 <ListGroup className="mb-3">
                     {
                         products.map((value, i) => (
