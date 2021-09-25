@@ -122,13 +122,13 @@ const ShoppingList = () => {
 
     const saveChangesHandle = () => {
         if (shoppingListId) {
-            update({success: initNavbarItems});
+            updateShoppingList({success: initNavbarItems});
         } else {
-            create({success: initNavbarItems});
+            createShoppingList({success: initNavbarItems});
         }
     };
 
-    const create = ({success}) => {
+    const createShoppingList = ({success}) => {
         ShoppingListsRC.post({
             body: shoppingList,
             id: shoppingList.id,
@@ -145,7 +145,7 @@ const ShoppingList = () => {
         });
     };
 
-    const update = ({success}) => {
+    const updateShoppingList = ({success}) => {
         ShoppingListsRC.put({
             body: shoppingList,
             id: shoppingList.id,
