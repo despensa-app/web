@@ -83,6 +83,10 @@ const ShoppingList = () => {
     }, [shoppingListId]);
 
     useEffect(() => {
+        if (!shoppingListId) {
+            return;
+        }
+
         initDataProducts();
     }, [nextProductPageURL]);
 
