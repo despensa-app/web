@@ -128,7 +128,12 @@ const ShoppingList = () => {
         if (shoppingListId) {
             updateShoppingList({success: initNavbarItems});
         } else {
-            createShoppingList({success: initNavbarItems});
+            createShoppingList({
+                success: (data) => {
+                    initNavbarItems();
+                    history.push("/shopping-list/" + data.id);
+                }
+            });
         }
     };
 
@@ -137,9 +142,8 @@ const ShoppingList = () => {
             body: shoppingList,
             id: shoppingList.id,
             success: ({data}) => {
-                success();
                 showMessage.success({message: "Lista creada."});
-                history.push("/shopping-list/" + data.id);
+                success(data);
             },
             error: (data) => {
                 if (data && data.error) {
