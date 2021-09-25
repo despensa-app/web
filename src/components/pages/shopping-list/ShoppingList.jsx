@@ -58,7 +58,7 @@ const ShoppingList = () => {
     }, [isEdit, shoppingList]);
 
     useEffect(() => {
-        setShoppingList(shoppingListInitState);
+        setShoppingList({...shoppingListsRequestInitState, name: "Nueva lista"});
 
         if (!shoppingListId) {
             setIsEdit(true);
