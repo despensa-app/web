@@ -4,7 +4,6 @@ import CustomCheckBox from "../../common/CustomCheckBox";
 import Button from "../../common/button/Button";
 import {useContext, useEffect, useState} from "react";
 import shoppingListsRequestInitState from "../../../assests/requests/shopping-list.json";
-import shoppingListInitState from "../../../assests/requests/shopping-list.json";
 import Form from "../../common/form/Form";
 import {Link, useHistory, useParams} from "react-router-dom";
 import ShoppingListsRC from "../../../services/ShoppingListsRC";
@@ -113,15 +112,29 @@ const ShoppingList = () => {
                     <i className="fas fa-edit pr-1"/>
                     Guardar
                 </Button>),
-                (<Link
-                    to={`/shopping-list/${shoppingListId}/add-products`}
-                    className="btn btn-success">
-                    <i className="fas fa-plus pr-1"/>
+                (<Button variant="success"
+                         onClick={buttonAddProductHandle}>
                     Agregar producto
-                </Link>)
+                </Button>)
             ],
             right: []
         });
+    };
+
+    const buttonAddProductHandle = () => {
+        const getUrl = (id) => {
+            return `/shopping-list/${id}/add-products`;
+        };
+
+        if (shoppingListId) {
+            history.push(getUrl(shoppingListId));
+        } else {
+            createShoppingList({
+                success: (data) => {
+                    history.push(getUrl(data.id));
+                }
+            });
+        }
     };
 
     const saveChangesHandle = () => {
