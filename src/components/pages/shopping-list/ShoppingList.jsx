@@ -15,6 +15,7 @@ import ProductsShoppingListRC from "../../../services/ProductsShoppingListRC";
 import ShoppingListProductDetailModal from "./ShoppingListProductDetailModal";
 import $ from 'jquery';
 import CustomButtonLoad from "../../common/CustomButtonLoad";
+import ShoppingListOptionsModal from "./ShoppingListOptionsModal";
 
 const ShoppingList = () => {
 
@@ -43,6 +44,8 @@ const ShoppingList = () => {
     const history = useHistory();
 
     const productDetailModalId = "product-detail-modal";
+
+    const optionsModalId = "options-modal";
 
     useEffect(() => {
         initNavbarItems();
@@ -263,6 +266,10 @@ const ShoppingList = () => {
         setNextProductPageURL(productShoppingListResponse.links.next);
     };
 
+    const showOptionHandle = () => {
+        $(`#${optionsModalId}`).modal('show');
+    }
+
     return (
         <Content>
             <Content.Header>
@@ -294,7 +301,7 @@ const ShoppingList = () => {
                             <Button>
                                 <i className="fas fa-filter"/>
                             </Button>
-                            <Button>
+                            <Button onClick={showOptionHandle}>
                                 <i className="fas fa-ellipsis-h"/>
                             </Button>
                         </>
@@ -351,6 +358,7 @@ const ShoppingList = () => {
                 <ShoppingListProductDetailModal
                     productDetailModalId={productDetailModalId}
                     productShoppingList={selectProduct}/>
+                <ShoppingListOptionsModal modalId={optionsModalId}/>
             </Content.Main>
         </Content>
     );
