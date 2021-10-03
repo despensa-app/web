@@ -9,7 +9,7 @@ servicios a consumir.
 
 Cualquier contribución que hagas será muy apreciada.
 
-- Antes de empezar a codificar, lea las [directrices de contribución](CONTRIBUTING.md)
+- Antes de empezar a codificar, lea las [directrices de contribución](CONTRIBUTING.md).
 
 ## Agradecimientos
 
