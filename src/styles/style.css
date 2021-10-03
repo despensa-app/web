@@ -29,11 +29,15 @@
 }
 
 .border-radius-0 {
-    border-radius: 0;
+    border-radius: 0 !important;
 }
 
 .w-fixed-40 {
     width: 40px;
+}
+
+.w-fixed-25 {
+    width: 25px;
 }
 
 .cursor-pointer {
