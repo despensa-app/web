@@ -5,7 +5,7 @@ import {ConfirmDialogContext, LoadingProcessScreenContext, NavbarHandleContext, 
 import ShoppingListsRC from "../../services/ShoppingListsRC";
 import Content from "../../components/common/content/Content";
 import Card from "../../components/common/card/Card";
-import {dateFormat} from "../../common/date-utils";
+import {dateFormat} from "../../utils/date-utils";
 import Button from "../../components/common/button/Button";
 import ShoppingListButtonCreate from "../../components/shopping-list/ShoppingListButtonCreate";
 import ButtonNavbarSearch from "../../components/common/ButtonNavbarSearch";
