@@ -1,13 +1,14 @@
-import routes from "../assests/routes.json";
 import {call, getDeleteOptions, getPostOptions, getPutOptions, getRuteIfID} from "./RestCall";
 
+const productShoppingListPath = "/products-shopping-list";
+
 const getUri = ({uri, id} = {}) => {
-    return getRuteIfID({uri, path: routes.products_shopping_list, id});
+    return getRuteIfID({uri, path: productShoppingListPath, id});
 }
 
 const ProductsShoppingListRC = {
     getPath: () => {
-        return routes.products_shopping_list;
+        return productShoppingListPath;
     },
     post: ({body, success, error, final}) => {
         call({

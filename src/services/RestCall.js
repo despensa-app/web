@@ -1,5 +1,3 @@
-import routes from '../assests/routes.json';
-
 const getBaseRequestOptions = ({method, body}) => {
     const request = {
         method: method,
@@ -37,7 +35,7 @@ export const getRute = ({path = [], host = true, params = null, uri = ""}) => {
         });
 
         if (host) {
-            path.unshift(routes.host);
+            path.unshift(process.env.REST_API_URL);
         }
 
         pathFinal = path.join('/');

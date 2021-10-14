@@ -1,13 +1,14 @@
-import routes from "../assests/routes.json";
 import {call, getDeleteOptions, getPostOptions, getPutOptions, getRute, getRuteIfID} from "./RestCall";
 
+const products_path = "/products";
+
 const getUri = ({uri, id, params} = {}) => {
-    return getRuteIfID({uri, path: routes.products, id, params});
+    return getRuteIfID({uri, path: products_path, id, params});
 }
 
 const ProductsRC = {
     getPath: ({path = [], host = false} = {}) => {
-        return getRute({path: [routes.products, ...path], host});
+        return getRute({path: [products_path, ...path], host});
     },
     get: ({uri, id, params, success, error, final}) => {
         call({

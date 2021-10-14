@@ -1,13 +1,14 @@
-import routes from "../assests/routes.json";
 import {call, getDeleteOptions, getPostOptions, getPutOptions, getRute, getRuteIfID} from "./RestCall";
 
+const shoppingListPath = "/shopping-list";
+
 const getUri = ({uri, id, params} = {}) => {
-    return getRuteIfID({uri, path: routes.shopping_list, id, params});
+    return getRuteIfID({uri, path: shoppingListPath, id, params});
 }
 
 const ShoppingListsRC = {
     getPath: ({path = [], host = false} = {}) => {
-        return getRute({path: [routes.shopping_list, ...path], host});
+        return getRute({path: [shoppingListPath, ...path], host});
     },
     get: ({uri, id, params, success, error, final}) => {
         call({
