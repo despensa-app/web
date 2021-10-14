@@ -1,12 +1,8 @@
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {useContext} from "react";
-import Aside from './common/Aside';
-import Product from "./pages/products/Product";
-import Products from "./pages/products/Products";
-import ProductForm from "./pages/products/ProductForm";
-import LoadingProcessScreen from "./common/LoadingProcessScreen";
+import Aside from "../components/common/Aside";
+import LoadingProcessScreen from "../components/common/LoadingProcessScreen";
 import {LoadingProcessScreenContext, ShowMessagesContext} from "../App";
-import UnitTypes from "./pages/unit-types/UnitTypes";
 import {Toast} from "primereact/toast";
 import ShoppingLists from "./shopping-list/ShoppingLists";
 import Navbar from "../components/common/navbar/Navbar";
@@ -24,24 +20,6 @@ const Index = () => {
             <Toast ref={showMessage.toast}/>
             <Aside/>
             <Switch>
-                <Route path="/products/:productId/form">
-                    <ProductForm/>
-                </Route>
-                <Route path="/products/form">
-                    <ProductForm/>
-                </Route>
-                <Route path="/products/:productId">
-                    <Product/>
-                </Route>
-                <Route path="/products">
-                    <Products/>
-                </Route>
-                <Route path="/unit-types/:unitTypeId">
-                    <UnitTypes/>
-                </Route>
-                <Route path="/unit-types">
-                    <UnitTypes/>
-                </Route>
                 <Route path="/shopping-list/create">
                     <ShoppingList/>
                 </Route>

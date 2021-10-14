@@ -36,12 +36,6 @@ const NavLink = ({href, children, preClassIcon, postClassIcon}) => (
 const NavSidebar = () => (
     <nav className="mt-2">
         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <NavItem href="/products" preClassIcon="far fa-circle">
-                Productos
-            </NavItem>
-            <NavItem href="/unit-types" preClassIcon="far fa-circle">
-                Tipos de unidades
-            </NavItem>
             <NavItem href="/shopping-list" preClassIcon="far fa-circle">
                 Lista de la compra
             </NavItem>
