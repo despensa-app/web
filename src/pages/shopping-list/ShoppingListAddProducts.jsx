@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
-import productsResponseInitState from "../../assests/responses/products.json";
-import productRequestInitState from "../../assests/requests/product.json";
+import productsResponseInitState from "../../services/init-state/responses/products.json";
+import productRequestInitState from "../../services/init-state/requests/product.json";
 import {LoadingProcessScreenContext, NavbarHandleContext, ShowMessagesContext} from "../../App";
 import Content from "../../components/common/content/Content";
 import ProductsRC from "../../services/ProductsRC";
@@ -12,9 +12,9 @@ import ShoppingListAddProductModal from "../../components/shopping-list/Shopping
 import $ from 'jquery';
 import ProductsShoppingListRC from "../../services/ProductsShoppingListRC";
 import UnitTypeSearchModal from "../../components/shopping-list/UnitTypeSearchModal";
-import unitTypeRequestInitState from "../../assests/requests/unit-type.json";
+import unitTypeRequestInitState from "../../services/init-state/requests/unit-type.json";
 import Form from "../../components/common/form/Form";
-import linksPaginationInitState from "../../assests/links.json";
+import linksPaginationInitState from "../../services/init-state/links.json";
 
 const ShoppingListAddProducts = () => {
 

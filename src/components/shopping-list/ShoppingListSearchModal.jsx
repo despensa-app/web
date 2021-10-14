@@ -7,7 +7,7 @@ import Button from "../common/button/Button";
 import ListGroup from "../common/list-group/ListGroup";
 import ShoppingListsRC from "../../services/ShoppingListsRC";
 import {useHistory} from "react-router-dom";
-import shoppingListInitState from "../../assests/requests/shopping-list.json";
+import shoppingListInitState from "../../services/init-state/requests/shopping-list.json";
 
 const ShoppingListSearchModal = ({searchModalId}) => {
 

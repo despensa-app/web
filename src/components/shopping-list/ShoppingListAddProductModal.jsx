@@ -4,7 +4,7 @@ import Modal from "../common/modal/Modal";
 import Button from "../common/button/Button";
 import Form from "../common/form/Form";
 import {InputNumber} from "primereact/inputnumber";
-import requestInitState from "../../assests/requests/product-shopping-list.json"
+import requestInitState from "../../services/init-state/requests/product-shopping-list.json"
 
 const ShoppingListAddProductModal = ({modalId, product, unitType, addHandle, unitTypeHandle, closeHandle}) => {
 

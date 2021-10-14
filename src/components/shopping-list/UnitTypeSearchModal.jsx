@@ -3,7 +3,7 @@ import Modal from "../common/modal/Modal";
 import Form from "../common/form/Form";
 import Button from "../common/button/Button";
 import ListGroup from "../common/list-group/ListGroup";
-import unitTypeRequestInitState from "../../assests/requests/unit-type.json";
+import unitTypeRequestInitState from "../../services/init-state/requests/unit-type.json";
 import {ShowMessagesContext} from "../../App";
 import $ from 'jquery';
 import {UnitTypesRC} from "../../services/UnitTypesRC";

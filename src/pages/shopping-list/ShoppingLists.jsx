@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
-import shoppingListsResponseInitState from "../../assests/responses/shopping-lists.json"
-import shoppingListsRequestInitState from "../../assests/requests/shopping-list.json"
+import shoppingListsResponseInitState from "../../services/init-state/responses/shopping-lists.json"
+import shoppingListsRequestInitState from "../../services/init-state/requests/shopping-list.json"
 import {ConfirmDialogContext, LoadingProcessScreenContext, NavbarHandleContext, ShowMessagesContext} from "../../App";
 import ShoppingListsRC from "../../services/ShoppingListsRC";
 import Content from "../../components/common/content/Content";
