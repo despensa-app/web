@@ -1,12 +1,12 @@
 import {useContext, useEffect, useState} from "react";
-import Modal from "../../common/modal/Modal";
-import Form from "../../common/form/Form";
-import Button from "../../common/button/Button";
-import ListGroup from "../../common/list-group/ListGroup";
-import unitTypeRequestInitState from "../../../assests/requests/unit-type.json";
-import {ShowMessagesContext} from "../../../App";
+import Modal from "../common/modal/Modal";
+import Form from "../common/form/Form";
+import Button from "../common/button/Button";
+import ListGroup from "../common/list-group/ListGroup";
+import unitTypeRequestInitState from "../../assests/requests/unit-type.json";
+import {ShowMessagesContext} from "../../App";
 import $ from 'jquery';
-import {UnitTypesRC} from "../../../services/UnitTypesRC";
+import {UnitTypesRC} from "../../services/UnitTypesRC";
 
 const UnitTypeSearchModal = ({modalId, onClickItem, onClose}) => {
 

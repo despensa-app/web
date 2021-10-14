@@ -1,4 +1,4 @@
-import Modal from "../../common/modal/Modal";
+import Modal from "../common/modal/Modal";
 
 const ShoppingListOptionsModal = ({modalId}) => {
     return (

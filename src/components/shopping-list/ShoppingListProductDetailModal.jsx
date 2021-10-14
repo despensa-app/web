@@ -1,5 +1,5 @@
-import Modal from "../../common/modal/Modal";
-import Button from "../../common/button/Button";
+import Modal from "../common/modal/Modal";
+import Button from "../common/button/Button";
 import $ from 'jquery';
 
 const ShoppingListProductDetailModal = ({productDetailModalId, productShoppingList}) => {

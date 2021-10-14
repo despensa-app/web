@@ -1,13 +1,13 @@
 import {useContext, useEffect, useState} from "react";
-import {ShowMessagesContext} from "../../../App";
+import {ShowMessagesContext} from "../../App";
 import $ from 'jquery';
-import Modal from "../../common/modal/Modal";
-import Form from "../../common/form/Form";
-import Button from "../../common/button/Button";
-import ListGroup from "../../common/list-group/ListGroup";
-import ShoppingListsRC from "../../../services/ShoppingListsRC";
+import Modal from "../common/modal/Modal";
+import Form from "../common/form/Form";
+import Button from "../common/button/Button";
+import ListGroup from "../common/list-group/ListGroup";
+import ShoppingListsRC from "../../services/ShoppingListsRC";
 import {useHistory} from "react-router-dom";
-import shoppingListInitState from "../../../assests/requests/shopping-list.json";
+import shoppingListInitState from "../../assests/requests/shopping-list.json";
 
 const ShoppingListSearchModal = ({searchModalId}) => {
 
