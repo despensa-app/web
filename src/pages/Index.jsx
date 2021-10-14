@@ -8,10 +8,10 @@ import LoadingProcessScreen from "./common/LoadingProcessScreen";
 import {LoadingProcessScreenContext, ShowMessagesContext} from "../App";
 import UnitTypes from "./pages/unit-types/UnitTypes";
 import {Toast} from "primereact/toast";
-import ShoppingLists from "./pages/shopping-list/ShoppingLists";
-import Navbar from "./common/navbar/Navbar";
-import ShoppingList from "./pages/shopping-list/ShoppingList";
-import ShoppingListAddProducts from "./pages/shopping-list/ShoppingListAddProducts";
+import ShoppingLists from "./shopping-list/ShoppingLists";
+import Navbar from "../components/common/navbar/Navbar";
+import ShoppingList from "./shopping-list/ShoppingList";
+import ShoppingListAddProducts from "./shopping-list/ShoppingListAddProducts";
 
 const Index = () => {
     const version = "1.0.0";

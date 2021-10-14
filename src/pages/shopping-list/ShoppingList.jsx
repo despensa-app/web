@@ -1,21 +1,21 @@
-import Content from "../../common/content/Content";
-import ListGroup from "../../common/list-group/ListGroup";
-import CustomCheckBox from "../../common/CustomCheckBox";
-import Button from "../../common/button/Button";
+import Content from "../../components/common/content/Content";
+import ListGroup from "../../components/common/list-group/ListGroup";
+import CustomCheckBox from "../../components/common/CustomCheckBox";
+import Button from "../../components/common/button/Button";
 import {useContext, useEffect, useState} from "react";
-import shoppingListsRequestInitState from "../../../assests/requests/shopping-list.json";
-import Form from "../../common/form/Form";
+import shoppingListsRequestInitState from "../../assests/requests/shopping-list.json";
+import Form from "../../components/common/form/Form";
 import {Link, useHistory, useParams} from "react-router-dom";
-import ShoppingListsRC from "../../../services/ShoppingListsRC";
-import {LoadingProcessScreenContext, NavbarHandleContext, ShowMessagesContext} from "../../../App";
-import productsShoppingListResponseInitState from "../../../assests/responses/products-shopping-list.json";
-import productShoppingListInitState from "../../../assests/responses/product-shopping-list.json";
-import ButtonGroup from "../../common/button/ButtonGroup";
-import ProductsShoppingListRC from "../../../services/ProductsShoppingListRC";
-import ShoppingListProductDetailModal from "./ShoppingListProductDetailModal";
+import ShoppingListsRC from "../../services/ShoppingListsRC";
+import {LoadingProcessScreenContext, NavbarHandleContext, ShowMessagesContext} from "../../App";
+import productsShoppingListResponseInitState from "../../assests/responses/products-shopping-list.json";
+import productShoppingListInitState from "../../assests/responses/product-shopping-list.json";
+import ButtonGroup from "../../components/common/button/ButtonGroup";
+import ProductsShoppingListRC from "../../services/ProductsShoppingListRC";
+import ShoppingListProductDetailModal from "../../components/shopping-list/ShoppingListProductDetailModal";
 import $ from 'jquery';
-import CustomButtonLoad from "../../common/CustomButtonLoad";
-import ShoppingListOptionsModal from "./ShoppingListOptionsModal";
+import CustomButtonLoad from "../../components/common/CustomButtonLoad";
+import ShoppingListOptionsModal from "../../components/shopping-list/ShoppingListOptionsModal";
 
 const ShoppingList = () => {
 

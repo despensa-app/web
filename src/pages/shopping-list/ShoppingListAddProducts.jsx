@@ -1,20 +1,20 @@
 import {useContext, useEffect, useState} from "react";
-import productsResponseInitState from "../../../assests/responses/products.json";
-import productRequestInitState from "../../../assests/requests/product.json";
-import {LoadingProcessScreenContext, NavbarHandleContext, ShowMessagesContext} from "../../../App";
-import Content from "../../common/content/Content";
-import ProductsRC from "../../../services/ProductsRC";
-import Button from "../../common/button/Button";
-import ListGroup from "../../common/list-group/ListGroup";
-import CustomButtonLoad from "../../common/CustomButtonLoad";
+import productsResponseInitState from "../../assests/responses/products.json";
+import productRequestInitState from "../../assests/requests/product.json";
+import {LoadingProcessScreenContext, NavbarHandleContext, ShowMessagesContext} from "../../App";
+import Content from "../../components/common/content/Content";
+import ProductsRC from "../../services/ProductsRC";
+import Button from "../../components/common/button/Button";
+import ListGroup from "../../components/common/list-group/ListGroup";
+import CustomButtonLoad from "../../components/common/CustomButtonLoad";
 import {Link, useParams} from "react-router-dom";
-import ShoppingListAddProductModal from "./ShoppingListAddProductModal";
+import ShoppingListAddProductModal from "../../components/shopping-list/ShoppingListAddProductModal";
 import $ from 'jquery';
-import ProductsShoppingListRC from "../../../services/ProductsShoppingListRC";
-import UnitTypeSearchModal from "./UnitTypeSearchModal";
-import unitTypeRequestInitState from "../../../assests/requests/unit-type.json";
-import Form from "../../common/form/Form";
-import linksPaginationInitState from "../../../assests/links.json";
+import ProductsShoppingListRC from "../../services/ProductsShoppingListRC";
+import UnitTypeSearchModal from "../../components/shopping-list/UnitTypeSearchModal";
+import unitTypeRequestInitState from "../../assests/requests/unit-type.json";
+import Form from "../../components/common/form/Form";
+import linksPaginationInitState from "../../assests/links.json";
 
 const ShoppingListAddProducts = () => {
 

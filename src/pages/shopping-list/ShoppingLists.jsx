@@ -1,23 +1,18 @@
 import {useContext, useEffect, useState} from "react";
-import shoppingListsResponseInitState from "../../../assests/responses/shopping-lists.json"
-import shoppingListsRequestInitState from "../../../assests/requests/shopping-list.json"
-import {
-    ConfirmDialogContext,
-    LoadingProcessScreenContext,
-    NavbarHandleContext,
-    ShowMessagesContext
-} from "../../../App";
-import ShoppingListsRC from "../../../services/ShoppingListsRC";
-import Content from "../../common/content/Content";
-import Card from "../../common/card/Card";
-import {dateFormat} from "../../../common/date-utils";
-import Button from "../../common/button/Button";
-import ShoppingListButtonCreate from "./ShoppingListButtonCreate";
-import ButtonNavbarSearch from "../../common/ButtonNavbarSearch";
+import shoppingListsResponseInitState from "../../assests/responses/shopping-lists.json"
+import shoppingListsRequestInitState from "../../assests/requests/shopping-list.json"
+import {ConfirmDialogContext, LoadingProcessScreenContext, NavbarHandleContext, ShowMessagesContext} from "../../App";
+import ShoppingListsRC from "../../services/ShoppingListsRC";
+import Content from "../../components/common/content/Content";
+import Card from "../../components/common/card/Card";
+import {dateFormat} from "../../common/date-utils";
+import Button from "../../components/common/button/Button";
+import ShoppingListButtonCreate from "../../components/shopping-list/ShoppingListButtonCreate";
+import ButtonNavbarSearch from "../../components/common/ButtonNavbarSearch";
 import $ from 'jquery';
-import ShoppingListSearchModal from "./ShoppingListSearchModal";
+import ShoppingListSearchModal from "../../components/shopping-list/ShoppingListSearchModal";
 import {useHistory} from "react-router-dom";
-import CustomButtonLoad from "../../common/CustomButtonLoad";
+import CustomButtonLoad from "../../components/common/CustomButtonLoad";
 
 const ShoppingLists = () => {
 

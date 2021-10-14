@@ -1,4 +1,4 @@
-import Index from './components/Index';
+import Index from './pages/Index';
 import 'admin-lte/plugins/bootstrap/js/bootstrap.min'
 import 'admin-lte/dist/js/adminlte';
 import {createContext, useRef, useState} from "react";
