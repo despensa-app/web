@@ -35,7 +35,7 @@ export const getRute = ({path = [], host = true, params = null, uri = ""}) => {
         });
 
         if (host) {
-            path.unshift(process.env.REST_API_URL);
+            path.unshift(process.env.REACT_APP_REST_API_URL);
         }
 
         pathFinal = path.join('/');
