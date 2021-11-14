@@ -16,7 +16,7 @@ import ShoppingListProductDetailModal from "../../components/shopping-list/Shopp
 import $ from 'jquery';
 import CustomButtonLoad from "../../components/common/CustomButtonLoad";
 import ShoppingListOptionsModal from "../../components/shopping-list/ShoppingListOptionsModal";
-import LoadingProcessScreenContext from "../../context/LoadingProcessScreenContext";
+import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
 
 const ShoppingList = () => {
 
@@ -36,8 +36,6 @@ const ShoppingList = () => {
 
     const [nextProductPageURL, setNextProductPageURL] = useState("");
 
-    const loadingProcessScreen = useContext(LoadingProcessScreenContext);
-
     const showMessage = useContext(ShowMessagesContext);
 
     const navbarHandle = useContext(NavbarHandleContext);
@@ -47,6 +45,8 @@ const ShoppingList = () => {
     const productDetailModalId = "product-detail-modal";
 
     const optionsModalId = "options-modal";
+
+    const {showLoadingProcessScreen, hideLoadingProcessScreen} = useLoadingProcessScreen();
 
     useEffect(() => {
         initNavbarItems();
@@ -70,7 +70,7 @@ const ShoppingList = () => {
             return;
         }
 
-        loadingProcessScreen.show();
+        showLoadingProcessScreen();
         ShoppingListsRC.get({
             id: shoppingListId,
             success: ({data}) => {
@@ -81,7 +81,7 @@ const ShoppingList = () => {
                     showMessage.error(data.error);
                 }
             },
-            final: loadingProcessScreen.hide
+            final: hideLoadingProcessScreen
         });
     }, [shoppingListId]);
 
@@ -213,7 +213,7 @@ const ShoppingList = () => {
                     showMessage.error(data.error);
                 }
             },
-            final: loadingProcessScreen.hide
+            final: hideLoadingProcessScreen
         });
     };
 

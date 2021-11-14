@@ -15,7 +15,7 @@ import UnitTypeSearchModal from "../../components/shopping-list/UnitTypeSearchMo
 import unitTypeRequestInitState from "../../services/init-state/requests/unit-type.json";
 import Form from "../../components/common/form/Form";
 import linksPaginationInitState from "../../services/init-state/links.json";
-import LoadingProcessScreenContext from "../../context/LoadingProcessScreenContext";
+import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
 
 const ShoppingListAddProducts = () => {
 
@@ -31,8 +31,6 @@ const ShoppingListAddProducts = () => {
 
     const [productRequest, setProductRequest] = useState(productRequestInitState);
 
-    const loadingProcessScreen = useContext(LoadingProcessScreenContext);
-
     const showMessage = useContext(ShowMessagesContext);
 
     const navbarHandle = useContext(NavbarHandleContext);
@@ -42,6 +40,8 @@ const ShoppingListAddProducts = () => {
     const productModalId = "add-product-modal";
 
     const unitTypeSearchModalId = "unit-type-search-modal";
+
+    const {showLoadingProcessScreen, hideLoadingProcessScreen} = useLoadingProcessScreen();
 
     useEffect(() => {
         navbarHandle.setItems({
@@ -97,7 +97,7 @@ const ShoppingListAddProducts = () => {
                     showMessage.error(data.error);
                 }
             },
-            final: loadingProcessScreen.hide
+            final: hideLoadingProcessScreen
         });
     };
 
@@ -118,7 +118,7 @@ const ShoppingListAddProducts = () => {
             units_per_product
         };
 
-        loadingProcessScreen.show();
+        showLoadingProcessScreen();
         ProductsShoppingListRC.post({
             body: request,
             success: () => {
@@ -131,7 +131,7 @@ const ShoppingListAddProducts = () => {
                     showMessage.error(data.error);
                 }
             },
-            final: loadingProcessScreen.hide
+            final: hideLoadingProcessScreen
         });
     };
 

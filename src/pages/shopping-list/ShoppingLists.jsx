@@ -13,7 +13,7 @@ import $ from 'jquery';
 import ShoppingListSearchModal from "../../components/shopping-list/ShoppingListSearchModal";
 import {useHistory} from "react-router-dom";
 import CustomButtonLoad from "../../components/common/CustomButtonLoad";
-import LoadingProcessScreenContext from "../../context/LoadingProcessScreenContext";
+import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
 
 const ShoppingLists = () => {
 
@@ -22,8 +22,6 @@ const ShoppingLists = () => {
     const [shoppingLists, setShoppingLists] = useState([shoppingListsRequestInitState]);
 
     const [nextShoppingListPageURL, setNextShoppingListPageURL] = useState("");
-
-    const loadingProcessScreen = useContext(LoadingProcessScreenContext);
 
     const showMessage = useContext(ShowMessagesContext);
 
@@ -34,6 +32,8 @@ const ShoppingLists = () => {
     const searchModalId = "shopping-list-search-modal";
 
     const history = useHistory();
+
+    const {showLoadingProcessScreen, hideLoadingProcessScreen} = useLoadingProcessScreen();
 
     useEffect(() => {
         navbarHandle.setItems({
@@ -51,7 +51,7 @@ const ShoppingLists = () => {
     }, [nextShoppingListPageURL]);
 
     const initData = () => {
-        loadingProcessScreen.show();
+        showLoadingProcessScreen();
         ShoppingListsRC.get({
             uri: nextShoppingListPageURL,
             success: data => {
@@ -68,7 +68,7 @@ const ShoppingLists = () => {
                 setShoppingListsResponse(data);
             },
             error: () => showMessage.error({message: "Error al obtener la lista de la compra."}),
-            final: loadingProcessScreen.hide
+            final: hideLoadingProcessScreen
         });
     }
 
@@ -81,7 +81,7 @@ const ShoppingLists = () => {
     }
 
     const onClickDelete = (id) => {
-        loadingProcessScreen.show();
+        showLoadingProcessScreen();
         ShoppingListsRC.delete({
             id: id,
             success: () => {
@@ -93,7 +93,7 @@ const ShoppingLists = () => {
                     showMessage.error(data.error);
                 }
             },
-            final: loadingProcessScreen.hide
+            final: hideLoadingProcessScreen
         });
     }
 
