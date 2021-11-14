@@ -1,11 +1,10 @@
 import Index from './pages/Index';
 import 'admin-lte/plugins/bootstrap/js/bootstrap.min'
 import 'admin-lte/dist/js/adminlte';
-import {createContext, useRef, useState} from "react";
+import {createContext, useState} from "react";
 import {confirmDialog} from 'primereact/confirmdialog';
 import {LoadingProcessScreenProvider} from "./context/LoadingProcessScreenContext";
-
-export const ShowMessagesContext = createContext({});
+import {ShowMessagesProvider} from "./context/ShowMessagesContext";
 
 export const ConfirmDialogContext = createContext({});
 
@@ -17,24 +16,6 @@ const App = () => {
         middle: [],
         right: []
     });
-
-    const toast = useRef(null);
-
-    const showMessage = {
-        toast: toast,
-        success: ({message}) => {
-            toast.current.show({severity: 'success', summary: 'Operación realizada', detail: message, life: 5000});
-        },
-        info: ({message}) => {
-            toast.current.show({severity: 'info', summary: 'Información', detail: message, life: 5000});
-        },
-        warn: ({message}) => {
-            toast.current.show({severity: 'warn', summary: 'Advertencia', detail: message, life: 5000});
-        },
-        error: ({message}) => {
-            toast.current.show({severity: 'error', summary: 'Error', detail: message, life: 5000});
-        }
-    };
 
     const actionConfirmationDialog = {
         confirmation: ({accept, reject}) => {
@@ -71,7 +52,7 @@ const App = () => {
 
     return (
         <LoadingProcessScreenProvider>
-            <ShowMessagesContext.Provider value={showMessage}>
+            <ShowMessagesProvider>
                 <ConfirmDialogContext.Provider value={actionConfirmationDialog}>
                     <NavbarHandleContext.Provider value={navbarNavItemsValue}>
                         <div className="wrapper">
@@ -79,7 +60,7 @@ const App = () => {
                         </div>
                     </NavbarHandleContext.Provider>
                 </ConfirmDialogContext.Provider>
-            </ShowMessagesContext.Provider>
+            </ShowMessagesProvider>
         </LoadingProcessScreenProvider>
     );
 };
