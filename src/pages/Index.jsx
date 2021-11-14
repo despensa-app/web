@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Aside from "../components/common/Aside";
-import LoadingProcessScreen from "../components/common/LoadingProcessScreen";
+import LoadingProcessScreen from "../components/common/loading-process-screen/LoadingProcessScreen";
 import {Toast} from "primereact/toast";
 import ShoppingLists from "./shopping-list/ShoppingLists";
 import Navbar from "../components/common/navbar/Navbar";
