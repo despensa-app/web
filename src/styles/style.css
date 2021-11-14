@@ -53,34 +53,6 @@
     visibility: visible;
 }
 
-/* - full-screen -------------------------- */
-.full-screen,
-.full-screen-background {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2050;
-}
-
-.full-screen-background {
-    background-color: #fff;
-    opacity: 0.9;
-    z-index: 1051;
-}
-
-.full-screen-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-.full-screen-container > div {
-    z-index: 1052;
-}
-
 /* - custom-checkbox -------------------------- */
 .custom-checkbox {
     margin-right: 10px;

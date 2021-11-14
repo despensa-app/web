@@ -1,6 +1,7 @@
 import {ProgressSpinner} from 'primereact/progressspinner';
 import clsx from "clsx";
 import {useIsLoadingProcessScreen} from "../../../hooks/useLoadingProcessScreen";
+import "./LoadingProcessScreen.css";
 
 const LoadingProcessScreen = () => {
     const isLoading = useIsLoadingProcessScreen();
