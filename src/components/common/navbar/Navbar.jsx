@@ -1,7 +1,7 @@
 import NavbarNavItem from "./NavbarNavItem";
 import NavbarNav from "./NavbarNav";
 import {useContext} from "react";
-import {NavbarHandleContext} from "../../../App";
+import NavbarHandleContext from "../../../context/NavbarHandleContext";
 
 const Navbar = () => {
 

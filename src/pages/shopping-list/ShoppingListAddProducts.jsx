@@ -1,7 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import productsResponseInitState from "../../services/init-state/responses/products.json";
 import productRequestInitState from "../../services/init-state/requests/product.json";
-import {NavbarHandleContext, ShowMessagesContext} from "../../App";
 import Content from "../../components/common/content/Content";
 import ProductsRC from "../../services/ProductsRC";
 import Button from "../../components/common/button/Button";
@@ -16,6 +15,8 @@ import unitTypeRequestInitState from "../../services/init-state/requests/unit-ty
 import Form from "../../components/common/form/Form";
 import linksPaginationInitState from "../../services/init-state/links.json";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
+import ShowMessagesContext from "../../context/ShowMessagesContext";
+import NavbarHandleContext from "../../context/NavbarHandleContext";
 
 const ShoppingListAddProducts = () => {
 

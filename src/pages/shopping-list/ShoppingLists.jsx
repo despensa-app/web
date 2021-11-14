@@ -1,7 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import shoppingListsResponseInitState from "../../services/init-state/responses/shopping-lists.json"
 import shoppingListsRequestInitState from "../../services/init-state/requests/shopping-list.json"
-import {ConfirmDialogContext, NavbarHandleContext, ShowMessagesContext} from "../../App";
 import ShoppingListsRC from "../../services/ShoppingListsRC";
 import Content from "../../components/common/content/Content";
 import Card from "../../components/common/card/Card";
@@ -14,6 +13,9 @@ import ShoppingListSearchModal from "../../components/shopping-list/ShoppingList
 import {useHistory} from "react-router-dom";
 import CustomButtonLoad from "../../components/common/CustomButtonLoad";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
+import ConfirmDialogContext from "../../context/ConfirmDialogContext";
+import ShowMessagesContext from "../../context/ShowMessagesContext";
+import NavbarHandleContext from "../../context/NavbarHandleContext";
 
 const ShoppingLists = () => {
 

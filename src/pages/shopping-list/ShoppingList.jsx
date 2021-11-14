@@ -7,7 +7,6 @@ import shoppingListsRequestInitState from "../../services/init-state/requests/sh
 import Form from "../../components/common/form/Form";
 import {Link, useHistory, useParams} from "react-router-dom";
 import ShoppingListsRC from "../../services/ShoppingListsRC";
-import {NavbarHandleContext, ShowMessagesContext} from "../../App";
 import productsShoppingListResponseInitState from "../../services/init-state/responses/products-shopping-list.json";
 import productShoppingListInitState from "../../services/init-state/responses/product-shopping-list.json";
 import ButtonGroup from "../../components/common/button/ButtonGroup";
@@ -17,6 +16,8 @@ import $ from 'jquery';
 import CustomButtonLoad from "../../components/common/CustomButtonLoad";
 import ShoppingListOptionsModal from "../../components/shopping-list/ShoppingListOptionsModal";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
+import ShowMessagesContext from "../../context/ShowMessagesContext";
+import NavbarHandleContext from "../../context/NavbarHandleContext";
 
 const ShoppingList = () => {
 

@@ -1,5 +1,4 @@
 import {useContext, useEffect, useState} from "react";
-import {ShowMessagesContext} from "../../App";
 import $ from 'jquery';
 import Modal from "../common/modal/Modal";
 import Form from "../common/form/Form";
@@ -8,6 +7,7 @@ import ListGroup from "../common/list-group/ListGroup";
 import ShoppingListsRC from "../../services/ShoppingListsRC";
 import {useHistory} from "react-router-dom";
 import shoppingListInitState from "../../services/init-state/requests/shopping-list.json";
+import ShowMessagesContext from "../../context/ShowMessagesContext";
 
 const ShoppingListSearchModal = ({searchModalId}) => {
 

@@ -4,9 +4,9 @@ import Form from "../common/form/Form";
 import Button from "../common/button/Button";
 import ListGroup from "../common/list-group/ListGroup";
 import unitTypeRequestInitState from "../../services/init-state/requests/unit-type.json";
-import {ShowMessagesContext} from "../../App";
 import $ from 'jquery';
 import {UnitTypesRC} from "../../services/UnitTypesRC";
+import ShowMessagesContext from "../../context/ShowMessagesContext";
 
 const UnitTypeSearchModal = ({modalId, onClickItem, onClose}) => {
 
