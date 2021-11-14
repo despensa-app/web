@@ -1,5 +1,4 @@
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import {useContext} from "react";
 import Aside from "../components/common/Aside";
 import LoadingProcessScreen from "../components/common/LoadingProcessScreen";
 import {Toast} from "primereact/toast";
@@ -7,16 +6,16 @@ import ShoppingLists from "./shopping-list/ShoppingLists";
 import Navbar from "../components/common/navbar/Navbar";
 import ShoppingList from "./shopping-list/ShoppingList";
 import ShoppingListAddProducts from "./shopping-list/ShoppingListAddProducts";
-import ShowMessagesContext from "../context/ShowMessagesContext";
+import {useToastMessage} from "../hooks/useToastMessage";
 
 const Index = () => {
     const version = "1.0.0";
-    const showMessage = useContext(ShowMessagesContext);
+    const toastMessage = useToastMessage();
 
     return (
         <Router>
             <LoadingProcessScreen/>
-            <Toast ref={showMessage.toast}/>
+            <Toast ref={toastMessage}/>
             <Aside/>
             <Switch>
                 <Route path="/shopping-list/create">

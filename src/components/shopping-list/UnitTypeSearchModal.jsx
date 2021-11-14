@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Modal from "../common/modal/Modal";
 import Form from "../common/form/Form";
 import Button from "../common/button/Button";
@@ -6,7 +6,7 @@ import ListGroup from "../common/list-group/ListGroup";
 import unitTypeRequestInitState from "../../services/init-state/requests/unit-type.json";
 import $ from 'jquery';
 import {UnitTypesRC} from "../../services/UnitTypesRC";
-import ShowMessagesContext from "../../context/ShowMessagesContext";
+import {useShowToastMessage} from "../../hooks/useToastMessage";
 
 const UnitTypeSearchModal = ({modalId, onClickItem, onClose}) => {
 
@@ -14,7 +14,7 @@ const UnitTypeSearchModal = ({modalId, onClickItem, onClose}) => {
 
     const [unitTypeRequest, setUnitTypeRequest] = useState(unitTypeRequestInitState);
 
-    const showMessage = useContext(ShowMessagesContext);
+    const {showErrorMessage} = useShowToastMessage();
 
     useEffect(() => {
         search();
@@ -37,7 +37,7 @@ const UnitTypeSearchModal = ({modalId, onClickItem, onClose}) => {
                     setUnitTypes([]);
                 }
             },
-            error: () => showMessage.error({message: "Error al obtener los tipos de unidad."}),
+            error: () => showErrorMessage({message: "Error al obtener los tipos de unidad."}),
         });
     };
 

@@ -15,8 +15,8 @@ import unitTypeRequestInitState from "../../services/init-state/requests/unit-ty
 import Form from "../../components/common/form/Form";
 import linksPaginationInitState from "../../services/init-state/links.json";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
-import ShowMessagesContext from "../../context/ShowMessagesContext";
 import NavbarHandleContext from "../../context/NavbarHandleContext";
+import {useShowToastMessage} from "../../hooks/useToastMessage";
 
 const ShoppingListAddProducts = () => {
 
@@ -32,8 +32,6 @@ const ShoppingListAddProducts = () => {
 
     const [productRequest, setProductRequest] = useState(productRequestInitState);
 
-    const showMessage = useContext(ShowMessagesContext);
-
     const navbarHandle = useContext(NavbarHandleContext);
 
     const {shoppingListId} = useParams();
@@ -43,6 +41,8 @@ const ShoppingListAddProducts = () => {
     const unitTypeSearchModalId = "unit-type-search-modal";
 
     const {showLoadingProcessScreen, hideLoadingProcessScreen} = useLoadingProcessScreen();
+
+    const {showSuccessMessage, showErrorMessage} = useShowToastMessage();
 
     useEffect(() => {
         navbarHandle.setItems({
@@ -95,7 +95,7 @@ const ShoppingListAddProducts = () => {
             },
             error: (data) => {
                 if (data && data.error) {
-                    showMessage.error(data.error);
+                    showErrorMessage(data.error);
                 }
             },
             final: hideLoadingProcessScreen
@@ -123,13 +123,13 @@ const ShoppingListAddProducts = () => {
         ProductsShoppingListRC.post({
             body: request,
             success: () => {
-                showMessage.success({message: "Producto agregado"});
+                showSuccessMessage({message: "Producto agregado"});
                 setSelectedUnitType(unitTypeRequestInitState);
                 successHandle();
             },
             error: (data) => {
                 if (data && data.error) {
-                    showMessage.error(data.error);
+                    showErrorMessage(data.error);
                 }
             },
             final: hideLoadingProcessScreen

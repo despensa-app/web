@@ -14,8 +14,8 @@ import {useHistory} from "react-router-dom";
 import CustomButtonLoad from "../../components/common/CustomButtonLoad";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
 import ConfirmDialogContext from "../../context/ConfirmDialogContext";
-import ShowMessagesContext from "../../context/ShowMessagesContext";
 import NavbarHandleContext from "../../context/NavbarHandleContext";
+import {useShowToastMessage} from "../../hooks/useToastMessage";
 
 const ShoppingLists = () => {
 
@@ -24,8 +24,6 @@ const ShoppingLists = () => {
     const [shoppingLists, setShoppingLists] = useState([shoppingListsRequestInitState]);
 
     const [nextShoppingListPageURL, setNextShoppingListPageURL] = useState("");
-
-    const showMessage = useContext(ShowMessagesContext);
 
     const confirmDialog = useContext(ConfirmDialogContext);
 
@@ -36,6 +34,8 @@ const ShoppingLists = () => {
     const history = useHistory();
 
     const {showLoadingProcessScreen, hideLoadingProcessScreen} = useLoadingProcessScreen();
+
+    const {showSuccessMessage, showErrorMessage} = useShowToastMessage();
 
     useEffect(() => {
         navbarHandle.setItems({
@@ -69,7 +69,7 @@ const ShoppingLists = () => {
 
                 setShoppingListsResponse(data);
             },
-            error: () => showMessage.error({message: "Error al obtener la lista de la compra."}),
+            error: () => showErrorMessage({message: "Error al obtener la lista de la compra."}),
             final: hideLoadingProcessScreen
         });
     }
@@ -88,11 +88,11 @@ const ShoppingLists = () => {
             id: id,
             success: () => {
                 initData();
-                showMessage.success({message: "Lista borrada."});
+                showSuccessMessage({message: "Lista borrada."});
             },
             error: (data) => {
                 if (data && data.error) {
-                    showMessage.error(data.error);
+                    showErrorMessage(data.error);
                 }
             },
             final: hideLoadingProcessScreen

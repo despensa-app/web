@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import $ from 'jquery';
 import Modal from "../common/modal/Modal";
 import Form from "../common/form/Form";
@@ -7,7 +7,7 @@ import ListGroup from "../common/list-group/ListGroup";
 import ShoppingListsRC from "../../services/ShoppingListsRC";
 import {useHistory} from "react-router-dom";
 import shoppingListInitState from "../../services/init-state/requests/shopping-list.json";
-import ShowMessagesContext from "../../context/ShowMessagesContext";
+import {useShowToastMessage} from "../../hooks/useToastMessage";
 
 const ShoppingListSearchModal = ({searchModalId}) => {
 
@@ -15,9 +15,9 @@ const ShoppingListSearchModal = ({searchModalId}) => {
 
     const [shoppingList, setShoppingList] = useState(shoppingListInitState);
 
-    const showMessage = useContext(ShowMessagesContext);
-
     const history = useHistory();
+
+    const {showErrorMessage} = useShowToastMessage();
 
     useEffect(() => {
         if (shoppingList.name.length >= 1) {
@@ -43,7 +43,7 @@ const ShoppingListSearchModal = ({searchModalId}) => {
                     setShoppingLists([]);
                 }
             },
-            error: () => showMessage.error({message: "Error al obtener la lista de la compra."}),
+            error: () => showErrorMessage({message: "Error al obtener la lista de la compra."}),
         });
     };
 

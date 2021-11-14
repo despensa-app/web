@@ -16,8 +16,8 @@ import $ from 'jquery';
 import CustomButtonLoad from "../../components/common/CustomButtonLoad";
 import ShoppingListOptionsModal from "../../components/shopping-list/ShoppingListOptionsModal";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
-import ShowMessagesContext from "../../context/ShowMessagesContext";
 import NavbarHandleContext from "../../context/NavbarHandleContext";
+import {useShowToastMessage} from "../../hooks/useToastMessage";
 
 const ShoppingList = () => {
 
@@ -37,8 +37,6 @@ const ShoppingList = () => {
 
     const [nextProductPageURL, setNextProductPageURL] = useState("");
 
-    const showMessage = useContext(ShowMessagesContext);
-
     const navbarHandle = useContext(NavbarHandleContext);
 
     const history = useHistory();
@@ -48,6 +46,8 @@ const ShoppingList = () => {
     const optionsModalId = "options-modal";
 
     const {showLoadingProcessScreen, hideLoadingProcessScreen} = useLoadingProcessScreen();
+
+    const {showSuccessMessage, showErrorMessage} = useShowToastMessage();
 
     useEffect(() => {
         initNavbarItems();
@@ -79,7 +79,7 @@ const ShoppingList = () => {
             },
             error: (data) => {
                 if (data && data.error) {
-                    showMessage.error(data.error);
+                    showErrorMessage(data.error);
                 }
             },
             final: hideLoadingProcessScreen
@@ -160,12 +160,12 @@ const ShoppingList = () => {
             body: shoppingList,
             id: shoppingList.id,
             success: ({data}) => {
-                showMessage.success({message: "Lista creada."});
+                showSuccessMessage({message: "Lista creada."});
                 success(data);
             },
             error: (data) => {
                 if (data && data.error) {
-                    showMessage.error(data.error);
+                    showErrorMessage(data.error);
                 }
             }
         });
@@ -176,12 +176,12 @@ const ShoppingList = () => {
             body: shoppingList,
             id: shoppingList.id,
             success: () => {
-                showMessage.success({message: "Lista actualizada."});
+                showSuccessMessage({message: "Lista actualizada."});
                 success();
             },
             error: (data) => {
                 if (data && data.error) {
-                    showMessage.error(data.error);
+                    showErrorMessage(data.error);
                 }
             }
         });
@@ -211,7 +211,7 @@ const ShoppingList = () => {
             },
             error: (data) => {
                 if (data && data.error) {
-                    showMessage.error(data.error);
+                    showErrorMessage(data.error);
                 }
             },
             final: hideLoadingProcessScreen
@@ -228,7 +228,7 @@ const ShoppingList = () => {
             },
             error: (data) => {
                 if (data && data.error) {
-                    showMessage.error(data.error);
+                    showErrorMessage(data.error);
                 }
             }
         });
@@ -241,7 +241,7 @@ const ShoppingList = () => {
             body: {product_id, shopping_list_id, unit_type_id, selected},
             error: (data) => {
                 if (data && data.error) {
-                    showMessage.error(data.error);
+                    showErrorMessage(data.error);
                 }
             }
         });
