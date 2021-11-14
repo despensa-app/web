@@ -3,8 +3,7 @@ import 'admin-lte/plugins/bootstrap/js/bootstrap.min'
 import 'admin-lte/dist/js/adminlte';
 import {createContext, useRef, useState} from "react";
 import {confirmDialog} from 'primereact/confirmdialog';
-
-export const LoadingProcessScreenContext = createContext({});
+import {LoadingProcessScreenProvider} from "./context/LoadingProcessScreenContext";
 
 export const ShowMessagesContext = createContext({});
 
@@ -14,20 +13,12 @@ export const NavbarHandleContext = createContext({});
 
 const App = () => {
 
-    const [loadingProcessScreen, setLoadingProcessScreen] = useState(false);
-
     const [navbarNavItems, setNavbarNavItems] = useState({
         middle: [],
         right: []
     });
 
     const toast = useRef(null);
-
-    const valueLoadingProcessScreen = {
-        isLoading: loadingProcessScreen,
-        show: () => setLoadingProcessScreen(true),
-        hide: () => setLoadingProcessScreen(false)
-    };
 
     const showMessage = {
         toast: toast,
@@ -79,7 +70,7 @@ const App = () => {
     };
 
     return (
-        <LoadingProcessScreenContext.Provider value={valueLoadingProcessScreen}>
+        <LoadingProcessScreenProvider>
             <ShowMessagesContext.Provider value={showMessage}>
                 <ConfirmDialogContext.Provider value={actionConfirmationDialog}>
                     <NavbarHandleContext.Provider value={navbarNavItemsValue}>
@@ -89,7 +80,7 @@ const App = () => {
                     </NavbarHandleContext.Provider>
                 </ConfirmDialogContext.Provider>
             </ShowMessagesContext.Provider>
-        </LoadingProcessScreenContext.Provider>
+        </LoadingProcessScreenProvider>
     );
 };
 

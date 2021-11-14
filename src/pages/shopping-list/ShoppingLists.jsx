@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import shoppingListsResponseInitState from "../../services/init-state/responses/shopping-lists.json"
 import shoppingListsRequestInitState from "../../services/init-state/requests/shopping-list.json"
-import {ConfirmDialogContext, LoadingProcessScreenContext, NavbarHandleContext, ShowMessagesContext} from "../../App";
+import {ConfirmDialogContext, NavbarHandleContext, ShowMessagesContext} from "../../App";
 import ShoppingListsRC from "../../services/ShoppingListsRC";
 import Content from "../../components/common/content/Content";
 import Card from "../../components/common/card/Card";
@@ -13,6 +13,7 @@ import $ from 'jquery';
 import ShoppingListSearchModal from "../../components/shopping-list/ShoppingListSearchModal";
 import {useHistory} from "react-router-dom";
 import CustomButtonLoad from "../../components/common/CustomButtonLoad";
+import LoadingProcessScreenContext from "../../context/LoadingProcessScreenContext";
 
 const ShoppingLists = () => {
 

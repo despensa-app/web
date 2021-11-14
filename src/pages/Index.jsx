@@ -2,12 +2,13 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {useContext} from "react";
 import Aside from "../components/common/Aside";
 import LoadingProcessScreen from "../components/common/LoadingProcessScreen";
-import {LoadingProcessScreenContext, ShowMessagesContext} from "../App";
+import {ShowMessagesContext} from "../App";
 import {Toast} from "primereact/toast";
 import ShoppingLists from "./shopping-list/ShoppingLists";
 import Navbar from "../components/common/navbar/Navbar";
 import ShoppingList from "./shopping-list/ShoppingList";
 import ShoppingListAddProducts from "./shopping-list/ShoppingListAddProducts";
+import LoadingProcessScreenContext from "../context/LoadingProcessScreenContext";
 
 const Index = () => {
     const version = "1.0.0";
