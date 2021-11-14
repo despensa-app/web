@@ -2,13 +2,14 @@ import Content from "../../components/common/content/Content";
 import Button from "../../components/common/button/Button";
 import {useEffect, useState} from "react";
 import shoppingListsRequestInitState from "../../services/init-state/requests/shopping-list.json";
-import {Link, useHistory, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import ShoppingListsRC from "../../services/ShoppingListsRC";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
 import {useShowToastMessage} from "../../hooks/useToastMessage";
 import {useSetNavbarItems} from "../../hooks/useNavbarItems";
 import ShoppingListProductsList from "../../components/shopping-list/ShoppingListProductsList";
 import ShoppingListHeader from "../../components/shopping-list/ShoppingListHeader";
+import ShoppingListButtonAddProduct from "../../components/shopping-list/ShoppingListButtonAddProduct";
 
 const ShoppingList = () => {
 
@@ -26,17 +27,17 @@ const ShoppingList = () => {
 
     const {setNavbarMiddleItems} = useSetNavbarItems();
 
-    const [hasProducts, setHasProducts] = useState(false);
+    const [hasProducts, setHasProducts] = useState(true);
 
     useEffect(() => {
         initNavbarItems();
     }, []);
 
     useEffect(() => {
-        if (isEdit) {
+        if (isEdit || !hasProducts) {
             shoppingListEditHandle();
         }
-    }, [isEdit, shoppingList]);
+    }, [isEdit, shoppingList, hasProducts]);
 
     useEffect(() => {
         setShoppingList({...shoppingListsRequestInitState, name: "Nueva lista"});
@@ -72,6 +73,14 @@ const ShoppingList = () => {
         ]);
     };
 
+    const addProductHandle = () => {
+        createShoppingList({
+            success: (data) => {
+                history.push(`/shopping-list/${data.id}/add-products`);
+            }
+        })
+    }
+
     const shoppingListEditHandle = () => {
         setIsEdit(true);
         setNavbarMiddleItems([
@@ -81,27 +90,11 @@ const ShoppingList = () => {
                 <i className="fas fa-edit pr-1"/>
                 Guardar
             </Button>),
-            (<Button variant="success"
-                     onClick={buttonAddProductHandle}>
-                Agregar producto
-            </Button>)
+            (<ShoppingListButtonAddProduct
+                shoppingListId={shoppingListId}
+                isEdit={isEdit}
+                addProductHandle={addProductHandle}/>)
         ]);
-    };
-
-    const buttonAddProductHandle = () => {
-        const getUrl = (id) => {
-            return `/shopping-list/${id}/add-products`;
-        };
-
-        if (shoppingListId) {
-            history.push(getUrl(shoppingListId));
-        } else {
-            createShoppingList({
-                success: (data) => {
-                    history.push(getUrl(data.id));
-                }
-            });
-        }
     };
 
     const saveChangesHandle = () => {
@@ -149,10 +142,6 @@ const ShoppingList = () => {
         });
     };
 
-    const showButtonAddProductContentMain = () => {
-        return !hasProducts && !isEdit;
-    };
-
     return (
         <Content>
             <Content.Header>
@@ -163,15 +152,6 @@ const ShoppingList = () => {
                     setShoppingList={setShoppingList}/>
             </Content.Header>
             <Content.Main>
-                {
-                    showButtonAddProductContentMain()
-                    && <Link
-                        to={`/shopping-list/${shoppingListId}/add-products`}
-                        className="btn btn-success btn-block">
-                        <i className="fas fa-plus pr-1"/>
-                        Agregar producto
-                    </Link>
-                }
                 <ShoppingListProductsList
                     shoppingListId={shoppingListId}
                     isEdit={isEdit}
