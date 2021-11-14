@@ -8,16 +8,14 @@ import ShoppingLists from "./shopping-list/ShoppingLists";
 import Navbar from "../components/common/navbar/Navbar";
 import ShoppingList from "./shopping-list/ShoppingList";
 import ShoppingListAddProducts from "./shopping-list/ShoppingListAddProducts";
-import LoadingProcessScreenContext from "../context/LoadingProcessScreenContext";
 
 const Index = () => {
     const version = "1.0.0";
-    const loadingProcessScreenContext = useContext(LoadingProcessScreenContext);
     const showMessage = useContext(ShowMessagesContext);
 
     return (
         <Router>
-            <LoadingProcessScreen {...loadingProcessScreenContext}/>
+            <LoadingProcessScreen/>
             <Toast ref={showMessage.toast}/>
             <Aside/>
             <Switch>
