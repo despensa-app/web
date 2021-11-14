@@ -14,8 +14,8 @@ import {useHistory} from "react-router-dom";
 import CustomButtonLoad from "../../components/common/CustomButtonLoad";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
 import ConfirmDialogContext from "../../context/ConfirmDialogContext";
-import NavbarHandleContext from "../../context/NavbarHandleContext";
 import {useShowToastMessage} from "../../hooks/useToastMessage";
+import {useSetNavbarItems} from "../../hooks/useNavbarItems";
 
 const ShoppingLists = () => {
 
@@ -27,8 +27,6 @@ const ShoppingLists = () => {
 
     const confirmDialog = useContext(ConfirmDialogContext);
 
-    const navbarHandle = useContext(NavbarHandleContext);
-
     const searchModalId = "shopping-list-search-modal";
 
     const history = useHistory();
@@ -37,8 +35,10 @@ const ShoppingLists = () => {
 
     const {showSuccessMessage, showErrorMessage} = useShowToastMessage();
 
+    const {setNavbarItems} = useSetNavbarItems();
+
     useEffect(() => {
-        navbarHandle.setItems({
+        setNavbarItems({
             middle: [
                 (<ShoppingListButtonCreate/>)
             ],

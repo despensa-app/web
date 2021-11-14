@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import productsResponseInitState from "../../services/init-state/responses/products.json";
 import productRequestInitState from "../../services/init-state/requests/product.json";
 import Content from "../../components/common/content/Content";
@@ -15,8 +15,8 @@ import unitTypeRequestInitState from "../../services/init-state/requests/unit-ty
 import Form from "../../components/common/form/Form";
 import linksPaginationInitState from "../../services/init-state/links.json";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
-import NavbarHandleContext from "../../context/NavbarHandleContext";
 import {useShowToastMessage} from "../../hooks/useToastMessage";
+import {useSetNavbarItems} from "../../hooks/useNavbarItems";
 
 const ShoppingListAddProducts = () => {
 
@@ -32,8 +32,6 @@ const ShoppingListAddProducts = () => {
 
     const [productRequest, setProductRequest] = useState(productRequestInitState);
 
-    const navbarHandle = useContext(NavbarHandleContext);
-
     const {shoppingListId} = useParams();
 
     const productModalId = "add-product-modal";
@@ -44,17 +42,16 @@ const ShoppingListAddProducts = () => {
 
     const {showSuccessMessage, showErrorMessage} = useShowToastMessage();
 
+    const {setNavbarMiddleItems} = useSetNavbarItems();
+
     useEffect(() => {
-        navbarHandle.setItems({
-            middle: [
-                (<Link
-                    to={`/shopping-list/${shoppingListId}`}
-                    className="btn btn-success">
-                    Terminar
-                </Link>)
-            ],
-            right: []
-        });
+        setNavbarMiddleItems([
+            (<Link
+                to={`/shopping-list/${shoppingListId}`}
+                className="btn btn-success">
+                Terminar
+            </Link>)
+        ]);
     }, []);
 
     useEffect(() => {

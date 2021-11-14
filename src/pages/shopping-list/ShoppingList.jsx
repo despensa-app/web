@@ -2,7 +2,7 @@ import Content from "../../components/common/content/Content";
 import ListGroup from "../../components/common/list-group/ListGroup";
 import CustomCheckBox from "../../components/common/CustomCheckBox";
 import Button from "../../components/common/button/Button";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import shoppingListsRequestInitState from "../../services/init-state/requests/shopping-list.json";
 import Form from "../../components/common/form/Form";
 import {Link, useHistory, useParams} from "react-router-dom";
@@ -16,8 +16,8 @@ import $ from 'jquery';
 import CustomButtonLoad from "../../components/common/CustomButtonLoad";
 import ShoppingListOptionsModal from "../../components/shopping-list/ShoppingListOptionsModal";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
-import NavbarHandleContext from "../../context/NavbarHandleContext";
 import {useShowToastMessage} from "../../hooks/useToastMessage";
+import {useSetNavbarItems} from "../../hooks/useNavbarItems";
 
 const ShoppingList = () => {
 
@@ -37,8 +37,6 @@ const ShoppingList = () => {
 
     const [nextProductPageURL, setNextProductPageURL] = useState("");
 
-    const navbarHandle = useContext(NavbarHandleContext);
-
     const history = useHistory();
 
     const productDetailModalId = "product-detail-modal";
@@ -48,6 +46,8 @@ const ShoppingList = () => {
     const {showLoadingProcessScreen, hideLoadingProcessScreen} = useLoadingProcessScreen();
 
     const {showSuccessMessage, showErrorMessage} = useShowToastMessage();
+
+    const {setNavbarMiddleItems} = useSetNavbarItems();
 
     useEffect(() => {
         initNavbarItems();
@@ -96,34 +96,28 @@ const ShoppingList = () => {
 
     const initNavbarItems = () => {
         setIsEdit(false);
-        navbarHandle.setItems({
-            middle: [
-                (<Button variant="primary" onClick={shoppingListEditHandle}>
-                    <i className="fas fa-edit pr-1"/>
-                    Editar
-                </Button>)
-            ],
-            right: []
-        });
+        setNavbarMiddleItems([
+            (<Button variant="primary" onClick={shoppingListEditHandle}>
+                <i className="fas fa-edit pr-1"/>
+                Editar
+            </Button>)
+        ]);
     };
 
     const shoppingListEditHandle = () => {
         setIsEdit(true);
-        navbarHandle.setItems({
-            middle: [
-                (<Button variant="primary"
-                         className="mr-1"
-                         onClick={saveChangesHandle}>
-                    <i className="fas fa-edit pr-1"/>
-                    Guardar
-                </Button>),
-                (<Button variant="success"
-                         onClick={buttonAddProductHandle}>
-                    Agregar producto
-                </Button>)
-            ],
-            right: []
-        });
+        setNavbarMiddleItems([
+            (<Button variant="primary"
+                     className="mr-1"
+                     onClick={saveChangesHandle}>
+                <i className="fas fa-edit pr-1"/>
+                Guardar
+            </Button>),
+            (<Button variant="success"
+                     onClick={buttonAddProductHandle}>
+                Agregar producto
+            </Button>)
+        ]);
     };
 
     const buttonAddProductHandle = () => {

@@ -1,11 +1,10 @@
 import NavbarNavItem from "./NavbarNavItem";
 import NavbarNav from "./NavbarNav";
-import {useContext} from "react";
-import NavbarHandleContext from "../../../context/NavbarHandleContext";
+import {useNavbarItems} from "../../../hooks/useNavbarItems";
 
 const Navbar = () => {
 
-    const {items} = useContext(NavbarHandleContext);
+    const items = useNavbarItems();
 
     return (
         <nav className="main-header navbar navbar-expand fixed-bottom navbar-white navbar-light d-flex justify-content-between">
