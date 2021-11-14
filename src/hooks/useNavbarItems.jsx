@@ -1,12 +1,12 @@
-import NavbarHandleContext from "../context/NavbarHandleContext";
+import NavbarItemsContext from "../context/NavbarItemsContext";
 import {useContext} from "react";
 
 export const useNavbarItems = () => {
-    return useContext(NavbarHandleContext).items;
+    return useContext(NavbarItemsContext).items;
 };
 
 export const useSetNavbarItems = () => {
-    const context = useContext(NavbarHandleContext);
+    const context = useContext(NavbarItemsContext);
 
     return {
         setNavbarMiddleItems: (items) => context.setItems({middle: items, right: []}),

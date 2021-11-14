@@ -1,8 +1,8 @@
 import {createContext, useState} from "react";
 
-const NavbarHandleContext = createContext({});
+const NavbarItemsContext = createContext({});
 
-export const NavbarHandleProvider = ({children}) => {
+export const NavbarItemsProvider = ({children}) => {
     const [navbarNavItems, setNavbarNavItems] = useState({
         middle: [],
         right: []
@@ -14,10 +14,10 @@ export const NavbarHandleProvider = ({children}) => {
     };
 
     return (
-        <NavbarHandleContext.Provider value={navbarNavItemsValue}>
+        <NavbarItemsContext.Provider value={navbarNavItemsValue}>
             {children}
-        </NavbarHandleContext.Provider>
+        </NavbarItemsContext.Provider>
     );
 };
 
-export default NavbarHandleContext;
+export default NavbarItemsContext;

@@ -4,18 +4,18 @@ import 'admin-lte/dist/js/adminlte';
 import {LoadingProcessScreenProvider} from "./context/LoadingProcessScreenContext";
 import {ShowMessagesProvider} from "./context/ShowMessagesContext";
 import {ConfirmDialogProvider} from "./context/ConfirmDialogContext";
-import {NavbarHandleProvider} from "./context/NavbarHandleContext";
+import {NavbarItemsProvider} from "./context/NavbarItemsContext";
 
 const App = () => {
     return (
         <LoadingProcessScreenProvider>
             <ShowMessagesProvider>
                 <ConfirmDialogProvider>
-                    <NavbarHandleProvider>
+                    <NavbarItemsProvider>
                         <div className="wrapper">
                             <Index/>
                         </div>
-                    </NavbarHandleProvider>
+                    </NavbarItemsProvider>
                 </ConfirmDialogProvider>
             </ShowMessagesProvider>
         </LoadingProcessScreenProvider>
