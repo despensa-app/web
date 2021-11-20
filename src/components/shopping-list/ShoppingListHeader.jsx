@@ -4,6 +4,7 @@ import Button from "../common/button/Button";
 import $ from 'jquery';
 import ShoppingListOptionsModal from "./ShoppingListOptionsModal";
 import shoppingListsRequestInitState from "../../services/init-state/requests/shopping-list.json";
+import CommonHeader from "../common/CommonHeader";
 
 const ShoppingListHeader = ({
     isEdit,
@@ -34,7 +35,7 @@ const ShoppingListHeader = ({
     };
 
     return (
-        <div className="d-flex justify-content-between">
+        <CommonHeader>
             {
                 isEdit
                     ? <Form className="flex-grow-1">
@@ -68,7 +69,7 @@ const ShoppingListHeader = ({
                     <ShoppingListOptionsModal modalId={optionsModalId}/>
                 </>
             }
-        </div>
+        </CommonHeader>
     );
 };
 

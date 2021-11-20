@@ -17,6 +17,7 @@ import linksPaginationInitState from "../../services/init-state/links.json";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
 import {useShowToastMessage} from "../../hooks/useToastMessage";
 import {useSetNavbarItems} from "../../hooks/useNavbarItems";
+import CommonHeader from "../../components/common/CommonHeader";
 
 const ShoppingListAddProducts = () => {
 
@@ -157,12 +158,11 @@ const ShoppingListAddProducts = () => {
     return (
         <Content>
             <Content.Header>
-                <div className="d-flex justify-content-between">
-                    <h1>Seleccionar productos</h1>
+                <CommonHeader title="Seleccionar productos">
                     <Button>
                         <i className="fas fa-filter"/>
                     </Button>
-                </div>
+                </CommonHeader>
             </Content.Header>
             <Content.Main>
                 <Form className="mb-3">

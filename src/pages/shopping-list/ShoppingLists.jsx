@@ -16,6 +16,7 @@ import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
 import ConfirmDialogContext from "../../context/ConfirmDialogContext";
 import {useShowToastMessage} from "../../hooks/useToastMessage";
 import {useSetNavbarItems} from "../../hooks/useNavbarItems";
+import CommonHeader from "../../components/common/CommonHeader";
 
 const ShoppingLists = () => {
 
@@ -114,12 +115,11 @@ const ShoppingLists = () => {
     return (
         <Content>
             <Content.Header>
-                <div className="d-flex justify-content-between">
-                    <h1>Listas</h1>
+                <CommonHeader title="Listas">
                     <Button>
                         <i className="fas fa-filter"/>
                     </Button>
-                </div>
+                </CommonHeader>
             </Content.Header>
             <Content.Main>
                 {
