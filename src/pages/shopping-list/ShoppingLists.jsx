@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import shoppingListsResponseInitState from "../../services/init-state/responses/shopping-lists.json"
 import shoppingListsRequestInitState from "../../services/init-state/requests/shopping-list.json"
 import ShoppingListsRC from "../../services/ShoppingListsRC";
@@ -13,7 +13,6 @@ import ShoppingListSearchModal from "../../components/shopping-list/ShoppingList
 import {useHistory} from "react-router-dom";
 import CustomButtonLoad from "../../components/common/CustomButtonLoad";
 import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
-import ConfirmDialogContext from "../../context/ConfirmDialogContext";
 import {useShowToastMessage} from "../../hooks/useToastMessage";
 import {useSetNavbarItems} from "../../hooks/useNavbarItems";
 import CommonHeader from "../../components/common/CommonHeader";
@@ -26,15 +25,13 @@ const ShoppingLists = () => {
 
     const [nextShoppingListPageURL, setNextShoppingListPageURL] = useState("");
 
-    const confirmDialog = useContext(ConfirmDialogContext);
-
     const searchModalId = "shopping-list-search-modal";
 
     const history = useHistory();
 
     const {showLoadingProcessScreen, hideLoadingProcessScreen} = useLoadingProcessScreen();
 
-    const {showSuccessMessage, showErrorMessage} = useShowToastMessage();
+    const {showErrorMessage} = useShowToastMessage();
 
     const {setNavbarItems} = useSetNavbarItems();
 
@@ -71,31 +68,6 @@ const ShoppingLists = () => {
                 setShoppingListsResponse(data);
             },
             error: () => showErrorMessage({message: "Error al obtener la lista de la compra."}),
-            final: hideLoadingProcessScreen
-        });
-    }
-
-    const deleteConfirmDialog = (id) => {
-        confirmDialog.deleted({
-            accept: () => {
-                onClickDelete(id);
-            }
-        });
-    }
-
-    const onClickDelete = (id) => {
-        showLoadingProcessScreen();
-        ShoppingListsRC.delete({
-            id: id,
-            success: () => {
-                initData();
-                showSuccessMessage({message: "Lista borrada."});
-            },
-            error: (data) => {
-                if (data && data.error) {
-                    showErrorMessage(data.error);
-                }
-            },
             final: hideLoadingProcessScreen
         });
     }
