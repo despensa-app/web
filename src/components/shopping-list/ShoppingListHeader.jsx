@@ -5,6 +5,7 @@ import $ from 'jquery';
 import ShoppingListOptionsModal from "./ShoppingListOptionsModal";
 import shoppingListsRequestInitState from "../../services/init-state/requests/shopping-list.json";
 import CommonHeader from "../common/CommonHeader";
+import {Link} from "react-router-dom";
 
 const ShoppingListHeader = ({
     isEdit,
@@ -38,9 +39,9 @@ const ShoppingListHeader = ({
         <>
             <CommonHeader className="mb-2">
                 <div className="flex-grow-1">
-                    <Button className="pl-0">
+                    <Link to="/shopping-list" className="btn pl-0">
                         <i className="fas fa-arrow-left"/>
-                    </Button>
+                    </Link>
                 </div>
                 {
                     shoppingListId
