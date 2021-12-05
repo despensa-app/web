@@ -1,8 +1,51 @@
+import {useContext} from "react";
+import {useHistory} from "react-router-dom";
 import Modal from "../common/modal/Modal";
 import NavTabs from "../common/nav-tabs/NavTabs";
 import ListGroup from "../common/list-group/ListGroup";
+import ConfirmDialogContext from "../../context/ConfirmDialogContext";
+import {useShowToastMessage} from "../../hooks/useToastMessage";
+import {useLoadingProcessScreen} from "../../hooks/useLoadingProcessScreen";
+import $ from 'jquery';
+import ShoppingListsRC from "../../services/ShoppingListsRC";
 
-const ShoppingListOptionsModal = ({modalId}) => {
+const ShoppingListOptionsModal = ({modalId, shoppingListId}) => {
+
+    const confirmDialog = useContext(ConfirmDialogContext);
+
+    const {showSuccessMessage, showErrorMessage} = useShowToastMessage();
+
+    const {showLoadingProcessScreen, hideLoadingProcessScreen} = useLoadingProcessScreen();
+
+    const history = useHistory();
+
+    const deleteConfirmDialog = (id) => {
+        $(`#${modalId}`).modal('hide');
+        confirmDialog.deleted({
+            accept: () => {
+                onClickDelete(id);
+            }
+        });
+    };
+
+    const onClickDelete = (id) => {
+        showLoadingProcessScreen();
+        ShoppingListsRC.delete({
+            id: id,
+            success: () => {
+                showSuccessMessage({message: "Lista borrada."});
+                history.push("/shopping-list/");
+            },
+            error: (data) => {
+                console.log(data);
+                if (data && data.error) {
+                    showErrorMessage(data.error);
+                }
+            },
+            final: hideLoadingProcessScreen
+        });
+    };
+
     return (
         <Modal id={modalId}>
             <Modal.Body className="p-0">
@@ -76,6 +119,7 @@ const ShoppingListOptionsModal = ({modalId}) => {
                                 Duplicar lista
                             </ListGroup.Item>
                             <ListGroup.Item action
+                                            onClick={() => deleteConfirmDialog(shoppingListId)}
                                             className="text-danger border-top">
                                 <i className="fas fa-trash w-fixed-25"/>
                                 Eliminar lista

@@ -66,7 +66,8 @@ const ShoppingListHeader = ({
                     <Button onClick={showOptionHandle}>
                         <i className="fas fa-ellipsis-h"/>
                     </Button>
-                    <ShoppingListOptionsModal modalId={optionsModalId}/>
+                    <ShoppingListOptionsModal modalId={optionsModalId}
+                                              shoppingListId={shoppingListId}/>
                 </>
             }
         </CommonHeader>
