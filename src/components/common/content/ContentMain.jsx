@@ -1,7 +1,9 @@
 const ContentMain = ({children}) => {
     return (
         <section className="content">
-            {children}
+            <div className="container-fluid">
+                {children}
+            </div>
         </section>
     );
 };
