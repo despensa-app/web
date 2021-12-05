@@ -5,7 +5,6 @@ import ShoppingListsRC from "../../services/ShoppingListsRC";
 import Content from "../../components/common/content/Content";
 import Card from "../../components/common/card/Card";
 import {dateFormat} from "../../utils/date-utils";
-import Button from "../../components/common/button/Button";
 import ShoppingListButtonCreate from "../../components/shopping-list/ShoppingListButtonCreate";
 import ButtonNavbarSearch from "../../components/common/ButtonNavbarSearch";
 import $ from 'jquery';
@@ -87,11 +86,7 @@ const ShoppingLists = () => {
     return (
         <Content>
             <Content.Header>
-                <CommonHeader title="Listas">
-                    <Button>
-                        <i className="fas fa-filter"/>
-                    </Button>
-                </CommonHeader>
+                <CommonHeader title="Listas"/>
             </Content.Header>
             <Content.Main>
                 {
