@@ -35,42 +35,48 @@ const ShoppingListHeader = ({
     };
 
     return (
-        <CommonHeader>
-            {
-                isEdit
-                    ? <Form className="flex-grow-1">
-                        <Form.InputGroup>
-                            <Form.Label hide htmlFor="name">Nombre</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={shoppingList.name}
-                                onChange={shoppingListNameHandle}
-                                placeholder="Nombre de la lista"
-                                id="name"
-                                name="name"/>
-                            <Form.InputGroup.Append>
-                                <Button variant="default" onClick={resetNameHandle}>
-                                    <i className="fas fa-undo-alt"/>
-                                </Button>
-                            </Form.InputGroup.Append>
-                        </Form.InputGroup>
-                    </Form>
-                    : <h1 className="flex-grow-1">{shoppingList.name}</h1>
-            }
-            {
-                shoppingListId
-                && <>
-                    <Button>
-                        <i className="fas fa-filter"/>
+        <>
+            <CommonHeader className="mb-2">
+                <div className="flex-grow-1">
+                    <Button className="pl-0">
+                        <i className="fas fa-arrow-left"/>
                     </Button>
-                    <Button onClick={showOptionHandle}>
-                        <i className="fas fa-ellipsis-h"/>
-                    </Button>
-                    <ShoppingListOptionsModal modalId={optionsModalId}
-                                              shoppingListId={shoppingListId}/>
-                </>
-            }
-        </CommonHeader>
+                </div>
+                {
+                    shoppingListId
+                    && <>
+                        <Button className="pr-0" onClick={showOptionHandle}>
+                            <i className="fas fa-ellipsis-h"/>
+                        </Button>
+                        <ShoppingListOptionsModal modalId={optionsModalId}
+                                                  shoppingListId={shoppingListId}/>
+                    </>
+                }
+            </CommonHeader>
+            <CommonHeader>
+                {
+                    isEdit
+                        ? <Form className="flex-grow-1">
+                            <Form.InputGroup>
+                                <Form.Label hide htmlFor="name">Nombre</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={shoppingList.name}
+                                    onChange={shoppingListNameHandle}
+                                    placeholder="Nombre de la lista"
+                                    id="name"
+                                    name="name"/>
+                                <Form.InputGroup.Append>
+                                    <Button variant="default" onClick={resetNameHandle}>
+                                        <i className="fas fa-undo-alt"/>
+                                    </Button>
+                                </Form.InputGroup.Append>
+                            </Form.InputGroup>
+                        </Form>
+                        : <h1 className="flex-grow-1">{shoppingList.name}</h1>
+                }
+            </CommonHeader>
+        </>
     );
 };
 
