@@ -1,6 +1,8 @@
-const CommonHeader = ({children, title}) => {
+import clsx from "clsx";
+
+const CommonHeader = ({children, title, className}) => {
     return (
-        <div className="d-flex justify-content-between">
+        <div className={clsx("d-flex justify-content-between", className)}>
             {title && <h1>{title}</h1>}
             {children}
         </div>
